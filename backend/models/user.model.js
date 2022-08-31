@@ -33,29 +33,12 @@ const userSchema = new mongoose.Schema(
             max: 1024,
             minlength: 6
         },
-        job : {
-            type: String,
-            required: true
-        },
         role : {
             type: String,
             required: true
         },
         picture : {
             type : String
-        },
-        bio : {
-            type: String,
-            max: 1024,
-        },
-        followers : {
-            type: [String]
-        },
-        following : {
-            type: [String]
-        },
-        likes : {
-            type: [String]
         }
     },
     {

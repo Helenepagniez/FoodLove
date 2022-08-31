@@ -28,7 +28,6 @@ module.exports.updateUser = async (req, res) => {
       { _id: req.params.id },
       {
         $set: {
-          job: req.body.job,
           name: req.body.name,
           firstname: req.body.firstname,
           email: req.body.email,
@@ -52,7 +51,7 @@ module.exports.deleteUser = async (req, res) => {
   const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
   const role = decodedToken.role;
   if (decodedToken.id != req.params.id && role != "ADMIN")
-    return res.status(400).send("Vous n'avez pas le droit de supprimer cet utilisateur");
+    return res.status(403).send("Vous n'avez pas le droit de supprimer cet utilisateur");
 
   try {
     await UserModel.remove({ _id: req.params.id }).exec();

@@ -27,19 +27,9 @@ const userValidation = (body) => {
         .required()
         .regex(/^[a-zA-ZÀ-ÿ0-9 -]{6,40}$/),
 
-      job: Joi.string().required(),
-
       picture: Joi.string().allow(null),
 
       role: Joi.string(),
-
-      bio: Joi.string(),
-
-      followers: Joi.string(),
-
-      following: Joi.string(),
-
-      likes: Joi.string(),
     });
     return UserShema.validate(body)
 };
