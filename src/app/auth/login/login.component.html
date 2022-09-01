@@ -1,0 +1,18 @@
+<div class="entier">
+  <div class="gauche">
+    <img src="../../../assets/logo site.png" alt="logo">
+  </div>
+  <div class="droite">
+    <form [formGroup]="loginForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+    </div>
+    <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">LOGIN</button>
+  </form>
+  </div>
+</div>
