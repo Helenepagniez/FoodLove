@@ -3,6 +3,7 @@
     <img src="../../../assets/logo site.png" alt="logo">
   </div>
   <div class="droite">
+    <h1>Connexion</h1>
     <form [formGroup]="loginForm">
     <div class="form-group">
       <label for="email">Email</label>
@@ -12,7 +13,7 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" formControlName="password">
     </div>
-    <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">LOGIN</button>
+    <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">Se connecter</button>
   </form>
   </div>
 </div>
