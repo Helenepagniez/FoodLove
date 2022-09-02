@@ -1,5 +1,18 @@
-body{
-    background-color: whitesmoke ;
+.presentation{
+    margin-top: 20px;
+    text-align: center;
+    color: white;
+    background-color: darkcyan;
+}
+
+.retour{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
 }
 
 .entier{
@@ -9,7 +22,7 @@ body{
     align-content: center;
     width: 800px;
     height: 400px;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom: 5%;
     margin-left: auto;
     margin-right: auto;
@@ -25,7 +38,6 @@ body{
 }
 
 .droite{
-    background-color: whitesmoke;
     text-align: center;
     display: flex;
     justify-content: right;
@@ -40,6 +52,7 @@ body{
 
 .droite h1{
     margin-top: 50px;
+    color: rgb(3, 117, 117);
 }
 
 .droite form {
@@ -50,6 +63,20 @@ body{
 .droite form .form-group {
     margin-top: 18px;
     text-align: center;
+}
+
+.droite form .form-group {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.droite form .form-group label{
+    margin-right: 10px;
+}
+
+.droite form .form-group input{
+    color: rgb(3, 117, 117);
+    box-shadow: 2px 2px 2px darkcyan;
 }
 
 .droite button{

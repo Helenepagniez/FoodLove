@@ -1,3 +1,7 @@
+<div class="presentation">
+  <h1>Connectez-vous dès maintenant via le formulaire ci-dessous.</h1>
+</div>
+<a routerLink="/home"><button class="retour" >Retour</button></a>
 <div class="entier">
   <div class="gauche">
     <img src="../../../assets/logo site.png" alt="logo">
@@ -13,7 +17,7 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" formControlName="password">
     </div>
-    <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="onLogin()">Se connecter</button>
+    <button [disabled]="loginForm.invalid" (click)="onLogin()">Se connecter</button>
   </form>
   </div>
 </div>
