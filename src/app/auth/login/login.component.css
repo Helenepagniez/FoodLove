@@ -16,10 +16,12 @@ body{
 }
 
 .gauche img{
-    width: 400px;
+    width: auto;
+    padding: 50px;
     border-radius: 20px 0 0 20px;
     border: 10px solid darkcyan;
     margin-right: 10px;
+    height: 280px;
 }
 
 .droite{
