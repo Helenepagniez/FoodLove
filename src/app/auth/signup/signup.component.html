@@ -22,7 +22,7 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
             </div>
-            <button [disabled]="signupForm.invalid" (click)="onSignup()">S'inscrire</button>
+            <button [disabled]="signupForm.invalid" (click)="addUser(signupForm.value)">S'inscrire</button>
         </form>
     </div>
     <div class="droite">

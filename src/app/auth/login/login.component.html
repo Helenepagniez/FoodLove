@@ -17,7 +17,7 @@
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" formControlName="password">
     </div>
-    <button [disabled]="loginForm.invalid" (click)="onLogin()">Se connecter</button>
+    <button [disabled]="loginForm.invalid" (click)="loginUser(loginForm.value)">Se connecter</button>
   </form>
   </div>
 </div>

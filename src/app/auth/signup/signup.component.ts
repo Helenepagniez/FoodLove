@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { catchError,switchMap, tap } from 'rxjs';
+import { LoggedInUserId } from 'src/app/models/loggedInUserId.model';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.services';
+import { HttpErrorResponse } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -12,10 +16,16 @@ import { catchError,switchMap, tap } from 'rxjs';
 export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup;
+  user!: User;
+  users: User[]=[];
+  loggedInUser!: User | null;
+  loggedInUserId!: LoggedInUserId | null;
 
   constructor(private formBuilder: FormBuilder,
               private auth: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -24,20 +34,26 @@ export class SignupComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
+    if (localStorage.getItem('loggedInUserId')===null) {
+      this.loggedInUserId = null;
+    }
+    else {
+      this.loggedInUserId = JSON.parse(localStorage.getItem('loggedInUserId') || '{}');
+    }
   }
 
-  onSignup() {
-    const email = this.signupForm.get('email')!.value;
-    const password = this.signupForm.get('password')!.value;
-    this.auth.createUser(email, password).pipe(
-      switchMap(() => this.auth.loginUser(email, password)),
-      tap(() => {
-        this.router.navigate(['/liste']);
-      }),
-      catchError(error => {
-        return error;
-      })
-    ).subscribe();
-  }
+  addUser(user : User) {
+    user.role="CLIENT";
+    user.picture=null;
+    this.userService.addUser(user).subscribe(
+      (response: User) => {
+        location.href="/login";
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  };
+
 
 }
