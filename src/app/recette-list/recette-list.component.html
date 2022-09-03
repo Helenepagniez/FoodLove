@@ -1,25 +1,22 @@
 <app-header></app-header>
+<div class="header">
+    <h1>Liste de Recettes</h1>
+</div>
 <div class="barre-de-recherche">
     <div class="info">
         <input class="recherche" type="search" (ngModelChange)="searchRecettes(key.value)" #key="ngModel" ngModel name="key" name="recherche" placeholder="Recherchez ici !">
     </div>
 </div>
-<div *ngFor="let recette of recettes" class="colonne">
+<div *ngFor="let recette of recettes" class="colonne" (click)="onClickRecette(recette._id)">
     <div class="recette">
         <div class="composition">
-            <form #form="ngForm" (ngSubmit)="updateRecette(form.value)">
-                <div class="texte">
-                    <input type="hidden" class="id" ngModel="{{recette?._id}}" name="_id">
-                    <input type="text" class="menu" ngModel="{{recette?.menu}}" name="menu">
-                    <div *ngIf="recette?.picture" class="image">
-                        <img type="jpg" id="image" [src]="recette?.picture" alt="image">
-                    </div>
-                    <textarea autosize type="text" class="ingredient" placeholder="{{recette?.ingredient}}" ngModel="{{recette?.ingredient}}" name="ingredient"></textarea>
-                    <input type="text" class="quantite" ngModel="{{recette?.quantite}}" name="quantite">
-                    <textarea autosize type="text" class="etapes" placeholder="{{recette?.etapes}}" ngModel="{{recette?.etapes}}" name="etapes"></textarea>
-                    <button type="submit" title="modifier votre recette">Modifier</button>
+            <div class="texte">
+                <input type="hidden" class="id" ngModel="{{recette?._id}}" name="_id">
+                <p>{{recette?.menu}}</p>
+                <div *ngIf="recette?.picture" class="image">
+                    <img type="jpg" id="image" [src]="recette?.picture" alt="image">
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

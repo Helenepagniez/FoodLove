@@ -4,12 +4,14 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { RecetteListComponent } from './recette-list/recette-list.component';
+import { SingleRecetteComponent } from './single-recette/single-recette.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'liste', component: RecetteListComponent },
+  { path: 'recette/:id', component: SingleRecetteComponent},
   { path: '', pathMatch: 'full', redirectTo: '/home'}
 ];
 

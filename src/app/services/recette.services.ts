@@ -16,6 +16,12 @@ export class RecetteService {
         });
     };
 
+    public getOneRecette(recetteId: string): Observable<Recette> {
+        return this.http.get<any>(`${this.apiServerUrl}/api/recette/${recetteId}`,{
+            withCredentials: true,
+        });
+    };
+
     public addRecette(recette: Recette): Observable<Recette> {
         return this.http.post<Recette>(`${this.apiServerUrl}/api/recette`, recette,{
             withCredentials: true,

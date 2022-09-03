@@ -40,6 +40,10 @@ export class RecetteListComponent implements OnInit {
     this.getRecettes();
   };
 
+  onClickRecette(id: string) {
+    this.router.navigate(['recette/', id]);
+  }
+
   //Afficher toutes les recettes
   getRecettes() {
     this.recetteService.getRecettes().subscribe(

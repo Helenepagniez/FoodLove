@@ -1,0 +1,58 @@
+.header{
+    background-color: darkcyan;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.retour{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.details{
+    min-height: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.details .menu{
+    font-size: 42px;
+    margin-top: 20px;
+    padding-top: 25px;
+    text-align: center;
+    font-style: oblique;
+}
+
+.details .ingredient, .etapes, .quantite{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: justify;
+    margin-top: 15px;
+    padding-top: 25px;
+    margin-left: 20%;
+}
+
+.details .image{
+    width: auto;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.details .image img{
+    width: auto;
+    height: 180px;
+}

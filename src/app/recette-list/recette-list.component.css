@@ -1,0 +1,96 @@
+.header{
+    background-color: darkcyan;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+a {
+    cursor: pointer;
+}
+
+/************BARRE DE RECHERCHE***************/
+.barre-de-recherche
+{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.barre-de-recherche .info .recherche
+{
+    border-width: 4px;
+    border-color: darkcyan;
+    border-style: solid;
+    padding: 3px;
+    text-align: center;
+    border-radius: 50px;
+    margin-right: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+/************COLONNE***************/
+.colonne{
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 15px;
+}
+
+/************RECETTES***************/
+.recette{
+    border: darkcyan 3px solid;
+    width: 60%;
+    padding: 0;
+    height: auto;
+    margin: auto;
+    border-radius: 50px;
+}
+
+.recette .composition{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.recette .composition .texte {
+    width: 70%;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.recette .composition .texte p{
+    color: black;
+    text-align: center;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    min-height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.recette .composition .image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 280px;
+    height: auto;
+    margin: 0;
+    padding: 15px;
+}
+
+.recette .composition img{
+    width: auto;
+    height: 90%;
+    max-height: 200px;
+}

@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="header">
+    <h1>Recette en détails</h1>
+</div>
+<a routerLink="/liste"><button class="retour">Retour</button></a>
+<div class="details">
+    <div class="menu" *ngIf="recette?.menu">
+        <p>{{recette.menu}}</p>
+    </div>
+    <div class="ingredient" *ngIf="recette?.ingredient">
+        <p>Ingrédients : </p>
+        <p>- {{recette.ingredient}}</p>
+    </div>
+    <div class="quantite" *ngIf="recette?.quantite">
+        <p>Quantités : </p>
+        <p>=> {{recette.quantite}}</p>
+    </div>
+    <div class="etapes" *ngIf="recette?.etapes">
+        <p>Etapes : </p>
+        <p>1/{{recette.etapes}}</p>
+        <p>2/{{recette.etapes}}</p>
+    </div>
+    <div *ngIf="recette?.picture" class="image">
+        <img type="jpg" id="image" [src]="recette.picture" alt="image">
+    </div>
+</div>

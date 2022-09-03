@@ -14,6 +14,7 @@ import { RecetteListComponent } from './recette-list/recette-list.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderComponent } from './header/header.component';
+import { SingleRecetteComponent } from './single-recette/single-recette.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     RecetteListComponent,
     DialogComponent,
-    HeaderComponent
+    HeaderComponent,
+    SingleRecetteComponent
   ],
   imports: [
     BrowserModule,
