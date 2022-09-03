@@ -12,6 +12,9 @@ import { RecetteService } from '../services/recette.services';
 export class SingleRecetteComponent implements OnInit {
 
   recette!: Recette;
+  ingredients!: string[];
+  quantites!: number[];
+  etapes!: string[];
 
   constructor( private recetteService: RecetteService,
               private route: ActivatedRoute) { }
@@ -25,6 +28,9 @@ export class SingleRecetteComponent implements OnInit {
     this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
+        this.etapes=response.etapes;
+        this.ingredients=response.ingredients;
+        this.quantites=response.quantites;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

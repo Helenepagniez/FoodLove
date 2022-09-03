@@ -88,18 +88,17 @@ export class RecetteListComponent implements OnInit {
   };
 
   //Barre de recherche des recettes
-  searchRecettes(key: string){
+  /*searchRecettes(key: string){
     const results: Recette[] = [];
     for (const recette of this.recettes) {
       if (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1
-      || recette.ingredient?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
+      || recette.ingredients?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
         results.push(recette);
       }
-    }
     this.recettes = results;
     if (results.length === 0 ||!key) {
       this.getRecettes();
     }
   };
-
+  */
 }

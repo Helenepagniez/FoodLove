@@ -44,6 +44,7 @@
 .portions-container input {
     width: 60%;
     background-color: white;
+    cursor: pointer;
 }
 
 .portions-container p {

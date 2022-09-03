@@ -8,16 +8,16 @@ const RecetteSchema = new mongoose.Schema(
             required: true,
             maxlength: 100000
         },
-        ingredient: {
-            type: String,
+        ingredients: {
+            type: [String],
             required: true
         },
-        quantite: {
-            type: Number,
+        quantites: {
+            type: [Number],
             required: true
         },
         etapes: {
-            type: String,
+            type: [String],
             required: true
         },
         portions: {

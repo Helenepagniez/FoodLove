@@ -13,15 +13,15 @@
             oninput="amount.value=rangeInput.value">                                                       
         <output id="amount" name="amount" for="rangeInput">1</output>
     </div>
-    <div class="ingredient" *ngIf="recette?.ingredient">
+    <div class="ingredient" *ngFor="let ingredient of ingredients">
         <p>Ingrédients : </p>
-        <p>- {{recette.ingredient}}</p>
+        <p>- {{recette.ingredients}}</p>
     </div>
-    <div class="quantite" *ngIf="recette?.quantite">
+    <div class="quantite" *ngFor="let quantite of quantites">
         <p>Quantités : </p>
-        <p>=> {{recette.quantite}}</p>
+        <p>=> {{recette.quantites}}</p>
     </div>
-    <div class="etapes" *ngIf="recette?.etapes">
+    <div class="etapes" *ngFor="let etape of etapes">
         <p>Etapes : </p>
         <p>1/{{recette.etapes}}</p>
     </div>
