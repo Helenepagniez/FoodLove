@@ -20,6 +20,9 @@ const RecetteSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        portions: {
+            type: Number
+        },
         picture : {
             type: String
         },

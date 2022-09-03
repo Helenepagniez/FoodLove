@@ -34,6 +34,25 @@
     font-style: oblique;
 }
 
+.portions-container {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+}
+
+.portions-container input {
+    width: 60%;
+    background-color: white;
+}
+
+.portions-container p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: justify;
+    padding-top: 13px;
+}
+
 .details .ingredient, .etapes, .quantite{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;

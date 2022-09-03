@@ -4,6 +4,7 @@ export class Recette {
     ingredient!: string;
     quantite!: string;
     etapes!: string;
+    portions!: number;
     picture!: string | null;
     video!: string | null;
 }

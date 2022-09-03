@@ -7,6 +7,12 @@
     <div class="menu" *ngIf="recette?.menu">
         <p>{{recette.menu}}</p>
     </div>
+    <div class="portions-container">
+        <p>Portions : </p>
+        <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="0"
+            oninput="amount.value=rangeInput.value">                                                       
+        <output id="amount" name="amount" for="rangeInput">1</output>
+    </div>
     <div class="ingredient" *ngIf="recette?.ingredient">
         <p>Ingrédients : </p>
         <p>- {{recette.ingredient}}</p>
@@ -18,7 +24,6 @@
     <div class="etapes" *ngIf="recette?.etapes">
         <p>Etapes : </p>
         <p>1/{{recette.etapes}}</p>
-        <p>2/{{recette.etapes}}</p>
     </div>
     <div *ngIf="recette?.picture" class="image">
         <img type="jpg" id="image" [src]="recette.picture" alt="image">
