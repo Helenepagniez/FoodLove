@@ -5,6 +5,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
+import { RecetteFormComponent } from './recette-form/recette-form.component';
 import { RecetteListComponent } from './recette-list/recette-list.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'liste', component: RecetteListComponent },
   { path: 'recette/:id', component: SingleRecetteComponent},
   { path: 'profil', component: ProfilComponent },
+  { path: 'new-recette', component: RecetteFormComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home'}
 ];
 

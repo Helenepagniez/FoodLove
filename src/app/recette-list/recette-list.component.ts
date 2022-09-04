@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -15,20 +15,21 @@ import { UserService } from '../services/user.services';
   templateUrl: './recette-list.component.html',
   styleUrls: ['./recette-list.component.css']
 })
-export class RecetteListComponent implements OnInit {
-
-  recettes!: Recette[];
+export class RecetteListComponent implements OnInit{
+  recettes: Recette[] = [];
   recette!: Recette;
   loggedInUser!: User | null;
   loggedInUserId!: LoggedInUserId | null;
   user!: User;
   users: User[] = [];
+  filtres:string[] = [];
 
   constructor(private router: Router,
      private recetteService: RecetteService,
      private userService: UserService,
      private snackBar: MatSnackBar,
      private dialog: MatDialog) { }
+
 
   ngOnInit() {
     if (localStorage.getItem('loggedInUserId')===null) {
@@ -48,7 +49,6 @@ export class RecetteListComponent implements OnInit {
   getRecettes() {
     this.recetteService.getRecettes().subscribe(
       (response: Recette[]) => {
-        this.recettes = [];
         this.recettes = response;
       },
       (error: HttpErrorResponse) => {
@@ -88,17 +88,18 @@ export class RecetteListComponent implements OnInit {
   };
 
   //Barre de recherche des recettes
-  /*searchRecettes(key: string){
+  searchRecettes(key: string){
     const results: Recette[] = [];
     for (const recette of this.recettes) {
-      if (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1
-      || recette.ingredients?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
+      if (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
         results.push(recette);
       }
     this.recettes = results;
     if (results.length === 0 ||!key) {
       this.getRecettes();
     }
+    };
   };
-  */
+
 }
+

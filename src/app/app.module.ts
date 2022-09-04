@@ -16,6 +16,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderComponent } from './header/header.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
 import { ProfilComponent } from './profil/profil.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { RecetteFormComponent } from './recette-form/recette-form.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { ProfilComponent } from './profil/profil.component';
     DialogComponent,
     HeaderComponent,
     SingleRecetteComponent,
-    ProfilComponent
+    ProfilComponent,
+    RecetteFormComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { ProfilComponent } from './profil/profil.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

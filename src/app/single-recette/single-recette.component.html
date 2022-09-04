@@ -7,6 +7,12 @@
     <div class="menu" *ngIf="recette?.menu">
         <p>{{recette.menu}}</p>
     </div>
+    <div class="temps" *ngIf="recette?.temps">
+        <p>{{recette.temps}}</p>
+    </div>
+    <div class="filtres" *ngIf="recette?.filtres">
+        <p>{{recette.filtres}}</p>
+    </div>
     <div class="portions-container">
         <p>Portions : </p>
         <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="0"
@@ -19,7 +25,7 @@
     </div>
     <div class="quantite" *ngFor="let quantite of quantites">
         <p>Quantités : </p>
-        <p>=> {{recette.quantites}}</p>
+        <p>=> {{recette.quantites}} </p> <p>{{recette.unites}} </p>
     </div>
     <div class="etapes" *ngFor="let etape of etapes">
         <p>Etapes : </p>

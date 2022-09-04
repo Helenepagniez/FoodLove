@@ -1,0 +1,95 @@
+<app-header></app-header>
+<div class="header">
+    <h1>Formulaire d'ajout de nouvelle recette</h1>
+</div>
+<a routerLink="/liste"><button class="retour">Retour</button></a>
+<form [formGroup]="recetteForm">
+    <div class="form-group">
+      <label for="menu">Nom de la recette</label>
+      <input type="text" class="form-control" id="menu" formControlName="menu">
+    </div>
+    <div class="form-group">
+        <mat-form-field appearance="fill">
+            <mat-label>Filtres</mat-label>
+            <mat-select [formControl]="filtres" multiple>
+              <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <label for="temps">Temps de préparation</label>
+        <input type="text" class="form-control" id="temps" formControlName="temps">
+    </div>
+    <div class="form-group">
+        <label for="portions">Portions</label>
+        <div class="portions-container">
+          <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="0" formControlName="portions"
+            oninput="amount.value=rangeInput.value">                                                       
+        <output id="amount" name="amount" for="rangeInput">1</output>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ingredients">Ingrédients</label>
+        <ul>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+            </li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <label for="quantites">Quantitées</label>
+        <div class="quantites-container">
+          <input type="number" class="quantites" formControlName="quantitesValue">
+          <mat-form-field appearance="fill">
+            <mat-label>Unitées</mat-label>
+            <mat-select [formControl]="unites">
+              <mat-option *ngFor="let unite of uniteList" [value]="unite">{{unite}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="etapes">Etapes</label>
+        <ul>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+            <li>
+                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+            </li>
+        </ul>
+    </div>
+    <div class="form-group">
+        <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+        <button mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</button>
+        <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+    </div>
+    <button mat-raised-button color="primary" (click)="submitRecette()" [disabled]="recetteForm.invalid">Enregistrer</button>
+</form>

@@ -23,6 +23,15 @@ const RecetteSchema = new mongoose.Schema(
         portions: {
             type: Number
         },
+        filtres: {
+            type: [String],
+        },
+        temps: {
+            type: String,
+        },
+        unites: {
+            type: [String],
+        },
         picture : {
             type: String
         },

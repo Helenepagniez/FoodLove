@@ -94,3 +94,11 @@ a {
     height: 90%;
     max-height: 200px;
 }
+
+.filtres mat-chip{
+    display: flex;
+    background-color: darkcyan;
+    color: white;
+    margin-top: 23px;
+    flex-wrap: wrap;
+}

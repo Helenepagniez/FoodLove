@@ -4,15 +4,25 @@
 </div>
 <div class="barre-de-recherche">
     <div class="info">
-        <input class="recherche" type="search" (ngModelChange)="(key.value)" #key="ngModel" ngModel name="key" name="recherche" placeholder="Recherchez ici !">
+        <input class="recherche" type="search" (ngModelChange)="searchRecettes(key.value)" #key="ngModel" ngModel name="recherche" placeholder="Recherchez ici !">
+    </div>
+    <div class="filtres">
+        <mat-chip-list selectable aria-label="Food selection">
+            <mat-chip>Familiale</mat-chip>
+            <mat-chip>Rapide</mat-chip>
+            <mat-chip>Entrée</mat-chip>
+            <mat-chip>Repas</mat-chip>
+            <mat-chip>Dessert</mat-chip>
+        </mat-chip-list>
     </div>
 </div>
-<div *ngFor="let recette of recettes" class="colonne" (click)="onClickRecette(recette._id)">
+<div *ngFor="let recette of recettes" class="colonne">
     <div class="recette">
-        <div class="composition">
+        <div class="composition" (click)="onClickRecette(recette._id)">
             <div class="texte">
                 <input type="hidden" class="id" ngModel="{{recette?._id}}" name="_id">
                 <p>{{recette?.menu}}</p>
+                <p *ngIf="recette.temps">( Temps total : {{recette.temps}} min)</p>
                 <div *ngIf="recette?.picture" class="image">
                     <img type="jpg" id="image" [src]="recette?.picture" alt="image">
                 </div>
