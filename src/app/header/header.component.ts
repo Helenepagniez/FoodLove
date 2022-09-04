@@ -1,4 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { LoggedInUserId } from '../models/loggedInUserId.model';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user.services';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  loggedInUser!: User | null;
+  loggedInUserId!: LoggedInUserId | null;
+  users: User[]=[];
+  user!: User;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     let btn : any = document.querySelector("#btn");
@@ -18,4 +27,20 @@ export class HeaderComponent implements OnInit {
         sidebar.classList.toggle("active");
       }
   }
+
+   //déconnecter l'utilisateur connecté
+   logoutUser() {
+    this.userService.logoutUser(this.loggedInUser!).subscribe(
+      (response: User) => {
+        localStorage.removeItem('loggedInUserId');
+        this.loggedInUser = null;
+        this.loggedInUserId = null;
+        location.href="/home";
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  };
+
 }
