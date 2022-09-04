@@ -15,6 +15,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HeaderComponent } from './header/header.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
+import { ProfilComponent } from './profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SingleRecetteComponent } from './single-recette/single-recette.componen
     RecetteListComponent,
     DialogComponent,
     HeaderComponent,
-    SingleRecetteComponent
+    SingleRecetteComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

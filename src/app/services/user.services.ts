@@ -10,8 +10,8 @@ export class UserService {
 
     constructor(private http: HttpClient) {}
 
-    public getUsers(): Observable<User[]> {
-        return this.http.get<any>(`${this.apiServerUrl}/api/user`,{
+    public getUser(userId: string): Observable<User> {
+        return this.http.get<any>(`${this.apiServerUrl}/api/user/${userId}`,{
             withCredentials: true,
           });
     };
