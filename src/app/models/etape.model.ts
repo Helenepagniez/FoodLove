@@ -1,4 +1,4 @@
 export class Etape {
-    _id!: number;
+    _id: any;
     nomEtape!: string ;
 }

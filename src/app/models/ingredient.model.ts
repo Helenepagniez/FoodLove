@@ -1,5 +1,5 @@
 export class Ingredient {
-    _id!: number;
+    _id: any;
     nomIngredient!: string ;
     quantiteValue!: number;
     unite!: string | null;

@@ -11,7 +11,7 @@ const IngredientSchema = new mongoose.Schema(
             required: true
         },
         unite: {
-            type: String | null,
+            type: String,
             required: true
         },
     }

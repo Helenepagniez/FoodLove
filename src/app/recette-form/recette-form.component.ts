@@ -22,7 +22,7 @@ export class RecetteFormComponent implements OnInit {
   recettes!: Recette[];
   recette!: Recette;
   recetteId!: Recette['_id'];
-  unites = new FormControl('');
+  unite!: string;
   filtres = new FormControl('');
 
   constructor(private formBuilder: FormBuilder,
@@ -35,7 +35,6 @@ export class RecetteFormComponent implements OnInit {
       picture: [''],
       nomEtape: [''],
       quantiteValue: [''],
-      uniteList: [''],
       nomIngredient: [''],
       portions: [''],
       temps: [''],
@@ -43,47 +42,55 @@ export class RecetteFormComponent implements OnInit {
     });
   }
 
-    /**
-    creer une recette a partir du formulaire et envoie au backend
-    submitRecette() {
-      const recette = new Recette();
-      recette._id=this.recette?._id!;
-      recette.picture=this.imagePreview;
-      recette.menu=this.recetteForm.get('menu')!.value;
-      recette.etapes=this.recetteForm.get('etapes')!.value;
-      recette.quantites=this.recetteForm.get('quantites')!.value;
-      recette.unites=this.recetteForm.get('unites')!.value;
-      recette.ingredients=this.recetteForm.get('ingredients')!.value;
-      recette.portions=this.recetteForm.get('portions')!.value;
-      recette.temps=this.recetteForm.get('temps')!.value;
-      recette.filtres=this.recetteForm.get('filtres')!.value;
-      this.addRecette(recette);
-    }
-    */
     //Ajouter une recette
     addRecette(recette: Recette) {
-      let etape: Etape = {
-        "_id": 1,
-        "nomEtape":this.recetteForm.get('nomEtape')!.value,
+
+      let newRecette: Recette = {
+        "_id":null,
+        "menu":this.recetteForm.get('menu')?.value,
+        "portions":this.recetteForm.get('portions')?.value,
+        "temps":this.recetteForm.get('temps')?.value,
+        "picture":this.recetteForm.get('picture')?.value,
+        "video":this.recetteForm.get('video')?.value,
+        "etapes":[],
+        "filtres":[],
+        "ingredients":[]
       };
-      recette.etapes.push(etape);
-      
-      let ingredient: Ingredient = {
-        "_id": 1,
-        "nomIngredient":this.recetteForm.get('nomIngredient')!.value,
-        "quantiteValue":this.recetteForm.get('quantiteValue')!.value,
-        "unite":this.recetteForm.get('unite')!.value
-      };
-      recette.ingredients.push(ingredient);
-      
-      this.recetteService.addRecette(recette).subscribe(
+
+      if (this.recetteForm.get('nomEtape')?.value) {
+        let etape: Etape = {
+          "_id": null,
+          "nomEtape":this.recetteForm.get('nomEtape')?.value,
+        };
+        newRecette.etapes.push(etape);
+      }
+
+      if (this.recetteForm.get('nomIngredient')?.value) {
+        let ingredient: Ingredient = {
+          "_id": null,
+          "nomIngredient":this.recetteForm.get('nomIngredient')?.value,
+          "quantiteValue":this.recetteForm.get('quantiteValue')?.value,
+          "unite":this.unite
+        };
+        newRecette.ingredients.push(ingredient);
+      }
+      console.log(newRecette);
+
+      this.recetteService.addRecette(newRecette).subscribe(
         (response: Recette) => {
           this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
-            location.reload();
+            location.href="/liste";
         });
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          if(error.status !== 400){
+            alert(error.message);
+          }
+          else if(error.status === 400){
+            this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
+              location.href="/liste";
+            });
+          }
         }
       )
     };

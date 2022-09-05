@@ -40,7 +40,7 @@
           <input type="number" class="quantites" formControlName="quantiteValue">
           <mat-form-field appearance="fill">
             <mat-label>Unitées</mat-label>
-            <mat-select [formControl]="unites">
+            <mat-select [(ngModel)]="unite" [ngModelOptions]="{standalone: true}" name="unite">
               <mat-option *ngFor="let unite of uniteList" [value]="unite">{{unite}}</mat-option>
             </mat-select>
           </mat-form-field>
