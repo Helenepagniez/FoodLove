@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Etape } from '../models/etape.model';
+import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
 import { RecetteService } from '../services/recette.services';
 
@@ -12,9 +14,8 @@ import { RecetteService } from '../services/recette.services';
 export class SingleRecetteComponent implements OnInit {
 
   recette!: Recette;
-  ingredients!: string[];
-  quantites!: number[];
-  etapes!: string[];
+  ingredients!: Ingredient[];
+  etapes!: Etape[];
 
   constructor( private recetteService: RecetteService,
               private route: ActivatedRoute) { }
@@ -30,7 +31,6 @@ export class SingleRecetteComponent implements OnInit {
         this.recette= response;
         this.etapes=response.etapes;
         this.ingredients=response.ingredients;
-        this.quantites=response.quantites;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -25,14 +25,22 @@ module.exports.readRecette = (req, res) => {
 
 //créer recette
 module.exports.createRecette = async (req, res) => {
+  /*const newIngredient = new ingredientModel({
+    nomIngredient: req.body.nomIngredient,
+    quantiteValue: req.body.quantiteValue,
+    unite: req.body.unite,
+  });
+
+  const newEtape = new EtapeModel({
+    nomEtape: req.body.nomEtape
+  });*/
+
   const newRecette = new recetteModel({
     menu: req.body.menu,
     ingredients: req.body.ingredients,
-    quantites: req.body.quantites,
     etapes: req.body.etapes,
     filtres: req.body.filtres,
     temps: req.body.temps,
-    unites: req.body.unites,
     video: req.body.video,
     picture: req.body.picture,
   });

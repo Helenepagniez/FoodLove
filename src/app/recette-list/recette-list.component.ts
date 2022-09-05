@@ -94,11 +94,11 @@ export class RecetteListComponent implements OnInit{
       if (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
         results.push(recette);
       }
+    }
     this.recettes = results;
     if (results.length === 0 ||!key) {
       this.getRecettes();
     }
-    };
   };
 
 }

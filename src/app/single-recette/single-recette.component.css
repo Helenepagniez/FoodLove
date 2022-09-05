@@ -13,9 +13,15 @@
     height: 30px;
     background-color: darkcyan;
     color: white;
-    cursor: pointer;
     margin-left: 20px;
     margin-top: 30px;
+}
+
+.retour:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
 }
 
 .details{
@@ -32,6 +38,49 @@
     padding-top: 25px;
     text-align: center;
     font-style: oblique;
+}
+
+.details .categories{
+    font-size: 22px;
+    text-align: justify;
+    padding-top: 13px;
+    margin-top: 15px;
+    margin-left: 20%;
+    text-decoration: underline;
+    color: darkcyan;
+}
+
+.details .temps{
+    font-size: 22px;
+    margin-top: 23px;
+    text-align: center;
+    font-style: oblique;
+}
+
+.details .filtres{
+    background-color: darkcyan;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+.details .filtres:hover{
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+.details .filtres p {
+    color: white;
+    width: auto;
+    margin: 5px 20px;
+}
+
+.details .filtres:hover p {
+    color: darkcyan;
 }
 
 .portions-container {
@@ -59,7 +108,6 @@
     font-size: 20px;
     text-align: justify;
     margin-top: 15px;
-    padding-top: 25px;
     margin-left: 20%;
 }
 

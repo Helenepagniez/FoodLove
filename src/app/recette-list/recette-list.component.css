@@ -17,6 +17,7 @@ a {
     display: flex;
     align-content: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .barre-de-recherche .info .recherche
@@ -59,6 +60,7 @@ a {
     justify-content: center;
     align-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .recette .composition .texte {
@@ -95,10 +97,23 @@ a {
     max-height: 200px;
 }
 
+.filtres{
+    margin-bottom: 20px;
+}
+
 .filtres mat-chip{
     display: flex;
     background-color: darkcyan;
     color: white;
     margin-top: 23px;
     flex-wrap: wrap;
+    align-content: center;
+}
+
+.filtres mat-chip:hover{
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+    margin-top: 23px;
 }

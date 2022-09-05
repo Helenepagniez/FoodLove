@@ -32,29 +32,12 @@
         <label for="ingredients">Ingrédients</label>
         <ul>
             <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="ingredients" formControlName="ingredients">
+                <input type="text" class="form-control" id="nomIngredient" formControlName="nomIngredient">
             </li>
         </ul>
-    </div>
-    <div class="form-group">
         <label for="quantites">Quantitées</label>
         <div class="quantites-container">
-          <input type="number" class="quantites" formControlName="quantitesValue">
+          <input type="number" class="quantites" formControlName="quantiteValue">
           <mat-form-field appearance="fill">
             <mat-label>Unitées</mat-label>
             <mat-select [formControl]="unites">
@@ -67,22 +50,7 @@
         <label for="etapes">Etapes</label>
         <ul>
             <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
-            </li>
-            <li>
-                <input type="text" class="form-control" id="etapes" formControlName="etapes">
+                <input type="text" class="form-control" id="nomEtape" formControlName="nomEtape">
             </li>
         </ul>
     </div>
@@ -91,5 +59,5 @@
         <button mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</button>
         <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
     </div>
-    <button mat-raised-button color="primary" (click)="submitRecette()" [disabled]="recetteForm.invalid">Enregistrer</button>
+    <button mat-raised-button color="primary" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid">Enregistrer</button>
 </form>

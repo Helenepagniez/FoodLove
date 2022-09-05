@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
+import { Etape } from '../models/etape.model';
+import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
 import { RecetteService } from '../services/recette.services';
 
@@ -15,8 +17,8 @@ export class RecetteFormComponent implements OnInit {
   recetteForm!: FormGroup;
   imagePreview!: string;
   file!: File | null;
-  uniteList!: ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
-  filtreList!: ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
+  uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
+  filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
   recettes!: Recette[];
   recette!: Recette;
   recetteId!: Recette['_id'];
@@ -29,22 +31,20 @@ export class RecetteFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.recetteForm = this.formBuilder.group({
-      _id: [''],
       menu: [''],
       picture: [''],
-      etapes: [''],
-      quantite: [''],
-      uniteList: ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'],
-      ingredients: [''],
+      nomEtape: [''],
+      quantiteValue: [''],
+      uniteList: [''],
+      nomIngredient: [''],
       portions: [''],
       temps: [''],
-      filtreList: ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert']
+      filtreList: ['']
     });
   }
 
     /**
     creer une recette a partir du formulaire et envoie au backend
-    */
     submitRecette() {
       const recette = new Recette();
       recette._id=this.recette?._id!;
@@ -59,12 +59,28 @@ export class RecetteFormComponent implements OnInit {
       recette.filtres=this.recetteForm.get('filtres')!.value;
       this.addRecette(recette);
     }
+    */
     //Ajouter une recette
     addRecette(recette: Recette) {
+      let etape: Etape = {
+        "_id": 1,
+        "nomEtape":this.recetteForm.get('nomEtape')!.value,
+      };
+      recette.etapes.push(etape);
+      
+      let ingredient: Ingredient = {
+        "_id": 1,
+        "nomIngredient":this.recetteForm.get('nomIngredient')!.value,
+        "quantiteValue":this.recetteForm.get('quantiteValue')!.value,
+        "unite":this.recetteForm.get('unite')!.value
+      };
+      recette.ingredients.push(ingredient);
+      
       this.recetteService.addRecette(recette).subscribe(
         (response: Recette) => {
-          this.snackBar.open("Message publié", "Fermer", {duration: 2000});
-          location.reload();
+          this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
+            location.reload();
+        });
         },
         (error: HttpErrorResponse) => {
           alert(error.message);

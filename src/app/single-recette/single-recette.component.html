@@ -8,7 +8,7 @@
         <p>{{recette.menu}}</p>
     </div>
     <div class="temps" *ngIf="recette?.temps">
-        <p>{{recette.temps}}</p>
+        <p>( Temps total : {{recette.temps}} min)</p>
     </div>
     <div class="filtres" *ngIf="recette?.filtres">
         <p>{{recette.filtres}}</p>
@@ -19,17 +19,13 @@
             oninput="amount.value=rangeInput.value">                                                       
         <output id="amount" name="amount" for="rangeInput">1</output>
     </div>
+    <p class="categories">Ingrédients : </p>
     <div class="ingredient" *ngFor="let ingredient of ingredients">
-        <p>Ingrédients : </p>
-        <p>- {{recette.ingredients}}</p>
+        <p>- {{ingredient.nomIngredient}} : ({{ingredient.quantiteValue}} {{ingredient.unite}})</p>
     </div>
-    <div class="quantite" *ngFor="let quantite of quantites">
-        <p>Quantités : </p>
-        <p>=> {{recette.quantites}} </p> <p>{{recette.unites}} </p>
-    </div>
+    <p class="categories">Etapes : </p>
     <div class="etapes" *ngFor="let etape of etapes">
-        <p>Etapes : </p>
-        <p>1/{{recette.etapes}}</p>
+        <p>=> {{etape.nomEtape}}</p>
     </div>
     <div *ngIf="recette?.picture" class="image">
         <img type="jpg" id="image" [src]="recette.picture" alt="image">
