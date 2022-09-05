@@ -57,7 +57,7 @@
     width: 80%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;  
+    align-items: center;
   }
   
   .sidebar ul li {
@@ -112,3 +112,17 @@
     opacity: 1;
     pointer-events: auto;
   }
+
+@media screen and (max-width: 700px){
+  .sidebar ul {
+    flex-direction: column;
+  }
+
+  .sidebar.active{
+    height: 200px;
+  }
+
+  .sidebar{
+    width: 35px;
+  }
+}
