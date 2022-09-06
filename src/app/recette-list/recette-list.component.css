@@ -95,6 +95,7 @@ a {
     width: auto;
     height: 90%;
     max-height: 200px;
+    max-width: 500px;
 }
 
 .filtres{
@@ -116,4 +117,10 @@ a {
     background-color: white;
     border: 2px solid darkcyan;
     margin-top: 23px;
+}
+
+@media screen and (max-width: 700px) {
+    .recette .composition img{
+        max-width: 135px;
+    }
 }

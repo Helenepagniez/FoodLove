@@ -28,13 +28,14 @@ nav .conteneur a {
 }
 
 h1{
-    font-size: 70px;
+    font-size: 50px;
     font-weight: bold;
     text-align: center;
     width: 100%;
     padding: 50px 0 ;
     background-color: darkcyan;
     color: white;
+    height: auto;
 }
 
 .accroche{
@@ -79,7 +80,7 @@ h3{
 
 @media screen and (max-width: 600px){
     h1{
-        font-size: 20px;
+        font-size: 23px;
     }
 
     .accroche h2{
@@ -91,7 +92,7 @@ h3{
     }
 }
 
-@media screen and (max-width: 950){
+@media screen and (max-width: 950px){
     h1{
         font-size: 50px;
     }
