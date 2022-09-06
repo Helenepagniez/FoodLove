@@ -38,6 +38,7 @@
     padding-top: 25px;
     text-align: center;
     font-style: oblique;
+    height: auto;
 }
 
 .details .categories{
@@ -123,4 +124,8 @@
 .details .image img{
     width: auto;
     height: 180px;
+}
+
+@media screen and(max-width: 700px) {
+
 }

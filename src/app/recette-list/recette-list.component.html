@@ -8,11 +8,7 @@
     </div>
     <div class="filtres">
         <mat-chip-list selectable aria-label="Food selection">
-            <mat-chip>Familiale</mat-chip>
-            <mat-chip>Rapide</mat-chip>
-            <mat-chip>Entrée</mat-chip>
-            <mat-chip>Repas</mat-chip>
-            <mat-chip>Dessert</mat-chip>
+            <mat-chip *ngFor="let filtre of filtres" (click)="activateFiltre(filtre)">{{filtre}}</mat-chip>
         </mat-chip-list>
     </div>
 </div>

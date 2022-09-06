@@ -22,7 +22,7 @@ export class RecetteListComponent implements OnInit{
   loggedInUserId!: LoggedInUserId | null;
   user!: User;
   users: User[] = [];
-  filtres:string[] = [];
+  filtres: string[] = ['Familiale','Rapide','Entrée','Repas','Dessert','Annuler'];
 
   constructor(private router: Router,
      private recetteService: RecetteService,
@@ -100,6 +100,21 @@ export class RecetteListComponent implements OnInit{
       this.getRecettes();
     }
   };
+
+  activateFiltre(filtre: string) {
+    const results: Recette[] = [];
+    for (let recette of this.recettes) {
+      if(recette.filtres.includes(filtre)) {
+          results.push(recette);
+        }
+    }
+    if (results.length !== 0) {
+      this.recettes = results;
+    }
+    else {
+      this.getRecettes();
+    }
+  }
 
 }
 
