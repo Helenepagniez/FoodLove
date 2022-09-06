@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { ModifFormComponent } from './modif-form/modif-form.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import { RecetteListComponent } from './recette-list/recette-list.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'liste', component: RecetteListComponent },
   { path: 'recette/:id', component: SingleRecetteComponent},
+  { path: 'modif-form/:id', component: ModifFormComponent},
   { path: 'profil', component: ProfilComponent },
   { path: 'new-recette', component: RecetteFormComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home'}
