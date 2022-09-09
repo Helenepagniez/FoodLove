@@ -3,32 +3,83 @@
     <h1>Recette en détails</h1>
 </div>
 <a routerLink="/liste"><button class="retour">Retour</button></a>
+<a (click)="onModify()"><button class="retour">Modifier</button></a>
 <div class="details">
     <div class="menu" *ngIf="recette?.menu">
-        <p>{{recette.menu}}</p>
+        <p *ngIf="!isModifying">{{recette.menu}}</p>
+        <input *ngIf="isModifying" type="text" class="menu" value="{{recette.menu}}">
     </div>
     <div class="temps" *ngIf="recette?.temps">
-        <p>( Temps total : {{recette.temps}} min)</p>
+        <p *ngIf="!isModifying">( Temps total : {{recette.temps}} min)</p>
+        <p *ngIf="isModifying">( Temps total : <input type="text" class="temps" value="{{recette.temps}}"> min)</p>
     </div>
     <div class="filtres" *ngIf="recette?.filtres">
-        <p>{{recette.filtres}}</p>
+        <p *ngIf="!isModifying">{{recette.filtres}}</p>
+        <div *ngIf="isModifying">
+            <mat-form-field appearance="fill" style="background-color: white">
+                <mat-label>Filtres</mat-label>
+                <mat-select multiple>
+                  <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
     <div class="portions-container">
-        <p>Portions : </p>
-        <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="0"
-            oninput="amount.value=rangeInput.value">                                                       
-        <output id="amount" name="amount" for="rangeInput">1</output>
+        <div *ngIf="!isModifying">
+            <div *ngIf="recette.portions">
+                <p>Portions : </p>
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette.portions}}"
+                    oninput="amount.value=rangeInput.value">                                                       
+                <output id="amount" name="amount" for="rangeInput" value="{{recette.portions}}">1</output>
+            </div>
+            <div *ngIf="!recette.portions">
+                <p>Veuillez définir le nombre de portions correspondantes à cette recette</p>
+            </div>
+        </div>
+        <div *ngIf="isModifying">
+            <div *ngIf="recette.portions">
+                <p>Portions : </p>
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette.portions}}"
+                    oninput="amount.value=rangeInput.value">                                                       
+                <output id="amount" name="amount" for="rangeInput" value="{{recette.portions}}">1</output>
+            </div>
+            <div *ngIf="!recette.portions">
+                <p>Portions : </p>
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{0}}"
+                    oninput="amount.value=rangeInput.value">                                                       
+                <output id="amount" name="amount" for="rangeInput">1</output>
+            </div>
+        </div>
     </div>
     <p class="categories">Ingrédients : </p>
     <div class="ingredient" *ngFor="let ingredient of ingredients">
-        <p>- {{ingredient.nomIngredient}} : ({{ingredient.quantiteValue}} {{ingredient.unite}})</p>
+        <p *ngIf="!isModifying">- {{ingredient.nomIngredient}} ({{ingredient.quantiteValue}} {{ingredient.unite}})</p>
+        <p *ngIf="isModifying">- 
+            <input type="text" class="nomIngredient" value="{{ingredient.nomIngredient}}"> 
+            (<input type="text" class="quantiteValue" value="{{ingredient.quantiteValue}}">
+            <mat-form-field appearance="fill" style="font-size: 15px">
+                <mat-label>Unitées</mat-label>
+                <mat-select name="unite">
+                  <mat-option *ngFor="let unite of uniteList" [value]="unite">{{unite}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            )
+        </p>
     </div>
     <p class="categories">Etapes : </p>
     <div class="etapes" *ngFor="let etape of etapes">
-        <p>=> {{etape.nomEtape}}</p>
+        <p *ngIf="!isModifying">=> {{etape.nomEtape}}</p>
+        <p *ngIf="isModifying">=>
+            <input type="text" class="nomIngredient" value="{{etape.nomEtape}}">
+        </p>
     </div>
     <div *ngIf="recette?.picture" class="image">
         <img type="jpg" id="image" [src]="recette.picture" alt="image">
+        <div *ngIf="isModifying">
+            <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+            <button mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</button>
+            <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+        </div>
     </div>
 </div>
-<a routerLink="/modif-form/:id"><button class="modif-form">Modifier la recette</button></a>
+<button mat-raised-button color="primary" class="modif">Enregistrer les modifications</button>

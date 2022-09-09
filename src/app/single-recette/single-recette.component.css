@@ -91,7 +91,7 @@
     justify-content: center;
 }
 
-.portions-container input {
+.portions-container div input {
     width: 60%;
     background-color: white;
     cursor: pointer;
@@ -130,7 +130,7 @@ a{
     text-decoration: none;
 }
 
-.modif-form{
+.modif{
     border-radius: 50px;
     width: auto;
     height: 30px;
@@ -145,9 +145,51 @@ a{
     align-items: center;
 }
 
-.modif-form:hover {
+.modif:hover {
     cursor: pointer;
     color: darkcyan;
     background-color: white;
     border: 2px solid darkcyan;
+}
+
+button{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input{
+    width: auto;
+    color: darkcyan;
+    border: none;
+}
+
+.temps input{
+    width: 50px;
+}
+
+.ingredient .nomIngredient{
+    width: 130px;
+}
+
+.ingredient .quantiteValue {
+    width: 40px;
+    text-align: center;
 }
