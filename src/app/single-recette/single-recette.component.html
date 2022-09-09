@@ -28,9 +28,9 @@
         <div *ngIf="!isModifying">
             <div *ngIf="recette.portions">
                 <p>Portions : </p>
-                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette.portions}}"
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette?.portions}}"
                     oninput="amount.value=rangeInput.value">                                                       
-                <output id="amount" name="amount" for="rangeInput" value="{{recette.portions}}">1</output>
+                <output id="amount" name="amount" for="rangeInput" value="{{recette?.portions}}">1</output>
             </div>
             <div *ngIf="!recette.portions">
                 <p>Veuillez définir le nombre de portions correspondantes à cette recette</p>
@@ -39,13 +39,13 @@
         <div *ngIf="isModifying">
             <div *ngIf="recette.portions">
                 <p>Portions : </p>
-                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette.portions}}"
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette?.portions}}"
                     oninput="amount.value=rangeInput.value">                                                       
-                <output id="amount" name="amount" for="rangeInput" value="{{recette.portions}}">1</output>
+                <output id="amount" name="amount" for="rangeInput" value="{{recette?.portions}}">1</output>
             </div>
             <div *ngIf="!recette.portions">
                 <p>Portions : </p>
-                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{0}}"
+                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="0"
                     oninput="amount.value=rangeInput.value">                                                       
                 <output id="amount" name="amount" for="rangeInput">1</output>
             </div>
@@ -82,4 +82,5 @@
         </div>
     </div>
 </div>
-<button mat-raised-button color="primary" class="modif">Enregistrer les modifications</button>
+<button  *ngIf="isModifying" mat-raised-button color="primary" class="modif" (click)="updateRecette(recette._id, recette)" >Enregistrer les modifications</button>
+<button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>

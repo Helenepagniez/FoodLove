@@ -1,7 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { DialogComponent } from '../dialog/dialog.component';
 import { Etape } from '../models/etape.model';
 import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
@@ -24,7 +27,9 @@ export class SingleRecetteComponent implements OnInit {
   filtres = new FormControl('');
 
   constructor( private recetteService: RecetteService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getOneRecette(this.route.snapshot.params['id']);
@@ -62,4 +67,38 @@ export class SingleRecetteComponent implements OnInit {
       this.isModifying = true;
     }
   }
+
+  //modifier les recettes
+  updateRecette(recetteId: number, recette: Recette) {
+    this.recetteService.updateRecette(recetteId, recette).subscribe(
+      (response: Recette) => {
+        this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
+        this.isModifying = false;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  };
+
+  //supprimer les recettes
+  deleteRecette(recetteId: number) {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.recetteService.deleteRecette(recetteId).subscribe(
+          (response: void) => {
+            location.reload();
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+      }
+    });
+  };
+
+
+
 }
