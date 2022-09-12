@@ -11,13 +11,15 @@ import { Recette } from '../models/recette.model';
 import { RecetteService } from '../services/recette.services';
 
 @Component({
-  selector: 'app-single-recette',
-  templateUrl: './single-recette.component.html',
-  styleUrls: ['./single-recette.component.css']
+  selector: 'app-form-essai',
+  templateUrl: './form-essai.component.html',
+  styleUrls: ['./form-essai.component.css']
 })
-export class SingleRecetteComponent implements OnInit {
+export class FormEssaiComponent implements OnInit {
+
   isModifying: boolean = false;
   updateform!: FormGroup;
+  updateEtape!: FormGroup;
   recette!: Recette;
   imagePreview!: string;
   file!: File | null;
@@ -37,6 +39,9 @@ export class SingleRecetteComponent implements OnInit {
     this.updateform= this.fb.group({
       menu: ['', [Validators.required]],
       temps: ['', [Validators.required]]
+    });
+    this.updateEtape= this.fb.group({
+      nomEtape: ['', [Validators.required]]
     })
     this.getOneRecette(this.route.snapshot.params['id']);
   }
@@ -76,12 +81,11 @@ export class SingleRecetteComponent implements OnInit {
 
   //modifier les recettes
   updateRecette(nouvelleRecette: Recette) {
-    nouvelleRecette.etapes=[{"_id":"1", "nomEtape":"nom"}];
-    nouvelleRecette.ingredients=[{"_id":"1", "nomIngredient": "nom", "quantiteValue": 1, "unite": "cm"}];
     this.recetteService.updateRecette(this.recette._id, nouvelleRecette).subscribe(
       (response: Recette) => {
         this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
         this.isModifying = false;
+        location.reload();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -97,7 +101,7 @@ export class SingleRecetteComponent implements OnInit {
       if (result === true) {
         this.recetteService.deleteRecette(recetteId).subscribe(
           (response: void) => {
-            location.reload();
+            location.href="/liste";
           },
           (error: HttpErrorResponse) => {
             alert(error.message);
@@ -106,7 +110,5 @@ export class SingleRecetteComponent implements OnInit {
       }
     });
   };
-
-
 
 }

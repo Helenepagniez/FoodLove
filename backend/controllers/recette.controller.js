@@ -25,16 +25,6 @@ module.exports.readRecette = (req, res) => {
 
 //créer recette
 module.exports.createRecette = async (req, res) => {
-  /*const newIngredient = new ingredientModel({
-    nomIngredient: req.body.nomIngredient,
-    quantiteValue: req.body.quantiteValue,
-    unite: req.body.unite,
-  });
-
-  const newEtape = new EtapeModel({
-    nomEtape: req.body.nomEtape
-  });*/
-
   const newRecette = new recetteModel({
     menu: req.body.menu,
     ingredients: req.body.ingredients,
@@ -66,10 +56,8 @@ module.exports.updateRecette = (req, res) => {
       if (!theRecette) return res.status(404).send("Recette non trouvée");
       theRecette.menu = req.body.menu;
       theRecette.ingredients = req.body.ingredients;
-      theRecette.quantites = req.body.quantites;
       theRecette.filtres = req.body.filtres;
       theRecette.temps = req.body.temps;
-      theRecette.unites = req.body.unites;
       theRecette.etapes = req.body.etapes;
       theRecette.video = req.body.video;
       theRecette.picture = req.body.picture;

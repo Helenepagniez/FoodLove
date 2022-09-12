@@ -1,0 +1,195 @@
+.header{
+    background-color: darkcyan;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.retour{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.retour:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+.details{
+    min-height: 500px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.details .menu{
+    font-size: 42px;
+    margin-top: 20px;
+    padding-top: 25px;
+    text-align: center;
+    font-style: oblique;
+    height: auto;
+}
+
+.details .categories{
+    font-size: 22px;
+    text-align: justify;
+    padding-top: 13px;
+    margin-top: 15px;
+    margin-left: 20%;
+    text-decoration: underline;
+    color: darkcyan;
+}
+
+.details .temps{
+    font-size: 22px;
+    margin-top: 23px;
+    text-align: center;
+    font-style: oblique;
+}
+
+.details .filtres{
+    background-color: darkcyan;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    border-radius: 50px;
+    margin-top: 15px;
+}
+
+.details .filtres:hover{
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+.details .filtres p {
+    color: white;
+    width: auto;
+    margin: 5px 20px;
+}
+
+.details .filtres:hover p {
+    color: darkcyan;
+}
+
+.portions-container {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+}
+
+.portions-container div input {
+    width: 60%;
+    background-color: white;
+    cursor: pointer;
+}
+
+.portions-container p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: justify;
+    padding-top: 13px;
+}
+
+.details .ingredient, .etapes, .quantite{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    text-align: justify;
+    margin-top: 15px;
+    margin-left: 20%;
+}
+
+.details .image{
+    width: auto;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.details .image img{
+    width: auto;
+    height: 180px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.modif{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modif:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+button{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input{
+    width: auto;
+    color: darkcyan;
+    border: none;
+}
+
+.temps input{
+    width: 50px;
+}
+
+.ingredient .nomIngredient{
+    width: 130px;
+}
+
+.ingredient .quantiteValue {
+    width: 40px;
+    text-align: center;
+}

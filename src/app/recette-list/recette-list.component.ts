@@ -3,7 +3,6 @@ import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { DialogComponent } from '../dialog/dialog.component';
 import { LoggedInUserId } from '../models/loggedInUserId.model';
 import { Recette } from '../models/recette.model';
 import { User } from '../models/user.model';
@@ -55,36 +54,6 @@ export class RecetteListComponent implements OnInit{
         alert(error.message);
       }
     )
-  };
-
-    //modifier une recette
-    updateRecette(recette: Recette) {
-      this.recetteService.updateRecette(recette?._id, recette).subscribe(
-        (response: Recette) => {
-          this.snackBar.open("Recette modifié", "Fermer", {duration: 2000});
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
-    };
-
-  //supprimer une recette
-  deleteRecette(recetteId: number) {
-    const dialogRef = this.dialog.open(DialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-        this.recetteService.deleteRecette(recetteId).subscribe(
-          (response: void) => {
-            location.reload();
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
-      }
-    });
   };
 
   //Barre de recherche des recettes

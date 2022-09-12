@@ -19,6 +19,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import {MatSelectModule} from '@angular/material/select';
+import { FormEssaiComponent } from './form-essai/form-essai.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
     HeaderComponent,
     SingleRecetteComponent,
     ProfilComponent,
-    RecetteFormComponent
+    RecetteFormComponent,
+    FormEssaiComponent
   ],
   imports: [
     BrowserModule,

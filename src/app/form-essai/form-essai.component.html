@@ -70,22 +70,21 @@
             )
         </p>
     </div>
-    <p class="categories">Etapes : </p>
-    <div class="etapes" *ngFor="let etape of etapes">
-        <p *ngIf="!isModifying">=> {{etape.nomEtape}}</p>
-        <p *ngIf="isModifying">=>
-            <input type="text" class="nomIngredient" value="{{etape.nomEtape}}">
-        </p>
-    </div>
-    <div *ngIf="recette?.picture" class="image">
-        <img type="jpg" id="image" [src]="recette.picture" alt="image">
-        <div *ngIf="isModifying">
-            <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
-            <button mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</button>
-            <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+    -->
+    <form (ngSubmit)="updateRecette(updateEtape.value)" [formGroup]="updateEtape">
+        <p class="categories">Etapes : </p>
+        <div class="etapes" *ngFor="let etape of etapes">
+            <p *ngIf="!isModifying">=> {{etape.nomEtape}}</p>
+            <p *ngIf="isModifying">=>
+                <input type="text" class="nomIngredient" value="{{etape.nomEtape}}" ngModel="{{etape.nomEtape}}" formControlName="nomEtape">
+            </p>
         </div>
-    </div>
+        <button type="submit">Bouton</button>
+    </form>
 </div>
-<button  *ngIf="isModifying" mat-raised-button color="primary" class="modif" (click)="updateRecette(recette._id, recette)" >Enregistrer les modifications</button>
-<button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
+<!--
+<button *ngIf="isModifying" mat-raised-button color="primary" class="modif" (click)="updateRecette(recette._id, recette)" >Enregistrer les modifications</button>
 -->
+<button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
+
+
