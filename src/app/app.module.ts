@@ -20,6 +20,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import { FormEssaiComponent } from './form-essai/form-essai.component';
+import { IngredientsComponent } from './single-recette/ingredients/ingredients.component';
+import { EtapesComponent } from './single-recette/etapes/etapes.component';
+import { PortionsComponent } from './single-recette/portions/portions.component';
+import { ImagesComponent } from './single-recette/images/images.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { FormEssaiComponent } from './form-essai/form-essai.component';
     SingleRecetteComponent,
     ProfilComponent,
     RecetteFormComponent,
-    FormEssaiComponent
+    FormEssaiComponent,
+    IngredientsComponent,
+    EtapesComponent,
+    PortionsComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+<!--
 <app-header></app-header>
 <div class="header">
     <h1>Recette en détails</h1>
@@ -14,20 +15,19 @@
             <p *ngIf="!isModifying">( Temps total : {{recette.temps}} min)</p>
             <p *ngIf="isModifying">( Temps total : <input type="text" class="temps" ngModel="{{recette.temps}}" formControlName="temps"> min)</p>
         </div>
-        <button type="submit">Bouton</button>
-    </form>
-    <!--
-    <div class="filtres" *ngIf="recette?.filtres">
-        <p *ngIf="!isModifying">{{recette.filtres}}</p>
-        <div *ngIf="isModifying">
-            <mat-form-field appearance="fill" style="background-color: white">
-                <mat-label>Filtres</mat-label>
-                <mat-select multiple>
-                  <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+        <div class="filtres" *ngIf="recette?.filtres">
+            <p *ngIf="!isModifying">{{recette.filtres}}</p>
+            <div *ngIf="isModifying">
+                <mat-form-field appearance="fill" style="background-color: white">
+                    <mat-label>Filtres</mat-label>
+                    <mat-select multiple ngModel="{{recette.filtres}}" formControlName="filtres">
+                    <mat-option *ngFor="let filtre of filtreList" [value]="filtre" >{{filtre}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
+        <button type="submit" *ngIf="isModifying">Enregistrer les modifications du menu</button>
+    </form>
     <div class="portions-container">
         <div *ngIf="!isModifying">
             <div *ngIf="recette.portions">
@@ -70,21 +70,24 @@
             )
         </p>
     </div>
-    -->
     <form (ngSubmit)="updateRecette(updateEtape.value)" [formGroup]="updateEtape">
         <p class="categories">Etapes : </p>
         <div class="etapes" *ngFor="let etape of etapes">
             <p *ngIf="!isModifying">=> {{etape.nomEtape}}</p>
             <p *ngIf="isModifying">=>
-                <input type="text" class="nomIngredient" value="{{etape.nomEtape}}" ngModel="{{etape.nomEtape}}" formControlName="nomEtape">
+                <input type="text" class="nomIngredient" ngModel="{{etape.nomEtape}}" formControlName="nomEtape">
             </p>
         </div>
-        <button type="submit">Bouton</button>
+        <div class="etapes" *ngFor="let nouvelleEtape of nouvellesEtapes">
+            <p *ngIf="!isModifying">=> {{nouvelleEtape.nomEtape}}</p>
+            <p *ngIf="isModifying">=>
+                <input type="text" class="nomEtape" placeholder="{{nouvelleEtape.nomEtape}}" formControlName="nouvelleEtape">
+            </p>
+        </div>
+        <button type="submit" *ngIf="isModifying">Enregistrer les modifications des étapes</button>
     </form>
+    <button *ngIf="isModifying" (click)="addEtape()">Ajouter une étape</button>
 </div>
-<!--
-<button *ngIf="isModifying" mat-raised-button color="primary" class="modif" (click)="updateRecette(recette._id, recette)" >Enregistrer les modifications</button>
--->
 <button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
 
-
+-->

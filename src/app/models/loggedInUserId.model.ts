@@ -1,3 +1,3 @@
-export class LoggedInUserId {
-    user!: string | null;
+export interface LoggedInUserId {
+    user: string | null;
 }

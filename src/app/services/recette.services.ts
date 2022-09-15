@@ -28,8 +28,8 @@ export class RecetteService {
         });
     };
 
-    public updateRecette(recetteId: number, recette: Recette): Observable<Recette> {
-        return this.http.put<Recette>(`${this.apiServerUrl}/api/recette/${recetteId}`, recette,{
+    public updateRecette(recetteId: number, nouvelleRecette: Recette): Observable<Recette> {
+        return this.http.put<Recette>(`${this.apiServerUrl}/api/recette/${recetteId}`, nouvelleRecette,{
             withCredentials: true,
         });
     };

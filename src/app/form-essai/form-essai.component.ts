@@ -20,6 +20,7 @@ export class FormEssaiComponent implements OnInit {
   isModifying: boolean = false;
   updateform!: FormGroup;
   updateEtape!: FormGroup;
+  updateFiltres!: FormGroup;
   recette!: Recette;
   imagePreview!: string;
   file!: File | null;
@@ -28,6 +29,7 @@ export class FormEssaiComponent implements OnInit {
   uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
   filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
   filtres = new FormControl('');
+  nouvellesEtapes: Etape[] = [];
 
   constructor( private recetteService: RecetteService,
               private route: ActivatedRoute,
@@ -38,16 +40,17 @@ export class FormEssaiComponent implements OnInit {
   ngOnInit() {
     this.updateform= this.fb.group({
       menu: ['', [Validators.required]],
-      temps: ['', [Validators.required]]
+      temps: ['', [Validators.required]],
+      filtres: ['', [Validators.required]]
     });
     this.updateEtape= this.fb.group({
-      nomEtape: ['', [Validators.required]]
-    })
+      nomEtape: ['', [Validators.required]],
+      nouvelleEtape: ['', [Validators.required]]
+    });
     this.getOneRecette(this.route.snapshot.params['id']);
   }
 
   getOneRecette(recetteId: string) {
-    
     this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
@@ -81,6 +84,22 @@ export class FormEssaiComponent implements OnInit {
 
   //modifier les recettes
   updateRecette(nouvelleRecette: Recette) {
+    /*
+    nouvelleRecette.ingredients= [{
+      "_id":null,
+      "nomIngredient":"Saumon",
+      "quantiteValue":2,
+      "unite":"Produits"
+    }];
+    */
+   console.log(nouvelleRecette);
+   console.log(this.recette.etapes);
+   console.log(this.nouvellesEtapes);
+
+   
+   
+   //ajouter les nouvelles etapes aux etapes de la nouvelle recette (attention modifications des anciennes à garder)
+  /*
     this.recetteService.updateRecette(this.recette._id, nouvelleRecette).subscribe(
       (response: Recette) => {
         this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
@@ -91,6 +110,7 @@ export class FormEssaiComponent implements OnInit {
         alert(error.message);
       }
     );
+    */
   };
 
   //supprimer les recettes
@@ -109,6 +129,14 @@ export class FormEssaiComponent implements OnInit {
         );
       }
     });
-  };
+  }
 
+  addEtape (){
+    let nouvelleEtape = {
+      "_id": null,
+      "nomEtape": "Nouvelle étape"
+    };
+    
+    this.nouvellesEtapes.push(nouvelleEtape);
+  }
 }

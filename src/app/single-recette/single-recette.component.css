@@ -65,6 +65,8 @@
     margin: auto;
     border-radius: 50px;
     margin-top: 15px;
+    width: 50%;
+    height: 25px;
 }
 
 .details .filtres:hover{
@@ -169,6 +171,13 @@ button:hover {
     color: darkcyan;
     background-color: white;
     border: 2px solid darkcyan;
+}
+
+.lien {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 15px;
 }
 
 input[type="file"] {

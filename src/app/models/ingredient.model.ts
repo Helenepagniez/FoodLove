@@ -1,6 +1,6 @@
-export class Ingredient {
+export interface Ingredient {
     _id: any;
-    nomIngredient!: string ;
-    quantiteValue!: number;
-    unite!: string | null;
+    nomIngredient: string ;
+    quantiteValue: number;
+    unite: string | null;
 }

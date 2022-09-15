@@ -1,0 +1,22 @@
+<h1>Modifier ou Ajouter des ingrédients</h1>
+<div class="ingredients">
+    <form class="ingredient" *ngFor="let ingredient of ingredients" (ngSubmit)="updateRecette(updateform.value)" [formGroup]="updateform">
+        <div class="contenu">
+            <input type="text" class="nomIngredient" value="{{ingredient.nomIngredient}}" ngModel="{{ingredient.nomIngredient}}" formControlName="nomIngredient"> 
+            <input type="text" class="quantiteValue" value="{{ingredient.quantiteValue}}" ngModel="{{ingredient.quantiteValue}}" formControlName="quantiteValue">
+            <mat-form-field appearance="fill" style="border: 2px solid black; font-size: 10px;margin-right: 5px; background-color: white;">
+                <mat-label>Unitées</mat-label>
+                <mat-select name="unite">
+                  <mat-option *ngFor="let unite of uniteList" [value]="unite">{{unite}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button type="submit" class="enregistrer">Enregistrer</button>
+        </div>
+    </form>
+</div>
+<div class="ajout">
+    <button class="ajouter">Ajouter</button>
+</div>
+
+
+

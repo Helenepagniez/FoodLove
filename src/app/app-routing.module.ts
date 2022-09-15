@@ -8,6 +8,10 @@ import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import { RecetteListComponent } from './recette-list/recette-list.component';
+import { EtapesComponent } from './single-recette/etapes/etapes.component';
+import { ImagesComponent } from './single-recette/images/images.component';
+import { IngredientsComponent } from './single-recette/ingredients/ingredients.component';
+import { PortionsComponent } from './single-recette/portions/portions.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
 
 const routes: Routes = [
@@ -16,9 +20,12 @@ const routes: Routes = [
   { path: 'logout', component: HeaderComponent },
   { path: 'home', component: HomeComponent },
   { path: 'liste', component: RecetteListComponent },
-  //{ path: 'recette/:id', component: SingleRecetteComponent},
+  { path: 'recette/:id', component: SingleRecetteComponent},
+  { path: 'recette/:id/ingredients', component: IngredientsComponent},
+  { path: 'recette/:id/etapes', component: EtapesComponent},
+  { path: 'recette/:id/image', component: ImagesComponent},
+  { path: 'recette/:id/portions', component: PortionsComponent},
   { path: 'profil', component: ProfilComponent },
-  { path: 'recette/:id', component: FormEssaiComponent },
   { path: 'new-recette', component: RecetteFormComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home'}
 ];

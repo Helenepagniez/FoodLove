@@ -16,16 +16,17 @@ import { RecetteService } from '../services/recette.services';
   styleUrls: ['./single-recette.component.css']
 })
 export class SingleRecetteComponent implements OnInit {
+  
   isModifying: boolean = false;
   updateform!: FormGroup;
+  updateFiltres!: FormGroup;
   recette!: Recette;
-  imagePreview!: string;
-  file!: File | null;
   ingredients!: Ingredient[];
   etapes!: Etape[];
   uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
   filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
   filtres = new FormControl('');
+  nouvellesEtapes: Etape[] = [];
 
   constructor( private recetteService: RecetteService,
               private route: ActivatedRoute,
@@ -36,13 +37,13 @@ export class SingleRecetteComponent implements OnInit {
   ngOnInit() {
     this.updateform= this.fb.group({
       menu: ['', [Validators.required]],
-      temps: ['', [Validators.required]]
-    })
+      temps: ['', [Validators.required]],
+      filtres: ['', [Validators.required]]
+    });
     this.getOneRecette(this.route.snapshot.params['id']);
   }
 
   getOneRecette(recetteId: string) {
-    
     this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
@@ -55,16 +56,6 @@ export class SingleRecetteComponent implements OnInit {
     )
   };
 
-  onFileAdded(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-    this.file=file;
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  } 
-
   onModify() {
     if (this.isModifying) {
       this.isModifying = false;
@@ -76,12 +67,18 @@ export class SingleRecetteComponent implements OnInit {
 
   //modifier les recettes
   updateRecette(nouvelleRecette: Recette) {
-    nouvelleRecette.etapes=[{"_id":"1", "nomEtape":"nom"}];
-    nouvelleRecette.ingredients=[{"_id":"1", "nomIngredient": "nom", "quantiteValue": 1, "unite": "cm"}];
+    console.log(nouvelleRecette);
+    nouvelleRecette.etapes= this.recette.etapes;
+    nouvelleRecette.portions= this.recette.portions;
+    nouvelleRecette.ingredients= this.recette.ingredients;
+    nouvelleRecette.picture= this.recette.picture;
+    nouvelleRecette.video= this.recette.video;
+
     this.recetteService.updateRecette(this.recette._id, nouvelleRecette).subscribe(
       (response: Recette) => {
         this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
         this.isModifying = false;
+        location.reload();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -97,7 +94,7 @@ export class SingleRecetteComponent implements OnInit {
       if (result === true) {
         this.recetteService.deleteRecette(recetteId).subscribe(
           (response: void) => {
-            location.reload();
+            location.href="/liste";
           },
           (error: HttpErrorResponse) => {
             alert(error.message);
@@ -105,8 +102,5 @@ export class SingleRecetteComponent implements OnInit {
         );
       }
     });
-  };
-
-
-
+  }
 }

@@ -1,4 +1,4 @@
-export class Etape {
+export interface Etape {
     _id: any;
-    nomEtape!: string ;
+    nomEtape: string ;
 }
