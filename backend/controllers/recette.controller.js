@@ -27,8 +27,8 @@ module.exports.readRecette = (req, res) => {
 module.exports.createRecette = async (req, res) => {
   const newRecette = new recetteModel({
     menu: req.body.menu,
-    ingredients: req.body.ingredients,
-    etapes: req.body.etapes,
+    ingredients: [],
+    etapes: [],
     filtres: req.body.filtres,
     temps: req.body.temps,
     video: req.body.video,
@@ -55,10 +55,10 @@ module.exports.updateRecette = (req, res) => {
 
       if (!theRecette) return res.status(404).send("Recette non trouvée");
       theRecette.menu = req.body.menu;
-      theRecette.ingredients = req.body.ingredients;
+      theRecette.ingredients = [];
       theRecette.filtres = req.body.filtres;
       theRecette.temps = req.body.temps;
-      theRecette.etapes = req.body.etapes;
+      theRecette.etapes = [];
       theRecette.video = req.body.video;
       theRecette.picture = req.body.picture;
 
@@ -93,3 +93,74 @@ module.exports.deleteRecette = (req, res) => {
     return res.status(400).send(err);
   }
 };
+
+//créer un nouvel ingrédient
+module.exports.createIngredient = (req, res) => {
+  try {
+    return RecetteModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          ingredients: {
+            _id: req.body._id,
+            nomIngredient: req.body.nomIngredient,
+            quantiteValue: req.body.quantiteValue,
+            unite: req.body.unite,
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
+
+
+
+//modifier un ingrédient précis
+
+
+
+
+//supprimer un ingrédient précis
+
+
+
+
+//créer une nouvelle étape
+module.exports.createEtape = (req, res) => {
+  try {
+    return RecetteModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          etapes: {
+            _id: req.body._id,
+            nomEtape: req.body.nomEtape
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
+
+
+
+//modifier une étape précise
+
+
+
+
+//supprimer une étape précise

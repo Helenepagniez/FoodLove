@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const Ingredient = require=('../models/ingredient.model.js');
-const Etape = require=('../models/etape.model.js');
 
 const RecetteSchema = new mongoose.Schema(
     {
@@ -10,13 +8,13 @@ const RecetteSchema = new mongoose.Schema(
             required: true,
             maxlength: 100000
         },
-        ingredients: {
-            type: [Ingredient],
-            required: true
-        },
         etapes: {
-            type: [Etape],
-            required: true
+            type: [
+                {
+                _id: String,
+                nomEtape: String
+                }
+            ]
         },
         portions: {
             type: Number
@@ -32,6 +30,16 @@ const RecetteSchema = new mongoose.Schema(
         },
         video: {
             type: String
+        },
+        ingredients: {
+            type: [
+                {
+                    _id: String,
+                    nomIngredient: String,
+                    quantiteValue: Number,
+                    unite: String
+                }
+            ]
         }
     },
     {

@@ -1,1 +1,12 @@
-<p>etapes works!</p>
+<h1>Modifier ou Ajouter des étapes</h1>
+<div class="etapes">
+    <form class="etape" *ngFor="let etape of etapes" (ngSubmit)="updateRecette(updateform.value)" [formGroup]="updateform">
+        <div class="contenu">
+            <input type="text" class="nomEtape" value="{{etape.nomEtape}}" ngModel="{{etape.nomEtape}}" formControlName="nomEtape">
+            <button type="submit" class="enregistrer">Enregistrer</button>
+        </div>
+    </form>
+</div>
+<div class="ajout">
+    <button class="ajouter">Ajouter</button>
+</div>

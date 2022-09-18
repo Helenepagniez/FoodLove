@@ -1,0 +1,91 @@
+h1{
+    text-align: center;
+    font-weight: 500;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+.etapes{
+    background-color: darkcyan;
+    border-radius: 50px;
+    min-width: 300px;
+    width: 90%;
+    margin: auto;
+    min-height: 100px;
+    height: auto;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.etape{
+    width: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.etape input {
+    background-color: white;
+    color: darkcyan;
+    border-color: darkcyan;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 30px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid black;
+    margin-right: 35px;
+}
+
+.contenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.contenu .enregistrer{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: white;
+    color: darkcyan;
+    border: 2px solid black;
+    margin-left: 35px;
+}
+
+.contenu .enregistrer:hover {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+.etape .nomEtape{
+    width: 500px;
+}
+
+.ajout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+}
+
+.ajout .ajouter {
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+}
+
+.ajout .ajouter:hover {
+    cursor: pointer;
+    color: darkcyan;
+    background-color: white;
+}
