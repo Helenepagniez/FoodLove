@@ -11,7 +11,6 @@ const RecetteSchema = new mongoose.Schema(
         etapes: {
             type: [
                 {
-                _id: String,
                 nomEtape: String
                 }
             ]
@@ -34,7 +33,6 @@ const RecetteSchema = new mongoose.Schema(
         ingredients: {
             type: [
                 {
-                    _id: String,
                     nomIngredient: String,
                     quantiteValue: Number,
                     unite: String

@@ -10,8 +10,10 @@ router.put('/:id', requireAuth,multer, recetteController.updateRecette);//modifi
 router.delete('/:id', requireAuth, recetteController.deleteRecette);//supprimer recette
 
 router.patch('/ajout-ingredient/:id', requireAuth,recetteController.createIngredient);//créer ingrédient
-
+router.patch('/modification-ingredient/:id', requireAuth,recetteController.editIngredient);//modifier ingrédient
+router.patch('/suppression-ingredient/:id', requireAuth,recetteController.deleteIngredient);//suppprimer ingrédient
 
 router.patch('/ajout-etape/:id', requireAuth,recetteController.createEtape);//créer étape
+router.patch('/modification-etape/:id', requireAuth,recetteController.editEtape);//modifier étape
 
 module.exports = router;

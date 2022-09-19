@@ -96,13 +96,15 @@ module.exports.deleteRecette = (req, res) => {
 
 //créer un nouvel ingrédient
 module.exports.createIngredient = (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknow : " + req.params.id);
+
   try {
     return RecetteModel.findByIdAndUpdate(
       req.params.id,
       {
         $push: {
           ingredients: {
-            _id: req.body._id,
             nomIngredient: req.body.nomIngredient,
             quantiteValue: req.body.quantiteValue,
             unite: req.body.unite,
@@ -120,27 +122,69 @@ module.exports.createIngredient = (req, res) => {
   }
 };
 
-
-
 //modifier un ingrédient précis
+module.exports.editIngredient = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
 
+  try {
+    return RecetteModel.findById(req.params.id, (err, docs) => {
+      const theIngredient = docs.ingredients.find((ingredient) =>
+        ingredient._id.equals(req.body._id)
+      );
 
+      if (!theIngredient) return res.status(404).send("Comment not found");
+      theIngredient.nomIngredient = req.body.nomIngredient;
+      theIngredient.quantiteValue = req.body.quantiteValue;
+      theIngredient.unite = req.body.unite;
 
+      return docs.save((err) => {
+        if (!err) return res.status(200).send(docs);
+        return res.status(500).send(err);
+      });
+    });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
 
 //supprimer un ingrédient précis
+module.exports.deleteIngredient = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
 
+  try {
+    return RecetteModel.findById(req.params.id, (err, docs) => {
+      const theIngredient = docs.ingredients.find((ingredient) =>
+        ingredient._id.equals(req.body._id)
+      );
+      console.log(theIngredient);
 
-
+      if (!theIngredient) return res.status(404).send("ingredient not found");
+      
+      RecetteModel.deleteOne(theIngredient, (err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("Delete error : " + err);
+      });
+    });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
 
 //créer une nouvelle étape
 module.exports.createEtape = (req, res) => {
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknow : " + req.params.id);
+    
   try {
     return RecetteModel.findByIdAndUpdate(
       req.params.id,
       {
         $push: {
           etapes: {
-            _id: req.body._id,
             nomEtape: req.body.nomEtape
           },
         },
@@ -156,10 +200,30 @@ module.exports.createEtape = (req, res) => {
   }
 };
 
-
-
 //modifier une étape précise
+module.exports.editEtape = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
 
+  try {
+    return RecetteModel.findById(req.params.id, (err, docs) => {
+      const theEtape = docs.etapes.find((etape) =>
+        etape._id.equals(req.body._id)
+      );
+
+      if (!theEtape) return res.status(404).send("Comment not found");
+      theEtape.nomEtape = req.body.nomEtape;
+
+      return docs.save((err) => {
+        if (!err) return res.status(200).send(docs);
+        return res.status(500).send(err);
+      });
+    });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
 
 
 
