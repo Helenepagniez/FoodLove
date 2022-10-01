@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
 import { Etape } from '../models/etape.model';
 import { Ingredient } from '../models/ingredient.model';
@@ -17,65 +17,41 @@ export class RecetteFormComponent implements OnInit {
   recetteForm!: FormGroup;
   imagePreview!: string;
   file!: File | null;
-  uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
+  uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit', 'kilogrammes'];
   filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
-  recettes!: Recette[];
   recette!: Recette;
   recetteId!: Recette['_id'];
   unite!: string;
   filtres = new FormControl('');
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private fb: FormBuilder,
     private recetteService: RecetteService,
     private snackBar: MatSnackBar) { }
 
-  ngOnInit(): void {
-    this.recetteForm = this.formBuilder.group({
+  ngOnInit() {
+    this.recetteForm = this.fb.group({
       menu: [''],
-      picture: [''],
-      nomEtape: [''],
-      quantiteValue: [''],
-      nomIngredient: [''],
       portions: [''],
       temps: [''],
-      filtreList: ['']
+      filtres: ['', [Validators.required]],
+      picture: ['']
     });
   }
 
     //Ajouter une recette
     addRecette(recette: Recette) {
-
+      recette.picture=this.imagePreview;
       let newRecette: Recette = {
         "_id":null,
-        "menu":this.recetteForm.get('menu')?.value,
-        "portions":this.recetteForm.get('portions')?.value,
-        "temps":this.recetteForm.get('temps')?.value,
-        "picture":this.recetteForm.get('picture')?.value,
-        "video":this.recetteForm.get('video')?.value,
+        "menu":recette.menu,
+        "portions":recette.portions,
+        "temps":recette.temps,
+        "picture":recette.picture,
         "etapes":[],
-        "filtres":[],
+        "filtres":recette.filtres,
         "ingredients":[]
       };
-
-      if (this.recetteForm.get('nomEtape')?.value) {
-        let etape: Etape = {
-          "_id": null,
-          "nomEtape":this.recetteForm.get('nomEtape')?.value,
-        };
-        newRecette.etapes.push(etape);
-      }
-
-      if (this.recetteForm.get('nomIngredient')?.value) {
-        let ingredient: Ingredient = {
-          "_id": null,
-          "nomIngredient":this.recetteForm.get('nomIngredient')?.value,
-          "quantiteValue":this.recetteForm.get('quantiteValue')?.value,
-          "unite":this.unite
-        };
-        newRecette.ingredients.push(ingredient);
-      }
-      console.log(newRecette);
-
+      
       this.recetteService.addRecette(newRecette).subscribe(
         (response: Recette) => {
           this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
@@ -93,6 +69,7 @@ export class RecetteFormComponent implements OnInit {
           }
         }
       )
+      
     };
   
     onFileAdded(event: Event) {
