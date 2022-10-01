@@ -44,6 +44,7 @@ h1{
     width: 90%;
     margin-top: auto;
     margin-bottom: auto;
+    height: auto;
 }
 
 .etape input {
@@ -58,10 +59,14 @@ h1{
     padding-bottom: 5px;
     border: 2px solid black;
     margin-right: 35px;
+    font-size: 15px;
 }
 
 .etape .nomEtape{
     width: 500px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /****************ENREGISTRER ETAPE*******************/

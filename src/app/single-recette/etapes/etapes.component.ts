@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Etape } from 'src/app/models/etape.model';
 import { Recette } from 'src/app/models/recette.model';
 import { RecetteService } from 'src/app/services/recette.services';
@@ -14,21 +14,29 @@ import { RecetteService } from 'src/app/services/recette.services';
   styleUrls: ['./etapes.component.css']
 })
 export class EtapesComponent implements OnInit {
+  
   etapes!: Etape[];
   updateform!: FormGroup;
   recette!: Recette;
   isModifying: boolean = false;
+
   constructor(private recetteService: RecetteService,
               private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private dialog: MatDialog,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder, 
+              private router: Router) { }
 
   ngOnInit(){
     this.updateform= this.fb.group({
+      _id:[''],
       nomEtape: ['', [Validators.required]]
     });
     this.getOneRecette(this.route.snapshot.params['id']);
+  }
+
+  onClickRecette(id: string) {
+    this.router.navigate(['recette/', id]);
   }
 
   getOneRecette(recetteId: string) {
@@ -43,15 +51,30 @@ export class EtapesComponent implements OnInit {
     )
   };
 
-  //modifier les recettes
-  updateRecette(nouvelleRecette: Recette) {
-    console.log(nouvelleRecette);
+  
+  //modifier les étapes
+  updateEtape(etape: Etape) {
+    this.recetteService.updateEtape(etape, this.recette._id).subscribe(
+      (response: Etape) => {
+        this.snackBar.open("étapes modifiées", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
+          location.reload();
+      });
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  };
 
-    this.recetteService.updateRecette(this.recette._id, nouvelleRecette).subscribe(
-      (response: Recette) => {
-        this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
-        this.isModifying = false;
-        location.reload();
+  //créer une étape
+  addEtape() {
+    let nouvelleEtape: any= {
+      "nomEtape": "nouvelle étape"
+    };
+    this.recetteService.addEtape(nouvelleEtape, this.recette._id).subscribe(
+      (response: Etape) => {
+        this.snackBar.open("étape ajoutée", "Fermer", {duration: 2000});
+        this.getOneRecette(this.recette._id);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

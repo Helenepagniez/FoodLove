@@ -1,12 +1,15 @@
 <h1>Modifier ou Ajouter des étapes</h1>
+<a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
 <div class="etapes">
-    <form class="etape" *ngFor="let etape of etapes" (ngSubmit)="updateRecette(updateform.value)" [formGroup]="updateform">
+    <form class="etape" *ngFor="let etape of etapes" (ngSubmit)="updateEtape(updateform.value)" [formGroup]="updateform">
         <div class="contenu">
-            <input type="text" class="nomEtape" value="{{etape.nomEtape}}" ngModel="{{etape.nomEtape}}" formControlName="nomEtape">
+            <input type="hidden" ngModel="{{etape._id}}" formControlName="_id">
+            <input type="text" class="nomEtape" value="{{etape.nomEtape}}" placeholder="{{etape.nomEtape}}" formControlName="nomEtape">
             <button type="submit" class="enregistrer">Enregistrer</button>
+             <!-- <button class="supprimer">supprimer</button> -->
         </div>
     </form>
 </div>
 <div class="ajout">
-    <button class="ajouter">Ajouter</button>
+    <button class="ajouter" (click)="addEtape()">Ajouter</button>
 </div>
