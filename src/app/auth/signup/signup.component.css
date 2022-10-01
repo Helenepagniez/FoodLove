@@ -1,3 +1,4 @@
+/*******************AU DESSUS**********************/
 .presentation{
     margin-top: 20px;
     text-align: center;
@@ -15,6 +16,7 @@
     margin-left: 20px;
 }
 
+/*******************GENERAUX**********************/
 .entier{
     border-radius: 20%;
     display: flex;
@@ -24,16 +26,7 @@
     margin-left: auto;
     margin-right: auto;
 }
-
-.droite img{
-    border-radius: 20px 0 0 20px;
-    border: 10px solid darkcyan;
-    margin-left: 10px;
-    height: 280px;
-    width: auto;
-    padding: 50px;
-}
-
+/*******************GAUCHE**********************/
 .gauche{
     text-align: center;
     display: flex;
@@ -52,12 +45,12 @@
     color: rgb(3, 117, 117);
 }
 
-.gauche form {
+.gauche form{
     margin-top: 5px;
     height: 150px;
 }
 
-.gauche form .form-group {
+.gauche form .form-group{
     margin-top: 18px;
     text-align: end;
 }
@@ -81,6 +74,16 @@
     background-color: darkcyan;
     color: white;
     cursor: pointer;
+}
+
+/*******************DROITE**********************/
+.droite img{
+    border-radius: 20px 0 0 20px;
+    border: 10px solid darkcyan;
+    margin-left: 10px;
+    height: 280px;
+    width: auto;
+    padding: 50px;
 }
 
 @media screen and (max-width: 800px){

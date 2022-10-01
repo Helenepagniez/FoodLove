@@ -43,9 +43,6 @@
     text-align: center;
     line-height: 50px;
     transform: translateX(-50%);
-  }
-  
-  .sidebar #btn:hover {
     cursor: pointer;
   }
   

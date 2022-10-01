@@ -1,14 +1,14 @@
-h1 {
+h1{
     color: #FD2D01;
 }
 
-.buttons {
+.buttons{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.buttons .delete {
+.buttons .delete{
     cursor: pointer;
     color: #FD2D01;
     border-radius: 15px;
@@ -17,7 +17,7 @@ h1 {
     transition: 0.5s;
 }
 
-.buttons .delete:hover {
+.buttons .delete:hover{
     color: black;
     background-color: #FD2D01;
     box-shadow: 0 0 5px #FD2D01,
@@ -26,7 +26,7 @@ h1 {
     0 0 100px #FD2D01;
 }
 
-.buttons .cancel {
+.buttons .cancel{
     cursor: pointer;
     color: black;
     border-radius: 15px;
@@ -35,7 +35,7 @@ h1 {
     transition: 0.5s;
 }
 
-.buttons .cancel:hover {
+.buttons .cancel:hover{
     color: white;
     background-color: black;
     box-shadow: 0 0 5px black,

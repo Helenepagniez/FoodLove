@@ -1,3 +1,4 @@
+/****************HEADER*******************/
 .header{
     background-color: darkcyan;
     height: 63px;
@@ -18,13 +19,14 @@
     margin-top: 30px;
 }
 
-.retour:hover {
+.retour:hover{
     cursor: pointer;
     color: darkcyan;
     background-color: white;
     border: 2px solid darkcyan;
 }
 
+/****************GENERAUX*******************/
 button{
     border-radius: 50px;
     width: auto;
@@ -35,10 +37,6 @@ button{
     margin-left: 20px;
     margin-top: 30px;
     margin-bottom: 20px;
-}
-
-input[type="file"] {
-    display: none;
 }
 
 form{
@@ -65,4 +63,16 @@ form .form-group label{
     color: darkcyan;
     font-size: medium;
     margin-right: 10px;
+}
+
+/****************IMAGES*******************/
+input[type="file"]{
+    display: none;
+}
+
+/****************PORTIONS*******************/
+#quantity{
+    border: 3px solid darkcyan;
+    text-align: center;
+    cursor: pointer;
 }

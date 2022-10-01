@@ -1,3 +1,4 @@
+/*******************AU DESSUS**********************/
 .presentation{
     margin-top: 20px;
     text-align: center;
@@ -15,6 +16,7 @@
     margin-left: 20px;
 }
 
+/*******************GENERAUX*********************/
 .entier{
     border-radius: 20%;
     display: flex;
@@ -25,6 +27,7 @@
     margin-right: auto;
 }
 
+/*******************GAUCHE**********************/
 .gauche img{
     width: auto;
     padding: 50px;
@@ -34,6 +37,7 @@
     height: 280px;
 }
 
+/*******************DROITE**********************/
 .droite{
     text-align: center;
     display: flex;
@@ -52,12 +56,12 @@
     color: rgb(3, 117, 117);
 }
 
-.droite form {
+.droite form{
     margin-top: 5px;
     height: 150px;
 }
 
-.droite form .form-group {
+.droite form .form-group{
     margin-top: 18px;
     text-align: end;
 }

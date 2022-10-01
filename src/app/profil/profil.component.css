@@ -1,3 +1,4 @@
+/********************HEADER********************/
 .header{
     background-color: darkcyan;
     height: 63px;
@@ -18,7 +19,8 @@
     margin-top: 30px;
 }
 
-.form-group {
+/********************GENERAUX********************/
+.profil form .form-group{
     margin: 10px auto;
     width: 100%;
     display: flex;
@@ -32,7 +34,7 @@
     text-align: center;
 }
 
-.profil form .form-group input {
+.profil form .form-group input{
     width: 50%;
     max-width: 400px;
     background-color: whitesmoke;
@@ -42,8 +44,8 @@
     border: 2px solid darkcyan;
 }
 
-.profil .photo
-{
+/********************iMAGE DE PROFIL********************/
+.profil .photo{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -61,7 +63,7 @@
     border-radius: 20%;
 }
 
-.profil .photo input[type="file"] {
+.profil .photo input[type="file"]{
     display: none;
 }
 
