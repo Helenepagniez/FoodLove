@@ -6,6 +6,11 @@ h1{
     margin-bottom: 10px;
 }
 
+h3{
+    text-align: center;
+    color: darkcyan;
+}
+
 .retour{
     border-radius: 50px;
     width: auto;
@@ -57,10 +62,16 @@ h1{
     font-size: 18px;
     width: 100px;
     text-align: center;
+    transition: 0.5s;
 }
 
 .ingredient p a{
     cursor: pointer;
+}
+
+.ingredient .scale:hover{
+    transform: scale(1.2);
+    color: #ff0000;
 }
 
 .ingredient.titre{

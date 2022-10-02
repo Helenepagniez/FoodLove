@@ -3,7 +3,12 @@ h1{
     text-align: center;
     font-weight: 500;
     margin-top: 70px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+}
+
+h3{
+    text-align: center;
+    color: darkcyan;
 }
 
 .retour{
@@ -15,7 +20,6 @@ h1{
     margin-left: 20px;
     margin-bottom: 20px;
     margin-top: 20px;
-
 }
 
 .retour:hover {
@@ -67,6 +71,11 @@ h1{
 .etape.titre{
     background-color: black;
     color: white;
+}
+
+.etape .scale:hover{
+    transform: scale(1.2);
+    color: #ff0000;
 }
 
 .etape.titre p{

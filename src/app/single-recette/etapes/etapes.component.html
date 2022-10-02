@@ -1,4 +1,5 @@
 <h1>Modifier ou Ajouter des étapes</h1>
+<h3>Cliquez sur le nom d'une étape pour l'afficher ou la modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
 <div class="etapes">
     <div class="etape titre">
@@ -6,7 +7,7 @@
         <p>Supprimer</p>
     </div>
     <div class="etape" *ngFor="let etape of etapes">
-        <p><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
+        <p  class="scale"><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
         <button class="supprimer">supprimer</button>
     </div>
 </div>
