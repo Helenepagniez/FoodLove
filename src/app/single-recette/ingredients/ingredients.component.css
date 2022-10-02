@@ -32,51 +32,45 @@ h1{
     min-width: 300px;
     width: 90%;
     margin: auto;
-    min-height: 100px;
-    height: auto;
     display: flex;
     align-content: center;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .ingredient{
     width: 90%;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.ingredient input{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     color: darkcyan;
-    border-color: darkcyan;
-    border-style: solid;
-    border-width: 3px;
     border-radius: 30px;
+    border: 3px solid black;
+}
+
+.ingredient p{
+    padding-top: 10px;
+    font-size: 18px;
+    width: 100px;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border: 2px solid black;
-    margin-right: 35px;
 }
 
-.ingredient .nomIngredient{
-    width: 250px;
+.ingredient p a{
+    cursor: pointer;
 }
 
-.ingredient .quantiteValue{
-    width: 65px;
+.ingredient.titre{
+    background-color: black;
+    color: white;
 }
 
-/****************ENREGISTRER INGREDIENT*******************/
-.contenu{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
 
-.contenu .enregistrer{
+/****************SUPPRIMER INGREDIENT*******************/
+.ingredient .supprimer{
     border-radius: 50px;
     width: auto;
     height: 30px;
@@ -86,7 +80,7 @@ h1{
     margin-left: 35px;
 }
 
-.contenu .enregistrer:hover{
+.ingredient .supprimer:hover{
     cursor: pointer;
     color: white;
     background-color: black;
@@ -115,4 +109,134 @@ h1{
     cursor: pointer;
     color: darkcyan;
     background-color: white;
+}
+
+/****************MODIFIER INGREDIENT****************/
+
+.cancel {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: 15px 30px;
+    margin: 30px 0 0 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 0.4em;
+    transition: 0.5s;
+}
+
+.cancel:hover {
+    background-color: red;
+    color: white;
+}
+
+.modify-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 600px;
+    width: 80%;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+
+.object-form {
+    width: 80%;
+    margin: auto;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.object-form .error {
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.object-form-text {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 16px 0;
+    border: 0;
+    padding: 20px 40px;
+    border: 2px solid rgb(2, 216, 216);
+    outline: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
+    background-color: rgb(64, 185, 185);
+}
+
+input {
+    color: white;
+    font-size: 1em;
+}
+
+::placeholder {
+    color: white;
+    font-size: 1em;
+}
+
+.object-form-text:focus.ng-valid {
+    box-shadow: 0 0 10px 4px darkcyan;
+    background-color: white;
+    color: darkcyan;
+    border: 2px solid darkcyan;
+}
+
+.object-form-text:focus.ng-invalid {
+    box-shadow: 0 0 10px 4px #ff0000;
+    border: 2px solid #ff0000;
+    background-color: white;
+    color: red;
+}
+
+textarea.object-form-text {
+    resize: none;
+    height: 100px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.object-form .button-container .validButton {
+    text-decoration: none;
+    background: aliceblue;
+    color: var(--secondary);
+    padding: 15px 30px;
+    border: 2px solid darkcyan;
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 0.4em;
+    transition: 0.5s;
+}
+
+.object-form .button-container .invalidButton {
+    text-decoration: none;
+    background: aliceblue;
+    color: var(--secondary);
+    padding: 15px 30px;
+    border: 2px solid #ff0000;
+    margin-top: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 0.4em;
+    transition: 0.5s;
+}
+
+.object-form .button-container .validButton:hover {
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
 }
