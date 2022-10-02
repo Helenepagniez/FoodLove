@@ -1,15 +1,27 @@
 <h1>Modifier ou Ajouter des étapes</h1>
 <a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
 <div class="etapes">
-    <form class="etape" *ngFor="let etape of etapes" (ngSubmit)="updateEtape(updateform.value)" [formGroup]="updateform">
-        <div class="contenu">
-            <input type="hidden" ngModel="{{etape._id}}" formControlName="_id">
-            <input type="text" class="nomEtape" value="{{etape.nomEtape}}" placeholder="{{etape.nomEtape}}" formControlName="nomEtape">
-            <button type="submit" class="enregistrer">Enregistrer</button>
-             <!-- <button class="supprimer">supprimer</button> -->
-        </div>
-    </form>
+    <div class="etape titre">
+        <p>Nom / Modifier</p>
+        <p>Supprimer</p>
+    </div>
+    <div class="etape" *ngFor="let etape of etapes">
+        <p><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
+        <button class="supprimer">supprimer</button>
+    </div>
 </div>
 <div class="ajout">
     <button class="ajouter" (click)="addEtape()">Ajouter</button>
+</div>
+<div *ngIf="etape" class="modify-container">
+    <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateEtape(updateform.value)">
+        <input type="hidden" formControlName="_id" ngModel="{{etape._id}}">
+        <input class="object-form-text" placeholder="Nom étape" formControlName="nomEtape" ngModel="{{etape.nomEtape}}">
+        <span class="error" *ngIf="updateform.get('nomEtape')!.hasError('required') && updateform.get('nomEtape')!.touched">Le nom de l'étape est requise</span>
+        <div class="button-container">
+            <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
+            <button class="validButton" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
+            <a class="cancel" title="annuler" (click)="unmodify()">ANNULER</a>
+        </div>
+    </form>
 </div>

@@ -15,6 +15,7 @@ import { RecetteService } from 'src/app/services/recette.services';
 })
 export class EtapesComponent implements OnInit {
   
+  etape!: Etape | null;
   etapes!: Etape[];
   updateform!: FormGroup;
   recette!: Recette;
@@ -33,6 +34,14 @@ export class EtapesComponent implements OnInit {
       nomEtape: ['', [Validators.required]]
     });
     this.getOneRecette(this.route.snapshot.params['id']);
+  }
+
+  modify(etape: Etape) {
+    this.etape=etape;
+  }
+
+  unmodify() {
+    this.etape = null;
   }
 
   onClickRecette(id: string) {
