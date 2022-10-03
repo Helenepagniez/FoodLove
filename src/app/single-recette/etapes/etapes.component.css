@@ -62,6 +62,7 @@ h3{
     font-size: 18px;
     width: 400px;
     text-align: center;
+    transition: 0.5s;
 }
 
 .etape p a{

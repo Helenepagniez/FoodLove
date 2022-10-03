@@ -7,6 +7,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const recetteModel = require("../models/recette.model");
 const recette = require('../models/recette.model');
+const { default: mongoose } = require("mongoose");
 
 //lire une recette
 exports.getOneRecette = (req, res) => {
@@ -33,6 +34,7 @@ module.exports.createRecette = async (req, res) => {
     temps: req.body.temps,
     video: req.body.video,
     picture: req.body.picture,
+    portions: req.body.portions
   });
   
   try {
@@ -61,6 +63,7 @@ module.exports.updateRecette = (req, res) => {
       theRecette.etapes = [];
       theRecette.video = req.body.video;
       theRecette.picture = req.body.picture;
+      theRecette.portions = req.body.portions;
 
       return docs.save((err) => {
         if (!err) return res.status(200).send(docs);
@@ -154,21 +157,22 @@ module.exports.deleteIngredient = (req, res) => {
   const token = req.cookies.jwt;
   const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
   const role = decodedToken.role;
-
   try {
-    return RecetteModel.findById(req.params.id, (err, docs) => {
-      const theIngredient = docs.ingredients.find((ingredient) =>
-        ingredient._id.equals(req.body._id)
-      );
-      console.log(theIngredient);
-
-      if (!theIngredient) return res.status(404).send("ingredient not found");
-      
-      RecetteModel.deleteOne(theIngredient, (err, docs) => {
-        if (!err) res.send(docs);
-        else console.log("Delete error : " + err);
-      });
-    });
+    return RecetteModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          ingredients: {
+            _id: req.body._id
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -225,6 +229,28 @@ module.exports.editEtape = (req, res) => {
   }
 };
 
-
-
 //supprimer une étape précise
+module.exports.deleteEtape = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
+  try {
+    return RecetteModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          etapes: {
+            _id: req.body._id
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (!err) return res.send(docs);
+        else return res.status(400).send(err);
+      }
+    );
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
