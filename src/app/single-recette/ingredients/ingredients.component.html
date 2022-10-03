@@ -12,7 +12,7 @@
         <p class="scale"><a title="modify" (click)="modify(ingredient)">{{ingredient.nomIngredient}}</a></p>
         <p>{{ingredient.quantiteValue}}</p>
         <p>{{ingredient.unite}}</p>
-        <button class="supprimer">supprimer</button>
+        <button class="supprimer" (click)="deleteIngredient(ingredient, recette._id)">supprimer</button>
     </div>
 </div>
 <div class="ajout">

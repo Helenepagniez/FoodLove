@@ -54,6 +54,12 @@ export class RecetteService {
         });
     };
 
+    public deleteIngredient(ingredient: Ingredient, recetteId: number): Observable<Ingredient> {
+        return this.http.patch<Ingredient>(`${this.apiServerUrl}/api/recette/suppression-ingredient/${recetteId}`, ingredient,{
+            withCredentials: true,
+        });
+    };
+
     public addEtape(etape: Etape, recetteId: number): Observable<Etape> {
         return this.http.patch<Etape>(`${this.apiServerUrl}/api/recette/ajout-etape/${recetteId}`, etape,{
             withCredentials: true,
@@ -66,4 +72,9 @@ export class RecetteService {
         });
     };
 
+    public deleteEtape(etape: Etape, recetteId: number): Observable<Etape> {
+        return this.http.patch<Etape>(`${this.apiServerUrl}/api/recette/suppression-etape/${recetteId}`, etape,{
+            withCredentials: true,
+        });
+    };
 }

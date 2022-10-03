@@ -2,8 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
-import { Etape } from '../models/etape.model';
-import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
 import { RecetteService } from '../services/recette.services';
 
@@ -17,11 +15,8 @@ export class RecetteFormComponent implements OnInit {
   recetteForm!: FormGroup;
   imagePreview!: string;
   file!: File | null;
-  uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit', 'kilogrammes'];
   filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
   recette!: Recette;
-  recetteId!: Recette['_id'];
-  unite!: string;
   filtres = new FormControl('');
 
   constructor(private fb: FormBuilder,

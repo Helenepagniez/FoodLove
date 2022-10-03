@@ -8,7 +8,7 @@
     </div>
     <div class="etape" *ngFor="let etape of etapes">
         <p  class="scale"><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
-        <button class="supprimer">supprimer</button>
+        <button class="supprimer" (click)="deleteEtape(etape, recette._id)">supprimer</button>
     </div>
 </div>
 <div class="ajout">

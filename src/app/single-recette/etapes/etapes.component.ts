@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Etape } from 'src/app/models/etape.model';
+import { Ingredient } from 'src/app/models/ingredient.model';
 import { Recette } from 'src/app/models/recette.model';
 import { RecetteService } from 'src/app/services/recette.services';
 
@@ -89,6 +91,26 @@ export class EtapesComponent implements OnInit {
         alert(error.message);
       }
     );
+  };
+
+  //supprimer une étape
+  deleteEtape(etape: Etape, recetteId: number) {
+    const dialogRef = this.dialog.open(DialogComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.recetteService.deleteEtape(etape, recetteId).subscribe(
+          (response: Etape) => {
+            this.snackBar.open("Etape supprimée", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
+              location.reload();
+            });
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+      }
+    });
   };
 
 }

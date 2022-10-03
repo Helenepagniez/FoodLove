@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { Recette } from 'src/app/models/recette.model';
 import { RecetteService } from 'src/app/services/recette.services';
@@ -107,6 +108,26 @@ export class IngredientsComponent implements OnInit {
         alert(error.message);
       }
     );
+  };
+
+  //supprimer un ingrédient
+  deleteIngredient(ingredient: Ingredient, recetteId: number) {
+    const dialogRef = this.dialog.open(DialogComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.recetteService.deleteIngredient(ingredient, recetteId).subscribe(
+          (response: Ingredient) => {
+            this.snackBar.open("Ingrédient supprimé", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
+              location.reload();
+            });
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          }
+        );
+      }
+    });
   };
 
 }
