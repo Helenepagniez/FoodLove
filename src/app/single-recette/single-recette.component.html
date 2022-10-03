@@ -6,6 +6,14 @@
 <a (click)="onModify()"><button class="retour">Modifier</button></a>
 <div class="details">
     <form (ngSubmit)="updateRecette(updateform.value)" [formGroup]="updateform">
+        <div *ngIf="recette?.picture" class="image">
+            <img type="jpg" id="image" [src]="recette.picture" alt="image">
+        </div>
+        <div class="picture" *ngIf="isModifying">
+            <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+            <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
+            <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+        </div>
         <div class="menu" *ngIf="recette?.menu">
             <p *ngIf="!isModifying">{{recette.menu}}</p>
             <input *ngIf="isModifying" type="text" class="menu" ngModel="{{recette.menu}}" formControlName="menu">
@@ -19,28 +27,24 @@
             <div *ngIf="isModifying">
                 <mat-form-field appearance="fill" style="background-color: white">
                     <mat-label>Filtres</mat-label>
-                    <mat-select multiple ngModel="{{recette.filtres}}" formControlName="filtres">
-                    <mat-option *ngFor="let filtre of filtreList" [value]="filtre" >{{filtre}}</mat-option>
+                    <mat-select multiple value="{{recette.filtres}}" formControlName="filtres">
+                        <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
-        <button type="submit" *ngIf="isModifying">Enregistrer les modifications du menu</button>
-    </form>
-    <div class="portions-container">
-        <div>
-            <a routerLink="portions" *ngIf="isModifying"><button class="lien">Modifier la portion</button></a>
-            <div *ngIf="recette.portions">
-                <p>Portions : </p>
-                <input type="range" id="rangeInput" name="rangeInput" min="1" max="10" value="{{recette.portions}}"
-                    oninput="amount.value=rangeInput.value">                                                       
-                <output id="amount" name="amount" for="rangeInput" value="{{recette.portions}}">1</output>
-            </div>
-            <div *ngIf="!recette.portions">
-                <p>Veuillez définir le nombre de portions correspondantes à cette recette</p>
+        <div class="portions-container">
+            <div>
+                <div class="quantity">
+                    <br/><p>Portions : </p>
+                    <input *ngIf="isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette?.portions}}" formControlName="portions">
+                    <p *ngIf="!isModifying" >{{recette?.portions}}</p>
+                    <p *ngIf="!recette?.portions && !isModifying">Aucune portion désirée</p>
+                </div>
             </div>
         </div>
-    </div>
+        <button type="submit" *ngIf="isModifying">Enregistrer les modifications du menu</button>
+    </form>
     <p class="categories">Ingrédients : </p>
     <a routerLink="ingredients" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Ingrédients</button></a>
     <div class="ingredient" *ngFor="let ingredient of ingredients">
@@ -50,10 +54,6 @@
     <a routerLink="etapes" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Etapes</button></a>
     <div class="etapes" *ngFor="let etape of etapes">
         <p>=> {{etape.nomEtape}}</p>
-    </div>
-    <a routerLink="image" *ngIf="isModifying"><button class="lien">Modifier ou ajouter une Image</button></a>
-    <div *ngIf="recette?.picture" class="image">
-        <img type="jpg" id="image" [src]="recette.picture" alt="image">
     </div>
 </div>
 <button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>

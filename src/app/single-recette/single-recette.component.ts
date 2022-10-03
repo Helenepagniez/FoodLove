@@ -10,6 +10,11 @@ import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
 import { RecetteService } from '../services/recette.services';
 
+export interface Unite {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-single-recette',
   templateUrl: './single-recette.component.html',
@@ -21,12 +26,22 @@ export class SingleRecetteComponent implements OnInit {
   updateform!: FormGroup;
   updateFiltres!: FormGroup;
   recette!: Recette;
+  imagePreview!: string;
+  file!: File | null;
   ingredients!: Ingredient[];
   etapes!: Etape[];
-  uniteList: string[] = ['litre', 'décilitre', 'grammes', 'centilitres', 'cuillères', 'produit'];
   filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
   filtres = new FormControl('');
-  nouvellesEtapes: Etape[] = [];
+
+  unites: Unite[] = [
+    {value: 'litre', viewValue: 'Litre'},
+    {value: 'décilitre', viewValue: 'Décilitre'},
+    {value: 'gramme', viewValue: 'Gramme'},
+    {value: 'centilitre', viewValue: 'Centilitre'},
+    {value: 'cuillère', viewValue: 'Cuillère'},
+    {value: 'produit', viewValue: 'Produit'},
+    {value: 'kilogramme', viewValue: 'Kilogramme'}
+  ];
 
   constructor( private recetteService: RecetteService,
               private route: ActivatedRoute,
@@ -36,10 +51,13 @@ export class SingleRecetteComponent implements OnInit {
 
   ngOnInit() {
     this.updateform= this.fb.group({
+      picture: [''],
       menu: ['', [Validators.required]],
       temps: ['', [Validators.required]],
-      filtres: ['', [Validators.required]]
+      filtres: ['', [Validators.required]],
+      portions: ['', [Validators.required]]
     });
+    
     this.getOneRecette(this.route.snapshot.params['id']);
   }
 
@@ -47,8 +65,11 @@ export class SingleRecetteComponent implements OnInit {
     this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
-        this.etapes=response.etapes;
-        this.ingredients=response.ingredients;
+        this.etapes= response.etapes;
+        this.ingredients= response.ingredients;
+        this.recette.picture = response.picture;
+        this.recette.filtres = response.filtres;
+        this.recette.portions = response.portions;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -67,18 +88,27 @@ export class SingleRecetteComponent implements OnInit {
 
   //modifier les recettes
   updateRecette(nouvelleRecette: Recette) {
-    console.log(nouvelleRecette);
-    nouvelleRecette.etapes= this.recette.etapes;
-    nouvelleRecette.portions= this.recette.portions;
-    nouvelleRecette.ingredients= this.recette.ingredients;
-    nouvelleRecette.picture= this.recette.picture;
-    nouvelleRecette.video= this.recette.video;
+    nouvelleRecette.picture=this.imagePreview;
+    if (nouvelleRecette.portions) {
+      this.recette.portions = nouvelleRecette.portions;
+    }
+    if (nouvelleRecette.menu) {
+      this.recette.menu = nouvelleRecette.menu;
+    }
+    if (nouvelleRecette.temps) {
+      this.recette.temps = nouvelleRecette.temps;
+    }
+    if (nouvelleRecette.picture) {
+      this.recette.picture = nouvelleRecette.picture;
+    }
+    if (nouvelleRecette.filtres) {
+      this.recette.filtres = nouvelleRecette.filtres;
+    }
 
-    this.recetteService.updateRecette(this.recette._id, nouvelleRecette).subscribe(
+    this.recetteService.updateRecette(this.recette._id, this.recette).subscribe(
       (response: Recette) => {
-        this.snackBar.open("Message modifié", "Fermer", {duration: 2000});
+        this.snackBar.open("Recette modifiée", "Fermer", {duration: 2000});
         this.isModifying = false;
-        location.reload();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -103,4 +133,14 @@ export class SingleRecetteComponent implements OnInit {
       }
     });
   }
+
+  onFileAdded(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    this.file=file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  } 
 }

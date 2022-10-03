@@ -23,9 +23,14 @@
         <input type="hidden" formControlName="_id" ngModel="{{ingredient._id}}">
         <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}">
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
-        <input class="object-form-text" placeholder="Quantité" formControlName="quantiteValue" ngModel="{{ingredient.quantiteValue}}">
+        <input type="number" class="object-form-text" placeholder="Quantité" formControlName="quantiteValue" ngModel="{{ingredient.quantiteValue}}">
         <span class="error" *ngIf="updateform.get('quantiteValue')!.hasError('required') && updateform.get('quantiteValue')!.touched">La quantité de l'ingrédient est requise</span>
-        <input class="object-form-text" placeholder="Unité" formControlName="unite" ngModel="{{ingredient.unite}}">
+        <mat-form-field appearance="fill" style="width: 480px; background-color:rgb(64, 185, 185); border: 2px solid rgb(2, 216, 216)">
+            <mat-label>Unitées</mat-label>
+            <mat-select name="unite" value="{{ingredient.unite}}" formControlName="unite" ngModel="{{ingredient.unite}}">
+              <mat-option *ngFor="let unite of unites" [value]="unite.viewValue">{{unite.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         <span class="error" *ngIf="updateform.get('unite')!.hasError('required') && updateform.get('unite')!.touched">L'unité de l'ingrédient est requise</span>
         <div class="button-container">
             <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
