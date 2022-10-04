@@ -7,11 +7,11 @@
         <h1>Inscription</h1>
         <form [formGroup]="signupForm">
             <div class="form-group">
-                <label for="texte">Name</label>
+                <label for="texte">Nom</label>
                 <input type="texte" class="form-control" id="name" formControlName="name">
             </div>
             <div class="form-group">
-                <label for="texte">Firstname</label>
+                <label for="texte">Prénom</label>
                 <input type="texte" class="form-control" id="firstname" formControlName="firstname">
             </div>
             <div class="form-group">
@@ -19,7 +19,7 @@
                 <input type="email" class="form-control" id="email" formControlName="email">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
             </div>
             <button [disabled]="signupForm.invalid" (click)="addUser(signupForm.value)">S'inscrire</button>
