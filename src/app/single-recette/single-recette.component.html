@@ -28,17 +28,17 @@
                 <mat-form-field appearance="fill" style="background-color: white">
                     <mat-label>Filtres</mat-label>
                     <mat-select multiple value="{{recette.filtres}}" formControlName="filtres">
-                        <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
+                        <mat-option *ngFor="let filtre of filtres" [value]="filtre.viewValue">{{filtre.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
         </div>
         <div class="portions-container">
             <div>
-                <div class="quantity">
+                <div class="quantity" *ngIf="recette?.portions">
                     <br/><p>Portions : </p>
-                    <input *ngIf="isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette?.portions}}" formControlName="portions">
-                    <p *ngIf="!isModifying" >{{recette?.portions}}</p>
+                    <input *ngIf="isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette.portions}}" formControlName="portions">
+                    <p *ngIf="!isModifying" >{{recette.portions}}</p>
                     <p *ngIf="!recette?.portions && !isModifying">Aucune portion désirée</p>
                 </div>
             </div>

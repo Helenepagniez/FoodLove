@@ -15,6 +15,11 @@ export interface Unite {
   viewValue: string;
 }
 
+export interface Filtre {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-single-recette',
   templateUrl: './single-recette.component.html',
@@ -30,8 +35,6 @@ export class SingleRecetteComponent implements OnInit {
   file!: File | null;
   ingredients!: Ingredient[];
   etapes!: Etape[];
-  filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
-  filtres = new FormControl('');
 
   unites: Unite[] = [
     {value: 'litre', viewValue: 'Litre'},
@@ -41,6 +44,14 @@ export class SingleRecetteComponent implements OnInit {
     {value: 'cuillère', viewValue: 'Cuillère'},
     {value: 'produit', viewValue: 'Produit'},
     {value: 'kilogramme', viewValue: 'Kilogramme'}
+  ];
+
+  filtres: Filtre[] = [
+    {value: 'familiale', viewValue: 'Familiale'},
+    {value: 'rapide', viewValue: 'Rapide'},
+    {value: 'entrée', viewValue: 'Entrée'},
+    {value: 'repas', viewValue: 'Repas'},
+    {value: 'dessert', viewValue: 'Dessert'}
   ];
 
   constructor( private recetteService: RecetteService,
@@ -88,6 +99,7 @@ export class SingleRecetteComponent implements OnInit {
 
   //modifier les recettes
   updateRecette(nouvelleRecette: Recette) {
+    
     nouvelleRecette.picture=this.imagePreview;
     if (nouvelleRecette.portions) {
       this.recette.portions = nouvelleRecette.portions;
