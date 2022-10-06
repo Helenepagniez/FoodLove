@@ -31,8 +31,11 @@ export class IngredientsComponent implements OnInit {
     {value: 'décilitre', viewValue: 'Décilitre'},
     {value: 'gramme', viewValue: 'Gramme'},
     {value: 'centilitre', viewValue: 'Centilitre'},
-    {value: 'cuillère', viewValue: 'Cuillère'},
+    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
+    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
     {value: 'produit', viewValue: 'Produit'},
+    {value: 'paquet', viewValue: 'Paquet'},
+    {value: 'verre', viewValue: 'Verre'},
     {value: 'kilogramme', viewValue: 'Kilogramme'}
   ];
 
