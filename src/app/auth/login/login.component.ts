@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required]
     });
-    if (localStorage.getItem('loggedInUserId')===null) {
+    if (sessionStorage.getItem('loggedInUserId')===null) {
       this.loggedInUserId = null;
     }
     else {
-      this.loggedInUserId = JSON.parse(localStorage.getItem('loggedInUserId') || '{}');
+      this.loggedInUserId = JSON.parse(sessionStorage.getItem('loggedInUserId') || '{}');
     }
   }
 
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(user).subscribe(
       (response: any) => {
         if (response?.user) {
-          localStorage.setItem('loggedInUserId', JSON.stringify(response));
-          this.loggedInUserId = JSON.parse(localStorage.getItem('loggedInUserId') || '{}');
+          sessionStorage.setItem('loggedInUserId', JSON.stringify(response));
+          this.loggedInUserId = JSON.parse(sessionStorage.getItem('loggedInUserId') || '{}');
           location.href="/liste";
         }
         else {

@@ -44,11 +44,11 @@ export class ProfilComponent implements OnInit {
       role: ['']
     });
 
-    if (localStorage.getItem('loggedInUserId')===null) {
+    if (sessionStorage.getItem('loggedInUserId')===null) {
       this.loggedInUserId = null;
     }
     else {
-      this.loggedInUserId = JSON.parse(localStorage.getItem('loggedInUserId') || '{}');
+      this.loggedInUserId = JSON.parse(sessionStorage.getItem('loggedInUserId') || '{}');
       this.getLoggedInUser(this.loggedInUserId!.user!);
     };
   };
@@ -99,7 +99,7 @@ export class ProfilComponent implements OnInit {
       if (result === true) {
         this.userService.deleteUser(userId).subscribe(
           (response: void) => {
-            localStorage.removeItem('loggedInUserId');
+            sessionStorage.removeItem('loggedInUserId');
             this.loggedInUser = null;
             this.loggedInUserId = null;
             location.href="/home";

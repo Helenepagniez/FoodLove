@@ -1,9 +1,11 @@
 /****************AU DESSUS*******************/
-h1{
-    text-align: center;
-    font-weight: 500;
-    margin-top: 70px;
-    margin-bottom: 10px;
+.header{
+    background-color: darkcyan;
+    height: 63px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 h3{

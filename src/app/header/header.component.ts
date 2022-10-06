@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
    logoutUser() {
     this.userService.logoutUser(this.loggedInUser!).subscribe(
       (response: User) => {
-        localStorage.removeItem('loggedInUserId');
+        sessionStorage.removeItem('loggedInUserId');
         this.loggedInUser = null;
         this.loggedInUserId = null;
         location.href="/home";

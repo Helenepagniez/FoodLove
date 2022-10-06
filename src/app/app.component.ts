@@ -18,11 +18,11 @@ export class AppComponent  implements OnInit{
   constructor() { }
 
   ngOnInit(){
-    if (localStorage.getItem('loggedInUserId')===null) {
+    if (sessionStorage.getItem('loggedInUserId')===null) {
       this.loggedInUserId = null;
     }
     else {
-      this.loggedInUserId = JSON.parse(localStorage.getItem('loggedInUserId') || '{}');
+      this.loggedInUserId = JSON.parse(sessionStorage.getItem('loggedInUserId') || '{}');
     }
 
     if(this.loggedInUserId){
