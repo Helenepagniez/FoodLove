@@ -7,7 +7,7 @@
     </div>
     <div class="filtres">
         <mat-chip-list selectable aria-label="Food selection">
-            <mat-chip *ngFor="let filtre of filtres" (click)="activateFiltre(filtre)">{{filtre}}</mat-chip>
+            <mat-chip *ngFor="let filtre of filtres" (click)="activateFiltre(filtre.viewValue)">{{filtre.viewValue}}</mat-chip>
         </mat-chip-list>
     </div>
 </div>

@@ -27,16 +27,16 @@ export class IngredientsComponent implements OnInit {
   recette!: Recette;
 
   unites: Unite[] = [
-    {value: 'litre', viewValue: 'Litre'},
+    {value: 'centilitre', viewValue: 'Centilitre'},
+    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
+    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
     {value: 'décilitre', viewValue: 'Décilitre'},
     {value: 'gramme', viewValue: 'Gramme'},
-    {value: 'centilitre', viewValue: 'Centilitre'},
-    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
-    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
-    {value: 'produit', viewValue: 'Produit'},
+    {value: 'kilogramme', viewValue: 'Kilogramme'},
+    {value: 'litre', viewValue: 'Litre'},
     {value: 'paquet', viewValue: 'Paquet'},
-    {value: 'verre', viewValue: 'Verre'},
-    {value: 'kilogramme', viewValue: 'Kilogramme'}
+    {value: 'produit', viewValue: 'Produit'},
+    {value: 'verre', viewValue: 'Verre'}
   ];
 
   constructor(private recetteService: RecetteService,

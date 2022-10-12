@@ -37,24 +37,26 @@ export class SingleRecetteComponent implements OnInit {
   etapes!: Etape[];
 
   unites: Unite[] = [
-    {value: 'litre', viewValue: 'Litre'},
+    {value: 'centilitre', viewValue: 'Centilitre'},
+    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
+    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
     {value: 'décilitre', viewValue: 'Décilitre'},
     {value: 'gramme', viewValue: 'Gramme'},
-    {value: 'centilitre', viewValue: 'Centilitre'},
-    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
-    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
-    {value: 'produit', viewValue: 'Produit'},
+    {value: 'kilogramme', viewValue: 'Kilogramme'},
+    {value: 'litre', viewValue: 'Litre'},
     {value: 'paquet', viewValue: 'Paquet'},
-    {value: 'verre', viewValue: 'Verre'},
-    {value: 'kilogramme', viewValue: 'Kilogramme'}
+    {value: 'produit', viewValue: 'Produit'},
+    {value: 'verre', viewValue: 'Verre'}
   ];
 
   filtres: Filtre[] = [
+    {value: 'aperitif', viewValue: 'Apéritif'},
+    {value: 'cocktails', viewValue: 'Cocktails'},
+    {value: 'dessert', viewValue: 'Dessert'},
+    {value: 'entrée', viewValue: 'Entrée'},
     {value: 'familiale', viewValue: 'Familiale'},
     {value: 'rapide', viewValue: 'Rapide'},
-    {value: 'entrée', viewValue: 'Entrée'},
-    {value: 'repas', viewValue: 'Repas'},
-    {value: 'dessert', viewValue: 'Dessert'}
+    {value: 'repas', viewValue: 'Repas'}
   ];
 
   constructor( private recetteService: RecetteService,

@@ -9,6 +9,12 @@ import { User } from '../models/user.model';
 import { RecetteService } from '../services/recette.services';
 import { UserService } from '../services/user.services';
 
+
+export interface Filtre {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-recette-list',
   templateUrl: './recette-list.component.html',
@@ -21,7 +27,17 @@ export class RecetteListComponent implements OnInit{
   loggedInUserId!: LoggedInUserId | null;
   user!: User;
   users: User[] = [];
-  filtres: string[] = ['Familiale','Rapide','Entrée','Repas','Dessert','Annuler'];
+  
+  filtres: Filtre[] = [
+    {value: 'aperitif', viewValue: 'Apéritif'},
+    {value: 'cocktails', viewValue: 'Cocktails'},
+    {value: 'dessert', viewValue: 'Dessert'},
+    {value: 'entrée', viewValue: 'Entrée'},
+    {value: 'familiale', viewValue: 'Familiale'},
+    {value: 'rapide', viewValue: 'Rapide'},
+    {value: 'repas', viewValue: 'Repas'},
+    {value: 'annuler', viewValue: 'Annuler'}
+  ];
 
   constructor(private router: Router,
      private recetteService: RecetteService,
