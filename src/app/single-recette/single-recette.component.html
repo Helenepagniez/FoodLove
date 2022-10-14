@@ -38,7 +38,7 @@
                 <div class="quantity" *ngIf="recette?.portions">
                     <br/><p>Portions : </p>
                     <input *ngIf="isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette.portions}}" formControlName="portions">
-                    <p *ngIf="!isModifying" >{{recette.portions}}</p>
+                    <input *ngIf="!isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette.portions}}" formControlName="portions" (change)="onPortionsChange($event)">
                     <p *ngIf="!recette?.portions && !isModifying">Aucune portion désirée</p>
                 </div>
             </div>
@@ -48,7 +48,7 @@
     <p class="categories">Ingrédients : </p>
     <a routerLink="ingredients" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Ingrédients</button></a>
     <div class="ingredient" *ngFor="let ingredient of ingredients">
-        <p>- {{ingredient.nomIngredient}} ({{ingredient.quantiteValue}} {{ingredient.unite}})</p>
+        <p>- {{ingredient.nomIngredient}} ({{(ingredient.quantiteValue * recette.portions!).toFixed(1)}} {{ingredient.unite}})</p>
     </div>
     <p class="categories">Etapes : </p>
     <a routerLink="etapes" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Etapes</button></a>

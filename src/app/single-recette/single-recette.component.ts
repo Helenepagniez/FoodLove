@@ -160,4 +160,8 @@ export class SingleRecetteComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   } 
+
+  onPortionsChange(event: Event) {
+    this.recette.portions=Number((event.target as HTMLInputElement).value);
+  }
 }

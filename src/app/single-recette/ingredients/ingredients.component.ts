@@ -83,6 +83,7 @@ export class IngredientsComponent implements OnInit {
 
   //modifier les ingrédients
   updateIngredient(ingredient: Ingredient) {
+    ingredient.quantiteValue = ingredient.quantiteValue/this.recette.portions!;
     this.recetteService.updateIngredient(ingredient, this.recette._id).subscribe(
       (response: Ingredient) => {
         this.snackBar.open("ingrédient modifié", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
@@ -99,7 +100,7 @@ export class IngredientsComponent implements OnInit {
   addIngredient() {
     let nouvelIngredient: any= {
       "nomIngredient":"nouvel ingrédient",
-      "quantiteValue":1,
+      "quantiteValue":0,
       "unite":"produit"
     };
     this.recetteService.addIngredient(nouvelIngredient, this.recette._id).subscribe(
