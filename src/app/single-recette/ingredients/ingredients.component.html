@@ -25,7 +25,7 @@
         <input type="hidden" formControlName="_id" ngModel="{{ingredient._id}}">
         <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}">
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
-        <input type="number" class="object-form-text" placeholder="Quantité" formControlName="quantiteValue" ngModel="{{ingredient.quantiteValue}}">
+        <input type="number" step="0.1" class="object-form-text" placeholder="Quantité" formControlName="quantiteValue" ngModel="{{ingredient.quantiteValue}}">
         <span class="error" *ngIf="updateform.get('quantiteValue')!.hasError('required') && updateform.get('quantiteValue')!.touched">La quantité de l'ingrédient est requise</span>
         <mat-form-field appearance="fill" style="width: 480px; background-color:rgb(64, 185, 185); border: 2px solid rgb(2, 216, 216)">
             <mat-label>Unitées</mat-label>
