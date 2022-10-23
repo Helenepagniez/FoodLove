@@ -3,7 +3,7 @@
     <h1>Recette en détails</h1>
 </div>
 <a routerLink="/liste"><button class="retour">Retour</button></a>
-<a (click)="onModify()"><button class="retour">Modifier</button></a>
+<a (click)="onModify()"><button class="modif">Modifier la recette</button></a>
 <div class="details">
     <form (ngSubmit)="updateRecette(updateform.value)" [formGroup]="updateform">
         <div *ngIf="recette?.picture" class="image">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" *ngIf="isModifying">Enregistrer les modifications du menu</button>
+        <button type="submit" class="modif" *ngIf="isModifying">Enregistrer les modifications du menu</button>
     </form>
     <p class="categories">Ingrédients : </p>
     <a routerLink="ingredients" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Ingrédients</button></a>
@@ -64,4 +64,4 @@
         <p>=> {{etape.nomEtape}}</p>
     </div>
 </div>
-<button mat-raised-button color="primary" class="modif" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
+<button class="suppression" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
