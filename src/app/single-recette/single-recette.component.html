@@ -18,6 +18,14 @@
             <p *ngIf="!isModifying">{{recette.menu}}</p>
             <input *ngIf="isModifying" type="text" class="menu" ngModel="{{recette.menu}}" formControlName="menu">
         </div>
+        <div class="container" *ngIf="recette?.etoile">
+            Difficulté : 
+            <div class="etoiles" *ngIf="!isModifying">
+                <div class="etoile" *ngFor="let etoile of fakeArray(recette?.etoile!)"><i class="fas fa-star"></i></div>
+                <div class="etoile" *ngFor="let etoile of fakeArray(5-recette?.etoile!)"><i class="far fa-star"></i></div>
+            </div>
+            <input *ngIf="isModifying" ngModel="{{recette.etoile}}" type="number" class="etoile-modifier" id="etoile" min="1" max="5" formControlName="etoile">
+        </div>
         <div class="temps" *ngIf="recette?.temps">
             <p *ngIf="!isModifying">( Temps total : {{recette.temps}} min)</p>
             <p *ngIf="isModifying">( Temps total : <input type="text" class="temps" ngModel="{{recette.temps}}" formControlName="temps"> min)</p>

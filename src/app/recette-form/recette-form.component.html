@@ -16,6 +16,11 @@
         </mat-form-field>
     </div>
     <div class="form-group">
+        <label for="etoile">Difficulté de la recette</label>
+        (Facile = 1 et Très difficile = 5)
+        <input type="number" class="form-control" id="etoile" min="1" max="5" formControlName="etoile">
+      </div>
+    <div class="form-group">
         <label for="temps">Temps de préparation</label>
         <input type="text" class="form-control" id="temps" formControlName="temps">
     </div>

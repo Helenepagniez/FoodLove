@@ -31,6 +31,7 @@ module.exports.createRecette = async (req, res) => {
     ingredients: [],
     etapes: [],
     filtres: req.body.filtres,
+    etoile: req.body.etoile,
     temps: req.body.temps,
     video: req.body.video,
     picture: req.body.picture,
@@ -60,6 +61,7 @@ module.exports.updateRecette = (req, res) => {
       theRecette.ingredients = [];
       theRecette.filtres = req.body.filtres;
       theRecette.temps = req.body.temps;
+      theRecette.etoile = req.body.etoile;
       theRecette.etapes = [];
       theRecette.video = req.body.video;
       theRecette.picture = req.body.picture;

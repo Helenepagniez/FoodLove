@@ -7,6 +7,7 @@ export interface Recette {
     ingredients: Ingredient[];
     etapes: Etape[];
     portions: number | null;
+    etoile: number;
     filtres: string[];
     temps: string;
     picture: string | null;

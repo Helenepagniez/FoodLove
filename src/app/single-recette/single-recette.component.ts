@@ -70,6 +70,7 @@ export class SingleRecetteComponent implements OnInit {
       picture: [''],
       menu: ['', [Validators.required]],
       temps: ['', [Validators.required]],
+      etoile: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(5)])],
       filtres: ['', [Validators.required]],
       portions: ['', [Validators.required]]
     });
@@ -121,6 +122,9 @@ export class SingleRecetteComponent implements OnInit {
     if (nouvelleRecette.filtres) {
       this.recette.filtres = nouvelleRecette.filtres;
     }
+    if (nouvelleRecette.etoile) {
+      this.recette.etoile = nouvelleRecette.etoile;
+    }
 
     this.recetteService.updateRecette(this.recette._id, this.recette).subscribe(
       (response: Recette) => {
@@ -164,4 +168,9 @@ export class SingleRecetteComponent implements OnInit {
   onPortionsChange(event: Event) {
     this.recette.portions=Number((event.target as HTMLInputElement).value);
   }
+
+  fakeArray(length: number): Array<any> {
+    return new Array(length);
+  }
+
 }

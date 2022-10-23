@@ -28,6 +28,7 @@ export class RecetteFormComponent implements OnInit {
       menu: [''],
       portions: [''],
       temps: [''],
+      etoile: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(5)])],
       filtres: ['', [Validators.required]],
       picture: ['']
     });
@@ -40,6 +41,7 @@ export class RecetteFormComponent implements OnInit {
         "_id":null,
         "menu":recette.menu,
         "portions":recette.portions,
+        "etoile":recette.etoile,
         "temps":recette.temps,
         "picture":recette.picture,
         "etapes":[],

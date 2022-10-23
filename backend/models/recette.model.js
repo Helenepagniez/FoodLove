@@ -24,6 +24,9 @@ const RecetteSchema = new mongoose.Schema(
         temps: {
             type: String,
         },
+        etoile: {
+            type: Number
+        },
         picture : {
             type: String
         },

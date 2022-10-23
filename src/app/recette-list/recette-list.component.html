@@ -17,6 +17,10 @@
             <div class="texte">
                 <input type="hidden" class="id" ngModel="{{recette?._id}}" name="_id">
                 <p>{{recette?.menu}}</p>
+                <div class="etoiles" *ngIf="recette?.etoile">
+                    <div class="etoile" *ngFor="let etoile of fakeArray(recette?.etoile!)"><i class="fas fa-star"></i></div>
+                    <div class="etoile" *ngFor="let etoile of fakeArray(5-recette?.etoile!)"><i class="far fa-star"></i></div>
+                </div>
                 <p *ngIf="recette.temps">( Temps total : {{recette.temps}} min)</p>
                 <div *ngIf="recette?.picture" class="image">
                     <img type="jpg" id="image" [src]="recette?.picture" alt="image">

@@ -69,6 +69,16 @@ a {
     text-align: center;
 }
 
+.recette .composition .texte .etoiles {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.recette .composition .texte .etoiles .etoile{
+    color: darkcyan;
+}
+
 .recette .composition .texte p{
     color: black;
     text-align: center;
