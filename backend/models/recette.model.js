@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const RecetteSchema = new mongoose.Schema(
     {
+        posterId: {
+            type: String,
+            required: true
+        },
         menu: {
             type: String,
             trim: true,

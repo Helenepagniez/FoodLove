@@ -3,6 +3,7 @@ import { Ingredient } from "./ingredient.model";
 
 export interface Recette {
     _id: any;
+    posterId: string;
     menu: string ;
     ingredients: Ingredient[];
     etapes: Etape[];

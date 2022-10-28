@@ -5,6 +5,11 @@ const jwt = require("jsonwebtoken");
 
 // voir infos d'un utilisateur(profil)
 module.exports.userInfo = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
+  if (decodedToken.id != req.params.id && role != "ADMIN")
+    return res.status(403).send("Vous n'avez pas accès au profil");
   console.log(req.params);
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknow : " + req.params.id);

@@ -39,6 +39,7 @@ export class RecetteFormComponent implements OnInit {
       recette.picture=this.imagePreview;
       let newRecette: Recette = {
         "_id":null,
+        "posterId":recette.posterId,
         "menu":recette.menu,
         "portions":recette.portions,
         "etoile":recette.etoile,
