@@ -27,6 +27,7 @@ export class IngredientsComponent implements OnInit {
   recette!: Recette;
 
   unites: Unite[] = [
+    {value: 'carré', viewValue: 'Carré'},
     {value: 'centilitre', viewValue: 'Centilitre'},
     {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
     {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
@@ -36,6 +37,7 @@ export class IngredientsComponent implements OnInit {
     {value: 'litre', viewValue: 'Litre'},
     {value: 'paquet', viewValue: 'Paquet'},
     {value: 'produit', viewValue: 'Produit'},
+    {value: 'tranche', viewValue: 'Tranche'},
     {value: 'verre', viewValue: 'Verre'}
   ];
 
