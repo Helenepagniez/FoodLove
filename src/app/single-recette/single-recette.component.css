@@ -297,3 +297,53 @@ input[type="file"]{
     width: 40px;
     text-align: center;
 }
+
+
+
+
+
+/*****************************************************/
+
+mat-accordion{
+    width: 90%;
+    transition: 1s;
+    margin-top: 20px;
+}
+
+mat-accordion mat-expansion-panel{
+    background-color: darkcyan;
+    color: white;
+    border: 2px solid black;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    height: auto;
+    margin: auto;
+    text-align: center;
+}
+
+mat-accordion mat-expansion-panel:hover{
+    border: 3px solid darkcyan;
+    color: darkcyan;
+    transform: scale(1);
+    border: 4px solid black;
+}
+
+i{
+   font-size: larger;
+   color: white;
+}
+
+span{
+    margin-left: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.composition{
+    font-size: 16px;
+    color: black;
+}
