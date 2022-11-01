@@ -16,6 +16,7 @@
     color: white;
     margin-left: 20px;
     margin-top: 30px;
+    margin-bottom: 5px;
 }
 
 .retour:hover{
@@ -25,26 +26,36 @@
     border: 2px solid darkcyan;
 }
 /******************GENERAUX*******************/
+
+.general{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .details{
     min-height: 500px;
     height: auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    max-width: 1000px;
+    width: 100%;
+    margin-right: 16%;
 }
 
-.details .ingredient, .etapes, .quantite{
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.details .ingredient, .etapes, .quantite, .temps, .portions, .filtres{
     font-size: 20px;
-    text-align: justify;
-    margin-top: 15px;
-    margin-left: 20%;
 }
 
 .etoiles{
     display: flex;
     align-content: center;
     justify-content: center;
+    margin-bottom: 20px;
+    margin-left: 5px;
 }
 
 .etoiles .etoile{
@@ -55,6 +66,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
+    font-size: 20px;
 }
 
 .details form .container .etoile-modifier{
@@ -62,11 +74,14 @@
     font-size: 18px;
     text-align: center;
     padding-top: -6px;
+    margin-bottom: 20px;
 }
-
 
 a{
     text-decoration: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
 }
 
 button{
@@ -76,9 +91,6 @@ button{
     background-color: darkcyan;
     color: white;
     cursor: pointer;
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-bottom: 20px;
 }
 
 button:hover{
@@ -96,19 +108,26 @@ button:hover{
 }
 
 input{
-    width: auto;
+    width: 50px;
     color: darkcyan;
     border: none;
+    text-align: center;
+    font-weight: 600;
+    height: 20px;
 }
+
 
 /******************MENU*******************/
 .details .menu{
     font-size: 42px;
-    margin-top: 20px;
-    padding-top: 25px;
+    padding-top: 5px;
     text-align: center;
     font-style: oblique;
     height: auto;
+}
+
+.details .menu input{
+    width: 60%;
 }
 
 .details .categories{
@@ -121,52 +140,29 @@ input{
     color: darkcyan;
 }
 
-/******************TEMPS*******************/
-.details .temps{
-    font-size: 22px;
-    margin-top: 23px;
-    text-align: center;
-    font-style: oblique;
-}
-
-.temps input{
-    width: 50px;
-}
 
 /******************FILTRES*******************/
 .details .filtres{
-    background-color: darkcyan;
     display: flex;
     justify-content: center;
     margin: auto;
-    border-radius: 50px;
     margin-top: 15px;
-    width: 50%;
+    width: 60%;
     height: 25px;
-}
-
-.details .filtres:hover{
     cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-    border: 2px solid darkcyan;
 }
 
 .details .filtres p{
     color: white;
     width: auto;
-    margin: 5px 20px;
-}
-
-.details .filtres:hover p{
-    color: darkcyan;
+    margin-left: 5px;
 }
 
 /******************PORTIONS*******************/
 .portions-container{
     display: flex;
     width: 100%;
-    height: 93px;
+    height: auto;
     flex-direction: column;
     justify-content: center;
 }
@@ -176,21 +172,35 @@ input{
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 50px;
 }
 
 .portions-container div input{
-    width: 10%;
     background-color: white;
     cursor: pointer;
+    height: 20px;
+    width: 50px;
+    color: darkcyan;
+    border: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 .portions-container p{
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
     text-align: justify;
     padding-top: 13px;
-    margin-right: 20px;
+    margin-left: 5px;
+    color: white;
+}
+
+.portions-container .black{
+    font-size: 20px;
+    text-align: justify;
+    padding-top: 13px;
+    margin-left: 5px;
+    color: black;
 }
 
 #quantity{
@@ -200,16 +210,27 @@ input{
 }
 
 /******************IMAGE*******************/
-.details .image{
+.photo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: darkcyan;
+    height: 500px;
+    border-radius: 0 100% 100% 0;
+    margin-bottom: 20px;
+}
+
+.image{
     width: auto;
     height: 200px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+    justify-content: flex-end;
+    margin-right: 50px;
+    margin-left: 20px;
 }
 
-.details .image img{
+.image img{
     width: auto;
     height: 180px;
 }
@@ -246,7 +267,6 @@ input[type="file"]{
     height: 30px;
     background-color: green;
     color: white;
-    margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -305,16 +325,15 @@ input[type="file"]{
 /*****************************************************/
 
 mat-accordion{
-    width: 90%;
+    width: 100%;
     transition: 1s;
-    margin-top: 20px;
 }
 
 mat-accordion mat-expansion-panel{
     background-color: darkcyan;
     color: white;
     border: 2px solid black;
-    width: 50%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -346,4 +365,22 @@ span{
 .composition{
     font-size: 16px;
     color: black;
+}
+
+
+@media screen and (max-width: 1240px) {
+
+    .photo {
+        width: 90%;
+        max-width: 950px;
+    }
+
+}
+
+@media screen and (max-width: 1480px) {
+
+    .details {
+        margin-right: 0;
+    }
+
 }
