@@ -104,7 +104,16 @@ button:hover{
     display: flex;
     align-items: center;
     margin: auto;
-    margin-top: 15px;
+    margin-bottom: 10px;
+    color: darkcyan;
+    background-color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.lien:hover{
+    color: white;
+    background-color: black;
 }
 
 input{
@@ -239,24 +248,28 @@ input[type="file"]{
     display: none;
 }
 
+.picture{
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .picture a{
     border-radius: 50px;
     width: auto;
     height: 30px;
-    background-color: darkcyan;
-    color: white;
+    background-color: white;
+    color: darkcyan;
     cursor: pointer;
-    margin-left: 20px;
     margin-top: 30px;
     margin-bottom: 20px;
     padding: 5px;
+    border: 2px solid darkcyan;
 }
 
 .picture a:hover{
-    cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-    border: 2px solid darkcyan;
+    color: white;
+    background-color: black;
 }
 
 
@@ -273,6 +286,7 @@ input[type="file"]{
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+    margin-bottom: 5px;
 }
 
 .modif:hover{

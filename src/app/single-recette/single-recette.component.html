@@ -13,7 +13,7 @@
             <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
             <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
         </div>
-        <button type="submit" class="modif" *ngIf="isModifying">Enregistrer les modifications d'image</button>
+        <button type="submit" class="modif" *ngIf="isModifying">Enregistrer l'image</button>
     </form>
     <div class="details">
         <a (click)="onModify()"><button class="modif">Modifier la recette</button></a>
@@ -22,7 +22,7 @@
                 <p *ngIf="!isModifying">{{recette.menu}}</p>
                 <input *ngIf="isModifying" type="text" class="menu" ngModel="{{recette.menu}}" formControlName="menu">
             </div>
-            <button type="submit" class="modif" *ngIf="isModifying">Enregistrer les modifications du nom</button>
+            <button type="submit" class="modif" *ngIf="isModifying">Enregistrer le nom</button>
         </form>
         <mat-accordion>
             <mat-expansion-panel expanded>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="modif" *ngIf="isModifying">Enregistrer les modifications du menu</button>
+                    <button type="submit" class="modif" *ngIf="isModifying" title="Enregistrer toutes vos modifications">Enregistrer</button>
                 </form>
             </mat-expansion-panel>
             <mat-expansion-panel>
