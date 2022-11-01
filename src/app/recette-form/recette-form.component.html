@@ -4,20 +4,19 @@
 <a routerLink="/liste"><button class="retour">Retour</button></a>
 <form [formGroup]="recetteForm">
     <div class="form-group">
-      <label for="menu">Nom de la recette</label>
+      <label for="menu">Nom de la recette</label> <br />
       <input type="text" class="form-control" id="menu" formControlName="menu">
     </div>
     <div class="form-group">
-        <mat-form-field appearance="fill">
-            <mat-label>Filtres</mat-label>
+        <mat-form-field>
+            <label for="filtres">Filtres</label>
             <mat-select formControlName="filtres" multiple>
               <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
     <div class="form-group">
-        <label for="etoile">Difficulté de la recette</label>
-        (Facile = 1 et Très difficile = 5)
+        <label for="etoile">Difficulté de la recette</label> (Si 1 = facile et 5 = très difficile) <br /><br />
         <input type="number" class="form-control" id="etoile" min="1" max="5" formControlName="etoile">
       </div>
     <div class="form-group">
@@ -25,8 +24,8 @@
         <input type="text" class="form-control" id="temps" formControlName="temps">
     </div>
     <div class="form-group">
-        <label for="portions">Portions</label>
         <div class="portions-container">
+            <label for="portions">Portions</label> <br /><br />
             <input type="number" id="quantity" name="quantity" min="1" max="10" formControlName="portions">
         </div>
     </div>
@@ -35,5 +34,5 @@
         <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
         <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
     </div>
-    <button mat-raised-button color="primary" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid">Enregistrer</button>
+    <button class="modif" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid">Enregistrer</button>
 </form>

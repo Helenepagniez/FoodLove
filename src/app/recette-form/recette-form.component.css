@@ -27,16 +27,25 @@
 }
 
 /****************GENERAUX*******************/
-button{
+.modif{
     border-radius: 50px;
     width: auto;
     height: 30px;
-    background-color: darkcyan;
+    background-color: green;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    margin: 20px auto;
+}
+
+.modif:hover{
     cursor: pointer;
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    color: white;
+    background-color: green;
+    border: none;
+    transform: scale(1.2);
 }
 
 form{
@@ -48,21 +57,33 @@ form{
     background-color: whitesmoke;
     width: 500px;
     margin: auto;
+    border: 4px solid darkcyan;
+    border-radius: 30%;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 form .form-group{
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 form .form-group input{
-    margin-top: 15px;
+    margin-top: 50px;
     height: auto;
+    margin: auto;
 }
 
 form .form-group label{
     color: darkcyan;
     font-size: medium;
-    margin-right: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 /****************IMAGES*******************/
@@ -70,9 +91,33 @@ input[type="file"]{
     display: none;
 }
 
+.picture{
+    margin-top: 30px;
+}
+
+.picture a{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.picture a:hover{
+    color: darkcyan;
+    background-color: white;
+    border: 2px solid darkcyan;
+}
+
 /****************PORTIONS*******************/
-#quantity{
+input{
     border: 3px solid darkcyan;
     text-align: center;
     cursor: pointer;
+}
+
+#temps{
+    width: 40px;
 }
