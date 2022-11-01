@@ -29,6 +29,8 @@ export class SingleRecetteComponent implements OnInit {
   
   isModifying: boolean = false;
   updateform!: FormGroup;
+  updateMenu!: FormGroup;
+  updateImage!: FormGroup;
   updateFiltres!: FormGroup;
   recette!: Recette;
   imagePreview!: string;
@@ -69,12 +71,18 @@ export class SingleRecetteComponent implements OnInit {
 
   ngOnInit() {
     this.updateform= this.fb.group({
-      picture: [''],
-      menu: ['', [Validators.required]],
       temps: ['', [Validators.required]],
       etoile: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(5)])],
       filtres: ['', [Validators.required]],
       portions: ['', [Validators.required]]
+    });
+
+    this.updateMenu= this.fb.group({
+      menu: ['', [Validators.required]]
+    });
+
+    this.updateImage= this.fb.group({
+      picture: ['']
     });
     
     this.getOneRecette(this.route.snapshot.params['id']);

@@ -21,6 +21,9 @@ import { RecetteFormComponent } from './recette-form/recette-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import { IngredientsComponent } from './single-recette/ingredients/ingredients.component';
 import { EtapesComponent } from './single-recette/etapes/etapes.component';
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import { EtapesComponent } from './single-recette/etapes/etapes.component';
     MatSnackBarModule,
     MatDialogModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    CommonModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
