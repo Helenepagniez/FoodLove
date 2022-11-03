@@ -379,6 +379,20 @@ span{
 .composition{
     font-size: 16px;
     color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.composition ol{
+    width: 100%;
+}
+
+.composition ol li{
+    color: white;
+}
+
+.composition ol li p{
+    color: black;
 }
 
 

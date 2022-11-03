@@ -101,8 +101,12 @@
                 </mat-expansion-panel-header>
                 <div class="composition">
                     <a routerLink="etapes" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Etapes</button></a>
-                    <div class="etapes" *ngFor="let etape of etapes">
-                        <p>{{etape.nomEtape}}</p>
+                    <div >
+                        <ol>
+                            <li class="etapes" *ngFor="let etape of etapes">
+                                <p>{{etape.nomEtape}}</p>
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </mat-expansion-panel>
