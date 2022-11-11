@@ -322,30 +322,7 @@ input[type="file"]{
     transform: scale(1.2);
 }
 
-/******************INGREDIENTS*******************/
-.ingredient{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.ingredient p {
-    margin-left: 10px;
-}
-
-
-.ingredient .nomIngredient{
-    width: 130px;
-}
-
-.ingredient .quantiteValue{
-    width: 40px;
-    text-align: center;
-}
-
-/*****************************************************/
-
+/**************************iNGREDIENTS ET ETAPES***************************/
 mat-accordion{
     width: 100%;
     transition: 1s;
@@ -391,6 +368,7 @@ span{
     flex-direction: column;
 }
 
+/******************ETAPES*******************/
 .composition ol{
     width: 100%;
     display: flex;
@@ -407,7 +385,29 @@ span{
     color: black;
     margin-left: 10px;
 }
+/******************INGREDIENTS*******************/
+.ingredient{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 
+.ingredient p {
+    margin-left: 10px;
+}
+
+
+.ingredient .nomIngredient{
+    width: 130px;
+}
+
+.ingredient .quantiteValue{
+    width: 40px;
+    text-align: center;
+}
+
+/*************************MEDIA QUERIES****************************/
 
 @media screen and (max-width: 1240px) {
 

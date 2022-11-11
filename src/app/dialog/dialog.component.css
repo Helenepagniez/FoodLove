@@ -8,6 +8,7 @@ h1{
     justify-content: space-between;
 }
 
+/**************************BOUTON SUPPRIMER**************************/
 .buttons .delete{
     cursor: pointer;
     color: #FD2D01;
@@ -26,6 +27,7 @@ h1{
     0 0 100px #FD2D01;
 }
 
+/**************************BOUTON ANNULER**************************/
 .buttons .cancel{
     cursor: pointer;
     color: black;
