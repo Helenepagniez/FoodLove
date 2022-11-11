@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { DialogSavedComponent } from '../dialog-sauvegarde/dialog.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Etape } from '../models/etape.model';
 import { Ingredient } from '../models/ingredient.model';
@@ -33,7 +34,7 @@ export class SingleRecetteComponent implements OnInit {
   updateImage!: FormGroup;
   updateFiltres!: FormGroup;
   recette!: Recette;
-  imagePreview!: string;
+  imagePreview!: string | null;
   file!: File | null;
   ingredients!: Ingredient[];
   etapes!: Etape[];
@@ -106,10 +107,46 @@ export class SingleRecetteComponent implements OnInit {
 
   onModify() {
     if (this.isModifying) {
-      this.isModifying = false;
+      const dialogRef = this.dialog.open(DialogSavedComponent);
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          this.isModifying = false;
+          this.imagePreview = null;
+        }
+        else {
+          if (!this.updateform.value.filtres) {
+            this.updateform.value.filtres = this.recette.filtres;
+          }
+          this.updateform.value.menu = this.updateMenu.value.menu;
+          this.updateRecette(this.updateform.value);
+        }
+      });
     }
     else {
       this.isModifying = true;
+    }
+  };
+
+  onReturn() {
+    if (this.isModifying) {
+      const dialogRef = this.dialog.open(DialogSavedComponent);
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          this.isModifying = false;
+          this.imagePreview = null;
+          window.location.href = '/liste';
+        }
+        else {
+          if (!this.updateform.value.filtres) {
+            this.updateform.value.filtres = this.recette.filtres;
+          }
+          this.updateform.value.menu = this.updateMenu.value.menu;
+          this.updateRecette(this.updateform.value);
+        }
+      });
+    }
+    else {
+      window.location.href = '/liste';
     }
   }
 
@@ -117,6 +154,7 @@ export class SingleRecetteComponent implements OnInit {
   updateRecette(nouvelleRecette: Recette) {
     
     nouvelleRecette.picture=this.imagePreview;
+
     if (nouvelleRecette.portions) {
       this.recette.portions = nouvelleRecette.portions;
     }
@@ -135,7 +173,6 @@ export class SingleRecetteComponent implements OnInit {
     if (nouvelleRecette.etoile) {
       this.recette.etoile = nouvelleRecette.etoile;
     }
-
     this.recetteService.updateRecette(this.recette._id, this.recette).subscribe(
       (response: Recette) => {
         this.snackBar.open("Recette modifiée", "Fermer", {duration: 2000});

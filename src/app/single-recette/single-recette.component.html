@@ -2,7 +2,7 @@
 <div class="header">
     <h1>Recette en détails</h1>
 </div>
-<a routerLink="/liste"><button class="retour">Retour</button></a>
+<a (click)="onReturn()"><button class="retour">Retour</button></a>
 <div class="general">
     <form (ngSubmit)="updateRecette(updateImage.value)" [formGroup]="updateImage" class="photo">
         <div *ngIf="recette?.picture" class="image">

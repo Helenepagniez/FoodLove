@@ -79,11 +79,9 @@ module.exports.updateRecette = (req, res) => {
       if (decodedToken.id != theRecette.posterId && role != "ADMIN") return res.status(403).send("Vous n'avez pas le droit de modifier cette recette");
       theRecette.posterId = decodedToken.id;
       theRecette.menu = req.body.menu;
-      theRecette.ingredients = [];
       theRecette.filtres = req.body.filtres;
       theRecette.temps = req.body.temps;
       theRecette.etoile = req.body.etoile;
-      theRecette.etapes = [];
       theRecette.video = req.body.video;
       theRecette.picture = req.body.picture;
       theRecette.portions = req.body.portions;
