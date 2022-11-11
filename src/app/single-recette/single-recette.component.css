@@ -323,6 +323,18 @@ input[type="file"]{
 }
 
 /******************INGREDIENTS*******************/
+.ingredient{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.ingredient p {
+    margin-left: 10px;
+}
+
+
 .ingredient .nomIngredient{
     width: 130px;
 }
@@ -331,10 +343,6 @@ input[type="file"]{
     width: 40px;
     text-align: center;
 }
-
-
-
-
 
 /*****************************************************/
 
@@ -385,6 +393,10 @@ span{
 
 .composition ol{
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .composition ol li{
@@ -393,6 +405,7 @@ span{
 
 .composition ol li p{
     color: black;
+    margin-left: 10px;
 }
 
 
