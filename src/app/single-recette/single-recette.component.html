@@ -87,9 +87,9 @@
                 </mat-expansion-panel-header>
                 <div class="composition">
                     <a routerLink="ingredients" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Ingrédients</button></a>
-                    <div class="ingredient" *ngFor="let ingredient of ingredients">
+                    <div class="ingredient" *ngFor="let composant of recette.composants">
                         <i class="fas fa-hand-point-right"></i>
-                        <p> {{ingredient.nomIngredient}} ({{(ingredient.quantiteValue * recette.portions!).toFixed(1)}} {{ingredient.unite}})</p>
+                        <p> {{composant.ingredient?.nomIngredient}} ({{(composant.quantiteValue * recette.portions!).toFixed(1)}} {{composant.unite}})</p>
                     </div>
                 </div>
             </mat-expansion-panel>

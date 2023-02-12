@@ -9,6 +9,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { Etape } from '../models/etape.model';
 import { Ingredient } from '../models/ingredient.model';
 import { Recette } from '../models/recette.model';
+import { IngredientService } from '../services/ingredient.service';
 import { RecetteService } from '../services/recette.services';
 
 export interface Unite {
@@ -65,6 +66,7 @@ export class SingleRecetteComponent implements OnInit {
   ];
 
   constructor( private recetteService: RecetteService,
+              private ingredientService: IngredientService,
               private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private dialog: MatDialog,
@@ -94,10 +96,21 @@ export class SingleRecetteComponent implements OnInit {
       (response: Recette) => {
         this.recette= response;
         this.etapes= response.etapes;
-        this.ingredients= response.ingredients;
         this.recette.picture = response.picture;
         this.recette.filtres = response.filtres;
         this.recette.portions = response.portions;
+        this.recette.composants = response.composants;
+        console.log(this.recette.composants);
+        for (let composant of response.composants) {
+          this.ingredientService.getOneIngredient(composant.ingredientId).subscribe(
+            (response: Ingredient) => {
+              composant.ingredient = response;
+            },
+            (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          )
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

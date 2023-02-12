@@ -1,6 +1,6 @@
 export interface Ingredient {
     _id: any;
-    nomIngredient: string ;
-    quantiteValue: number;
-    unite: string | null;
+    nomIngredient:string;
+    categorie: string;
+    picture:string;
 }

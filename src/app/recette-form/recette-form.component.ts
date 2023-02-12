@@ -47,7 +47,7 @@ export class RecetteFormComponent implements OnInit {
         "picture":recette.picture,
         "etapes":[],
         "filtres":recette.filtres,
-        "ingredients":[]
+        "composants": recette.composants
       };
       
       this.recetteService.addRecette(newRecette).subscribe(

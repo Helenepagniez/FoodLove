@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { Composant } from 'src/app/models/composant.model';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { Recette } from 'src/app/models/recette.model';
 import { RecetteService } from 'src/app/services/recette.services';
@@ -21,8 +22,8 @@ export interface Unite {
 })
 export class IngredientsComponent implements OnInit {
 
-  ingredient!: Ingredient | null;
-  ingredients: Ingredient[] = [];
+  composant!: Composant | null;
+  composants: Composant[] = [];
   updateform!: FormGroup;
   recette!: Recette;
 
@@ -59,12 +60,12 @@ export class IngredientsComponent implements OnInit {
     
   }
 
-  modify(ingredient: Ingredient) {
-    this.ingredient=ingredient;
+  modify(composant: Composant) {
+    this.composant=composant;
   }
 
   unmodify() {
-    this.ingredient = null;
+    this.composant = null;
   }
 
   onClickRecette(id: string) {
@@ -75,7 +76,7 @@ export class IngredientsComponent implements OnInit {
     this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
-        this.ingredients=response.ingredients;
+        this.composants=response.composants;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -83,11 +84,11 @@ export class IngredientsComponent implements OnInit {
     )
   };
 
-  //modifier les ingrédients
-  updateIngredient(ingredient: Ingredient) {
-    ingredient.quantiteValue = ingredient.quantiteValue/this.recette.portions!;
-    this.recetteService.updateIngredient(ingredient, this.recette._id).subscribe(
-      (response: Ingredient) => {
+  //modifier les composants
+  updateComposant(composant: Composant) {
+    composant.quantiteValue = composant.quantiteValue/this.recette.portions!;
+    this.recetteService.updateComposant(composant, this.recette._id).subscribe(
+      (response: Composant) => {
         this.snackBar.open("ingrédient modifié", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
           location.reload();
       });
@@ -98,16 +99,18 @@ export class IngredientsComponent implements OnInit {
     );
   };
 
-  //créer un ingrédient
-  addIngredient() {
-    let nouvelIngredient: any= {
-      "nomIngredient":"nouvel ingrédient",
+  //créer un composant
+  addComposant() {
+    let nouveauComposant: Composant= {
+      "_id":null,
+      "ingredient":null,
+      "ingredientId":"",
       "quantiteValue":0,
       "unite":"produit"
     };
-    this.recetteService.addIngredient(nouvelIngredient, this.recette._id).subscribe(
-      (response: Ingredient) => {
-        this.snackBar.open("ingrédient ajouté", "Fermer", {duration: 2000});
+    this.recetteService.addComposant(nouveauComposant, this.recette._id).subscribe(
+      (response: Composant) => {
+        this.snackBar.open("Composant ajouté", "Fermer", {duration: 2000});
         this.getOneRecette(this.recette._id);
       },
       (error: HttpErrorResponse) => {
@@ -116,15 +119,15 @@ export class IngredientsComponent implements OnInit {
     );
   };
 
-  //supprimer un ingrédient
-  deleteIngredient(ingredient: Ingredient, recetteId: number) {
+  //supprimer un composant
+  deleteComposant(composant: Composant, recetteId: number) {
     const dialogRef = this.dialog.open(DialogComponent);
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.recetteService.deleteIngredient(ingredient, recetteId).subscribe(
-          (response: Ingredient) => {
-            this.snackBar.open("Ingrédient supprimé", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
+        this.recetteService.deleteComposant(composant, recetteId).subscribe(
+          (response: Composant) => {
+            this.snackBar.open("Composant supprimé", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
               location.reload();
             });
           },

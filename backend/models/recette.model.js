@@ -1,55 +1,41 @@
 const mongoose = require('mongoose');
+const EtapeSchema = require('./etape.model').schema;
+const ComposantSchema = require('./composant.model').schema;
 
 const RecetteSchema = new mongoose.Schema(
     {
         posterId: {
-            type: String,
-            required: true
+            type: String
         },
         menu: {
             type: String,
-            trim: true,
             required: true,
             maxlength: 100000
         },
-        etapes: {
-            type: [
-                {
-                nomEtape: String
-                }
-            ]
-        },
+        etapes: [EtapeSchema],
         portions: {
-            type: Number
+            type: Number,
+            required: true
         },
-        filtres: {
-            type: [String],
-        },
+        filtres: [String],
         temps: {
             type: String,
         },
         etoile: {
             type: Number
         },
-        picture : {
+        picture: {
             type: String
         },
         video: {
             type: String
         },
-        ingredients: {
-            type: [
-                {
-                    nomIngredient: String,
-                    quantiteValue: Number,
-                    unite: String
-                }
-            ]
-        }
+        composants: [ComposantSchema]
     },
     {
         timestamps: true,
     }
 );
 
-module.exports = mongoose.model('recette', RecetteSchema);
+const Recette = mongoose.model('recette', RecetteSchema)
+module.exports = Recette;

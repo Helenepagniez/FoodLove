@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { Composant } from "../models/composant.model";
 import { Etape } from "../models/etape.model";
 import { Ingredient } from "../models/ingredient.model";
 import { Recette } from "../models/recette.model";
@@ -56,6 +57,24 @@ export class RecetteService {
 
     public deleteIngredient(ingredient: Ingredient, recetteId: number): Observable<Ingredient> {
         return this.http.patch<Ingredient>(`${this.apiServerUrl}/api/recette/suppression-ingredient/${recetteId}`, ingredient,{
+            withCredentials: true,
+        });
+    };
+
+    public addComposant(composant: Composant, recetteId: number): Observable<Composant> {
+        return this.http.patch<Composant>(`${this.apiServerUrl}/api/recette/ajout-composant/${recetteId}`, composant,{
+            withCredentials: true,
+        });
+    };
+
+    public updateComposant(composant: Composant, recetteId: number): Observable<Composant> {
+        return this.http.patch<Composant>(`${this.apiServerUrl}/api/recette/modification-composant/${recetteId}`, composant,{
+            withCredentials: true,
+        });
+    };
+
+    public deleteComposant(composant: Composant, recetteId: number): Observable<Composant> {
+        return this.http.patch<Composant>(`${this.apiServerUrl}/api/recette/suppression-composant/${recetteId}`, composant,{
             withCredentials: true,
         });
     };
