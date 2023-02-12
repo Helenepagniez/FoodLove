@@ -3,12 +3,11 @@ import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { max } from 'rxjs';
-import { LoggedInUserId } from '../models/loggedInUserId.model';
-import { Recette } from '../models/recette.model';
-import { User } from '../models/user.model';
-import { RecetteService } from '../services/recette.services';
-import { UserService } from '../services/user.services';
+import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
+import { Recette } from '../core/interfaces/recette';
+import { User } from '../core/interfaces/user';
+import { RecetteService } from '../core/services/recette.service';
+import { UserService } from '../core/services/user.service';
 
 
 export interface Filtre {

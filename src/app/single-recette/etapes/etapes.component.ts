@@ -5,10 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
-import { Etape } from 'src/app/models/etape.model';
-import { Ingredient } from 'src/app/models/ingredient.model';
-import { Recette } from 'src/app/models/recette.model';
-import { RecetteService } from 'src/app/services/recette.services';
+import { Etape } from 'src/app/core/interfaces/etape';
+import { Recette } from 'src/app/core/interfaces/recette';
+import { RecetteService } from 'src/app/core/services/recette.service';
 
 @Component({
   selector: 'app-etapes',

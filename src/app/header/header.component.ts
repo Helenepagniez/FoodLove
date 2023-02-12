@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { LoggedInUserId } from '../models/loggedInUserId.model';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.services';
+import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
+import { User } from '../core/interfaces/user';
+import { UserService } from '../core/services/user.service';
 
 @Component({
   selector: 'app-header',

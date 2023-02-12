@@ -2,10 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { Composant } from "../models/composant.model";
-import { Etape } from "../models/etape.model";
-import { Ingredient } from "../models/ingredient.model";
-import { Recette } from "../models/recette.model";
+import { Composant } from "../interfaces/composant";
+import { Etape } from "../interfaces/etape";
+import { Ingredient } from "../interfaces/ingredient";
+import { Recette } from "../interfaces/recette";
 
 @Injectable({providedIn: 'root'})
 export class RecetteService {

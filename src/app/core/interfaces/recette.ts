@@ -1,5 +1,5 @@
-import { Composant } from "./composant.model";
-import { Etape } from "./etape.model";
+import { Composant } from "./composant";
+import { Etape } from "./etape";
 
 export interface Recette {
     _id: any;

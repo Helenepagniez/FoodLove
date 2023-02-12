@@ -6,12 +6,12 @@
 <div class="ingredients">
     <div class="ingredient titre">
         <p>Nom / Modifier</p>
-        <p>Quantite</p>
+        <p>Quantité</p>
         <p>Unité</p>
         <p>Supprimer</p>
     </div>
     <div class="ingredient"*ngFor="let composant of composants">
-        <p class="scale"><a title="modify" (click)="modify(composant)">{{composant.ingredient?.nomIngredient}}</a></p>
+        <p class="scale"><a title="modify" (click)="modify(composant)">{{composant.ingredient!.nomIngredient}}</a></p>
         <p>{{composant.quantiteValue * recette.portions!}}</p>
         <p>{{composant.unite}}</p>
         <button class="supprimer" (click)="deleteComposant(composant, recette._id)">supprimer</button>
@@ -23,16 +23,23 @@
 <div *ngIf="composant" class="modify-container">
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateComposant(updateform.value)">
         <input type="hidden" formControlName="_id" ngModel="{{composant._id}}">
-        <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{composant.ingredient?.nomIngredient}}">
+        <label for="name">Choix de la catégorie de l'ingrédient :</label>
+        <select class="user-form-text" formControlName="categorie" ngModel="{{composant.ingredient!.categorie}}" (ngModelChange)="onCategorieChange($event)">
+            <option [value]="categorie.value" *ngFor="let categorie of categories" [disabled]="disableCategorie(categorie)">{{categorie.viewValue}}</option>
+        </select>
+        <label for="name">Choix du nom de l'ingrédient :</label>
+        <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{composant.ingredient?.nomIngredient}}" *ngIf="composant.ingredient!.categorie === 'personnaliser'">
+        <select class="user-form-text" formControlName="nomIngredient" ngModel="{{composant.ingredient!.nomIngredient}}" *ngIf="composant.ingredient!.categorie !== 'personnaliser'">
+            <option [value]="composant.ingredient!.nomIngredient" *ngFor="let ingredient of ingredients">{{ingredient.nomIngredient}}</option>
+        </select>
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
+        <label for="name">Choix de la quantité de l'ingrédient :</label>
         <input type="number" step="0.1" class="object-form-text" placeholder="Quantité" formControlName="quantiteValue" ngModel="{{composant.quantiteValue * recette.portions!}}">
         <span class="error" *ngIf="updateform.get('quantiteValue')!.hasError('required') && updateform.get('quantiteValue')!.touched">La quantité de l'ingrédient est requise</span>
-        <mat-form-field appearance="fill" style="width: 480px; background-color:rgb(64, 185, 185); border: 2px solid rgb(2, 216, 216)">
-            <mat-label>Unitées</mat-label>
-            <mat-select name="unite" value="{{composant.unite}}" formControlName="unite" ngModel="{{composant.unite}}">
-              <mat-option *ngFor="let unite of unites" [value]="unite.viewValue">{{unite.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+        <label for="name">Choix de l'unité de l'ingrédient :</label>
+        <select class="user-form-text" formControlName="unite" ngModel="{{composant.unite}}">
+            <option [value]="unite.value" *ngFor="let unite of unites">{{unite.viewValue}}</option>
+        </select>
         <span class="error" *ngIf="updateform.get('unite')!.hasError('required') && updateform.get('unite')!.touched">L'unité de l'ingrédient est requise</span>
         <div class="button-container">
             <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>

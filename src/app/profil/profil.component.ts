@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.services';
+import { User } from '../core/interfaces/user';
+import { UserService } from '../core/services/user.service';
 import { MatDialog} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoggedInUserId } from '../models/loggedInUserId.model';
+import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggedInUserId } from './models/loggedInUserId.model';
-import { User } from './models/user.model';
+import { LoggedInUserId } from './core/interfaces/loggedInUserId';
+import { User } from './core/interfaces/user';
 
 @Component({
   selector: 'app-root',

@@ -8,7 +8,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import { RecetteListComponent } from './recette-list/recette-list.component';
 import { EtapesComponent } from './single-recette/etapes/etapes.component';
-import { IngredientsComponent } from './single-recette/ingredients/ingredients.component';
+import { ComposantsComponent } from './single-recette/composants/composants.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'liste', component: RecetteListComponent },
   { path: 'recette/:id', component: SingleRecetteComponent},
-  { path: 'recette/:id/ingredients', component: IngredientsComponent},
+  { path: 'recette/:id/ingredients', component: ComposantsComponent},
   { path: 'recette/:id/etapes', component: EtapesComponent},
   { path: 'profil', component: ProfilComponent },
   { path: 'new-recette', component: RecetteFormComponent },

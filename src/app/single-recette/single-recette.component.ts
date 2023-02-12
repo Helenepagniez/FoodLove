@@ -1,16 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { DialogSavedComponent } from '../dialog-sauvegarde/dialog.component';
 import { DialogComponent } from '../dialog/dialog.component';
-import { Etape } from '../models/etape.model';
-import { Ingredient } from '../models/ingredient.model';
-import { Recette } from '../models/recette.model';
-import { IngredientService } from '../services/ingredient.service';
-import { RecetteService } from '../services/recette.services';
+import { Etape } from '../core/interfaces/etape';
+import { Ingredient } from '../core/interfaces/ingredient';
+import { Recette } from '../core/interfaces/recette';
+import { IngredientService } from '../core/services/ingredient.service';
+import { RecetteService } from '../core/services/recette.service';
 
 export interface Unite {
   value: string;

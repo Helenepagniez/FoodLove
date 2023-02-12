@@ -5,23 +5,30 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
-import { Composant } from 'src/app/models/composant.model';
-import { Ingredient } from 'src/app/models/ingredient.model';
-import { Recette } from 'src/app/models/recette.model';
-import { RecetteService } from 'src/app/services/recette.services';
+import { Composant } from 'src/app/core/interfaces/composant';
+import { Recette } from 'src/app/core/interfaces/recette';
+import { RecetteService } from 'src/app/core/services/recette.service';
+import { IngredientService } from 'src/app/core/services/ingredient.service';
+import { Ingredient } from 'src/app/core/interfaces/ingredient';
 
 export interface Unite {
   value: string;
   viewValue: string;
 }
 
-@Component({
-  selector: 'app-ingredients',
-  templateUrl: './ingredients.component.html',
-  styleUrls: ['./ingredients.component.css']
-})
-export class IngredientsComponent implements OnInit {
+export interface Categorie {
+  value: string;
+  viewValue: string;
+}
 
+@Component({
+  selector: 'app-composants',
+  templateUrl: './composants.component.html',
+  styleUrls: ['./composants.component.css']
+})
+export class ComposantsComponent implements OnInit {
+
+  ingredients: Ingredient[]= [];
   composant!: Composant | null;
   composants: Composant[] = [];
   updateform!: FormGroup;
@@ -42,30 +49,58 @@ export class IngredientsComponent implements OnInit {
     {value: 'verre', viewValue: 'Verre'}
   ];
 
+  categories: Categorie[] = [
+    {value: 'assaisonnements', viewValue: 'Assaisonnements'},
+    {value: 'feculents', viewValue: 'Féculents'},
+    {value: 'fruits', viewValue: 'Fruits'},
+    {value: 'legumes', viewValue: 'Légumes'},
+    {value: 'produits-laitiers', viewValue: 'Produits Laitiers'},
+    {value: 'proteines', viewValue: 'Protéines'},
+    {value: 'autres', viewValue: 'Autres'},
+    {value: 'personnaliser', viewValue: 'Personnaliser'},
+    {value: 'nouveau', viewValue: 'Nouveau'}
+  ];
+
   constructor(private recetteService: RecetteService,
               private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private fb: FormBuilder, 
-              private router: Router) {}
+              private router: Router,
+              private ingredientService: IngredientService) {}
 
   ngOnInit(){
     this.updateform= this.fb.group({
       _id: [''],
       nomIngredient: ['', [Validators.required]],
       quantiteValue: ['', [Validators.required]],
+      categorie: ['', [Validators.required]],
       unite: ['', [Validators.required]]
     });
     this.getOneRecette(this.route.snapshot.params['id']);
-    
+    this.getIngredients();
+  }
+
+  disableCategorie(categorie: Categorie): boolean {
+    return categorie.value === 'nouveau';
   }
 
   modify(composant: Composant) {
     this.composant=composant;
+    this.getIngredients();
+    setTimeout(() => {
+      this.ingredients = this.ingredients.filter((ingredient) => ingredient.categorie === composant.ingredient?.categorie);
+    }, 100);
   }
 
   unmodify() {
     this.composant = null;
+    this.getIngredients();
+  }
+
+  onCategorieChange(event: any) {
+    this.composant!.ingredient!.categorie = event;
+    this.modify(this.composant!);
   }
 
   onClickRecette(id: string) {
@@ -73,10 +108,21 @@ export class IngredientsComponent implements OnInit {
   }
 
   getOneRecette(recetteId: string) {
-    this.recetteService.getOneRecette(recetteId).subscribe(
+      this.recetteService.getOneRecette(recetteId).subscribe(
       (response: Recette) => {
         this.recette= response;
         this.composants=response.composants;
+        for (let composant of this.composants) {
+          composant.ingredient = {_id:null, nomIngredient: "", categorie:"", picture: ""};
+          this.ingredientService.getOneIngredient(composant.ingredientId).subscribe(
+            (response: Ingredient) => {
+              composant.ingredient = response;
+            },
+            (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          );
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -89,7 +135,7 @@ export class IngredientsComponent implements OnInit {
     composant.quantiteValue = composant.quantiteValue/this.recette.portions!;
     this.recetteService.updateComposant(composant, this.recette._id).subscribe(
       (response: Composant) => {
-        this.snackBar.open("ingrédient modifié", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
+        this.snackBar.open("Composant modifié", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
           location.reload();
       });
       },
@@ -104,7 +150,7 @@ export class IngredientsComponent implements OnInit {
     let nouveauComposant: Composant= {
       "_id":null,
       "ingredient":null,
-      "ingredientId":"",
+      "ingredientId":"63e9167ced2f749f999d1002",
       "quantiteValue":0,
       "unite":"produit"
     };
@@ -138,5 +184,16 @@ export class IngredientsComponent implements OnInit {
       }
     });
   };
+
+  getIngredients(){
+    this.ingredientService.getIngredients().subscribe(
+      (response: Ingredient[]) => {
+        this.ingredients = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
 
 }

@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar} from '@angular/material/snack-bar';
-import { Recette } from '../models/recette.model';
-import { RecetteService } from '../services/recette.services';
+import { Recette } from '../core/interfaces/recette';
+import { RecetteService } from '../core/services/recette.service';
 
 @Component({
   selector: 'app-recette-form',

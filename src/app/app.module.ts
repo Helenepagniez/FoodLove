@@ -19,7 +19,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { RecetteFormComponent } from './recette-form/recette-form.component';
 import {MatSelectModule} from '@angular/material/select';
-import { IngredientsComponent } from './single-recette/ingredients/ingredients.component';
+import { ComposantsComponent } from './single-recette/composants/composants.component';
 import { EtapesComponent } from './single-recette/etapes/etapes.component';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -37,7 +37,7 @@ import {MatCardModule} from '@angular/material/card';
     SingleRecetteComponent,
     ProfilComponent,
     RecetteFormComponent,
-    IngredientsComponent,
+    ComposantsComponent,
     EtapesComponent
   ],
   imports: [
