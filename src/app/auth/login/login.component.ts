@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoggedInUserId } from 'src/app/core/interfaces/loggedInUserId';
 import { User } from 'src/app/core/interfaces/user';
 import { UserService } from '../../core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   loggedInUserId!: LoggedInUserId | null;
 
   constructor(private formBuilder: FormBuilder,
-              private auth: AuthService,
-              private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private toastr: ToastrService,
+              private router : Router) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -43,14 +43,18 @@ export class LoginComponent implements OnInit {
         if (response?.user) {
           sessionStorage.setItem('loggedInUserId', JSON.stringify(response));
           this.loggedInUserId = JSON.parse(sessionStorage.getItem('loggedInUserId') || '{}');
-          location.href="/liste";
-        }
-        else {
-          alert("Mauvais mot de passe ou email");
+          this.router.navigate(["/liste"])
+            .then(() => {
+              this.toastr.success("Vous êtes connecté", "Connexion réussie", {
+                positionClass: "toast-bottom-center" 
+              });
+            });
         }
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Mauvais email ou mot de passe !", "Erreur de connexion", {
+            positionClass: "toast-bottom-center" 
+        });
       }
     );
   };

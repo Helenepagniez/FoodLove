@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
 import { LoggedInUserId } from 'src/app/core/interfaces/loggedInUserId';
 import { User } from 'src/app/core/interfaces/user';
 import { UserService } from 'src/app/core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -22,10 +21,9 @@ export class SignupComponent implements OnInit {
   loggedInUserId!: LoggedInUserId | null;
 
   constructor(private formBuilder: FormBuilder,
-              private auth: AuthService,
-              private router: Router,
               private userService: UserService,
-              private snackBar: MatSnackBar) { }
+              private toastr: ToastrService,
+              private router: Router) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({
@@ -47,10 +45,17 @@ export class SignupComponent implements OnInit {
     user.picture=null;
     this.userService.addUser(user).subscribe(
       (response: User) => {
-        location.href="/login";
+        this.router.navigate(["/login"])
+        .then(() => {
+          this.toastr.success("Veuillez vous connecter", "Inscription réussie", {
+            positionClass: "toast-bottom-center" 
+          });
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };

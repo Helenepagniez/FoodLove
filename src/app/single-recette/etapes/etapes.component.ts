@@ -2,12 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Etape } from 'src/app/core/interfaces/etape';
 import { Recette } from 'src/app/core/interfaces/recette';
 import { RecetteService } from 'src/app/core/services/recette.service';
+import { EtapeService } from 'src/app/core/services/etape.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-etapes',
@@ -24,10 +25,11 @@ export class EtapesComponent implements OnInit {
 
   constructor(private recetteService: RecetteService,
               private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private fb: FormBuilder, 
-              private router: Router) { }
+              private router: Router,
+              private etapeService: EtapeService,
+              private toastr : ToastrService) { }
 
   ngOnInit(){
     this.updateform= this.fb.group({
@@ -39,6 +41,7 @@ export class EtapesComponent implements OnInit {
 
   modify(etape: Etape) {
     this.etape=etape;
+    document.getElementById("cancel")?.scrollIntoView({behavior:"smooth"});
   }
 
   unmodify() {
@@ -56,7 +59,9 @@ export class EtapesComponent implements OnInit {
         this.etapes=response.etapes;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     )
   };
@@ -64,14 +69,18 @@ export class EtapesComponent implements OnInit {
   
   //modifier les étapes
   updateEtape(etape: Etape) {
-    this.recetteService.updateEtape(etape, this.recette._id).subscribe(
+    this.etapeService.updateEtape(etape, this.recette._id).subscribe(
       (response: Etape) => {
-        this.snackBar.open("étapes modifiées", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
-          location.reload();
-      });
+        this.unmodify();
+        this.getOneRecette(this.recette._id);
+        this.toastr.success("Etape modifiée", "Modification étape", {
+          positionClass: "toast-bottom-center" 
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };
@@ -81,13 +90,17 @@ export class EtapesComponent implements OnInit {
     let nouvelleEtape: any= {
       "nomEtape": "nouvelle étape"
     };
-    this.recetteService.addEtape(nouvelleEtape, this.recette._id).subscribe(
+    this.etapeService.addEtape(nouvelleEtape, this.recette._id).subscribe(
       (response: Etape) => {
-        this.snackBar.open("étape ajoutée", "Fermer", {duration: 2000});
         this.getOneRecette(this.recette._id);
+        this.toastr.success("Etape ajoutée", "Ajout étape", {
+          positionClass: "toast-bottom-center" 
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };
@@ -98,14 +111,17 @@ export class EtapesComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.recetteService.deleteEtape(etape, recetteId).subscribe(
+        this.etapeService.deleteEtape(etape, recetteId).subscribe(
           (response: Etape) => {
-            this.snackBar.open("Etape supprimée", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
-              location.reload();
+            this.getOneRecette(this.recette._id);
+            this.toastr.success("Etape supprimée", "Suppression étape", {
+              positionClass: "toast-bottom-center" 
             });
           },
           (error: HttpErrorResponse) => {
-            alert(error.message);
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
+            });
           }
         );
       }

@@ -1,15 +1,15 @@
 <div class="header">
-    <h1>Liste des étapes (Ajout- Modification- Suppression)</h1>
+    <h1>Etapes de la recette</h1>
 </div>
-<h3>Cliquez sur le nom d'une étape pour l'afficher ou la modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
+<h3>Cliquez sur le nom d'une étape pour l'afficher ou la modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <div class="etapes">
     <div class="etape titre">
-        <p>Nom / Modifier</p>
+        <p class="scale">Nom / Modifier</p>
         <p>Supprimer</p>
     </div>
     <div class="etape" *ngFor="let etape of etapes">
-        <p  class="scale"><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
+        <p class="scale"><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
         <button class="supprimer" (click)="deleteEtape(etape, recette._id)">supprimer</button>
     </div>
 </div>
@@ -24,7 +24,7 @@
         <div class="button-container">
             <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
             <button class="validButton" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <a class="cancel" title="annuler" (click)="unmodify()">ANNULER</a>
+            <a class="cancel" title="annuler" (click)="unmodify()" id="cancel">ANNULER</a>
         </div>
     </form>
 </div>

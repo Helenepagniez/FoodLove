@@ -11,6 +11,7 @@
 h3{
     text-align: center;
     color: darkcyan;
+    margin: 0 20px;
 }
 
 .retour{
@@ -33,9 +34,9 @@ h3{
 
 /****************ETAPES*******************/
 .etapes{
+    padding: 5px;
     background-color: darkcyan;
     border-radius: 50px;
-    min-width: 300px;
     width: 90%;
     margin: auto;
     margin: auto;
@@ -50,21 +51,30 @@ h3{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin: 10px 0;
+    margin: 10px;
     margin-left: auto;
     margin-right: auto;
+    padding: 5px;
     background-color: white;
     color: darkcyan;
     border-radius: 30px;
     border: 3px solid black;
 }
 
-.etape p {
-    padding-top: 10px;
+.etape .scale {
+    margin: 0;
+    padding: 5px;
     font-size: 18px;
-    width: 400px;
     text-align: center;
     transition: 0.5s;
+    width: 60%;
+}
+
+.etape p {
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
 }
 
 .etape p a{
@@ -76,14 +86,17 @@ h3{
     color: white;
 }
 
+.etape.titre .scale {
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    width: 60%;
+}
+
 .etape .scale:hover{
     transform: scale(1.2);
     color: #ff0000;
-}
-
-.etape.titre p{
-    width: 150px;
-    margin-left: 150px;
 }
 
 /****************SUPPRIMER ETAPE*******************/
@@ -108,7 +121,6 @@ h3{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 500px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
@@ -161,7 +173,7 @@ h3{
 }
 
 .object-form {
-    width: 80%;
+    width: 100%;
     margin: auto;
     padding: 0 10px;
     overflow: hidden;

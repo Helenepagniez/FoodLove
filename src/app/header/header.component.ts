@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
 import { User } from '../core/interfaces/user';
 import { UserService } from '../core/services/user.service';
@@ -16,7 +18,9 @@ export class HeaderComponent implements OnInit {
   users: User[]=[];
   user!: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private toastr : ToastrService,
+              private router : Router) { }
 
   ngOnInit() {
     let btn : any = document.querySelector("#btn");
@@ -31,13 +35,20 @@ export class HeaderComponent implements OnInit {
    logoutUser() {
     this.userService.logoutUser(this.loggedInUser!).subscribe(
       (response: User) => {
+        this.router.navigate(["/home"])
+        .then(() => {
+          this.toastr.success("Vous êtes déconnecté", "Déconnexion réussie", {
+            positionClass: "toast-bottom-center" 
+          });
+        });
         sessionStorage.removeItem('loggedInUserId');
         this.loggedInUser = null;
         this.loggedInUserId = null;
-        location.href="/home";
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };

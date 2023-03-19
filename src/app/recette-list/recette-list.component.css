@@ -106,6 +106,7 @@ a {
     height: 90%;
     max-height: 200px;
     max-width: 500px;
+    transform: scaleX(-1);
 }
 
 .filtres{

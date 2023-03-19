@@ -49,17 +49,17 @@
 }
 
 form{
+
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
     align-content: center;
     background-color: whitesmoke;
-    width: 500px;
     margin: auto;
     border: 4px solid darkcyan;
     border-radius: 30%;
-    margin-bottom: 20px;
+    margin: 20px;
     cursor: pointer;
 }
 

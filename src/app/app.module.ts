@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -24,6 +23,8 @@ import { EtapesComponent } from './single-recette/etapes/etapes.component';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
+import { PersonnaliserComponent } from './single-recette/composants/personnaliser/personnaliser.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatCardModule} from '@angular/material/card';
     ProfilComponent,
     RecetteFormComponent,
     ComposantsComponent,
-    EtapesComponent
+    EtapesComponent,
+    PersonnaliserComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     CommonModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

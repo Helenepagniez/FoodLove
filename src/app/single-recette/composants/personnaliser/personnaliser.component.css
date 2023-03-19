@@ -35,6 +35,7 @@ h3{
 
 /****************iNGREDIENTS*******************/
 .ingredients{
+    padding: 5px;
     background-color: darkcyan;
     border-radius: 50px;
     width: 90%;
@@ -43,7 +44,6 @@ h3{
     align-content: center;
     flex-direction: column;
     justify-content: center;
-    padding: 5px;
 }
 
 .ingredient{
@@ -52,9 +52,9 @@ h3{
     align-items: center;
     justify-content: space-around;
     margin: 10px;
+    padding: 5px;
     margin-left: auto;
     margin-right: auto;
-    padding: 5px;
     background-color: white;
     color: darkcyan;
     border-radius: 30px;
@@ -62,30 +62,31 @@ h3{
 }
 
 .ingredient p{
+    padding-top: 10px;
     font-size: 18px;
     text-align: center;
     transition: 0.5s;
 }
 
-.ingredient p a{
-    cursor: pointer;
-}
-
-
-.ingredient .center {
-    width: 30%;
-}
-
 .ingredient .scale {
-    width: 30%;
-}
-
-.ingredient.titre .center {
-    width: 30%;
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    transition: 0.5s;
+    width: 60%;
 }
 
 .ingredient.titre .scale {
-    width: 30%;
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    width: 60%;
+}
+
+.ingredient p a{
+    cursor: pointer;
 }
 
 .ingredient .scale:hover{
@@ -98,9 +99,6 @@ h3{
     color: white;
 }
 
-p {
-    margin: 3px;
-}
 
 /****************SUPPRIMER INGREDIENT*******************/
 .ingredient .supprimer{
@@ -110,6 +108,7 @@ p {
     background-color: white;
     color: darkcyan;
     border: 2px solid black;
+    margin-left: 35px;
 }
 
 .ingredient .supprimer:hover{
@@ -172,7 +171,7 @@ p {
     max-width: 600px;
     width: 80%;
     border-radius: 20px;
-    padding-bottom: 200px;
+    padding-bottom: 20px;
 }
 
 .object-form {
@@ -271,89 +270,4 @@ textarea.object-form-text {
     background-color: darkcyan;
     color: white;
     cursor: pointer;
-}
-
-/****************CATEGORIES****************/
-
-.user-form {
-    width: 80%;
-    margin: auto;
-    padding: 0 10px;
-    overflow: hidden;
-}
-
-.user-form span {
-    color: black;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.user-form-text {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 16px 0;
-    border: 0;
-    padding: 20px 40px;
-    border: 2px solid rgb(2, 216, 216);
-    outline: none;
-    border-radius: 10px;
-    transition: 0.5s;
-    text-align: center;
-    background-color: rgb(64, 185, 185);
-}
-
-input {
-    color: white;
-    font-size: 1em;
-}
-
-select {
-    color: white;
-    font-size: 1em;
-    appearance: none;
-    cursor: pointer;
-}
-
-select option {
-    color: black;
-}
-
-.user-form-text:focus.ng-valid {
-    box-shadow: 0 0 10px 4px darkcyan;
-    background-color: white;
-    color: darkcyan;
-    border: 2px solid darkcyan;
-}
-
-label{
-    font-style: oblique;
-    font-size: medium;
-    font-weight: 600;
-}
-
-/*************************MEDIA QUERIES****************************/
-
-@media screen and (max-width: 450px) {
-
-    .ingredient{
-        flex-direction: column;
-    }
-
-    .ingredient .center {
-        width: 90%;
-    }
-    
-    .ingredient .scale {
-        width: 90%;
-    }
-
-    .ingredient.titre .center {
-        width: 90%;
-    }
-    
-    .ingredient.titre .scale {
-        width: 90%;
-    }
-
 }

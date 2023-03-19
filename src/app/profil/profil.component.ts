@@ -1,13 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../core/interfaces/user';
 import { UserService } from '../core/services/user.service';
 import { MatDialog} from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogComponent } from '../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profil',
@@ -15,6 +16,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
+  imagePath: string = environment.imagePath;
   loggedInUser!: User | null;
   loggedInUserId!: LoggedInUserId | null;
   user!: User;
@@ -28,11 +30,11 @@ export class ProfilComponent implements OnInit {
   _id!: User['_id'];
   
 
-  constructor(private router: Router,
-    private userService: UserService,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog,
-    private fb: FormBuilder) { }
+  constructor(private userService: UserService,
+              private dialog: MatDialog,
+              private fb: FormBuilder,
+              private toastr : ToastrService,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -58,10 +60,15 @@ export class ProfilComponent implements OnInit {
    getLoggedInUser(userId: string) {
     this.userService.getUser(userId).subscribe(
       (response: User) => { 
-            this.loggedInUser = response;
+        if (!response.picture) {
+          response.picture = this.imagePath + "random-user.png";
+        }
+        this.loggedInUser = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     ) 
   }
@@ -83,10 +90,14 @@ export class ProfilComponent implements OnInit {
       (response: User) => {
         this.imagePreview=null;
         this.getLoggedInUser(response._id);
-        this.snackBar.open("Vous avez modifié vos informations", "Fermer", {duration: 2000});
+        this.toastr.success("Vous avez modifié vos informations", "Profil modifié", {
+          positionClass: "toast-bottom-center" 
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };
@@ -99,13 +110,20 @@ export class ProfilComponent implements OnInit {
       if (result === true) {
         this.userService.deleteUser(userId).subscribe(
           (response: void) => {
+            this.router.navigate(["/home"])
+              .then(() => {
+                this.toastr.success("Votre compte a été supprimé", "Suppression réussie", {
+                  positionClass: "toast-bottom-center" 
+                });
+              });
             sessionStorage.removeItem('loggedInUserId');
             this.loggedInUser = null;
             this.loggedInUserId = null;
-            location.href="/home";
           },
           (error: HttpErrorResponse) => {
-            alert(error.message);
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
+            });
           }
         );
       }

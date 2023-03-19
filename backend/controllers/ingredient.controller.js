@@ -3,8 +3,8 @@ const { default: mongoose } = require("mongoose");
 const jwt = require("jsonwebtoken");
 const ObjectID = require("mongoose").Types.ObjectId;
 
-//lire un ingrédient
-module.exports.getOneIngredient = (req, res) => {
+//lire un ingrédient par son _id
+module.exports.getOneIngredientById = (req, res) => {
     const token = req.cookies.jwt;
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     const role = decodedToken.role;
@@ -15,6 +15,20 @@ module.exports.getOneIngredient = (req, res) => {
       if (!err) res.status(200).json(docs);
       else console.log("Error to get data : " + err);
     })
+};
+
+//lire un ingrédient par son nom
+module.exports.getOneIngredientByName = (req, res) => {
+  const token = req.cookies.jwt;
+  const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+  const role = decodedToken.role;
+
+  ingredientModel.findOne({nomIngredient : req.params.nomIngredient},(err,docs) => {
+    console.log(decodedToken.id);
+    if ((docs.posterId != null && decodedToken.id != docs.posterId && role != "ADMIN")) return res.status(403).send("Vous n'avez pas le droit de lire cet ingrédient");
+    if (!err) res.status(200).json(docs);
+    else console.log("Error to get data : " + err);
+  })
 };
 
 //lire listes ingrédients

@@ -1,13 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
 import { Recette } from '../core/interfaces/recette';
 import { User } from '../core/interfaces/user';
 import { RecetteService } from '../core/services/recette.service';
-import { UserService } from '../core/services/user.service';
 
 
 export interface Filtre {
@@ -21,6 +20,7 @@ export interface Filtre {
   styleUrls: ['./recette-list.component.css']
 })
 export class RecetteListComponent implements OnInit{
+  imagePath: string = environment.imagePath;
   recettes: Recette[] = [];
   recette!: Recette;
   loggedInUser!: User | null;
@@ -41,9 +41,7 @@ export class RecetteListComponent implements OnInit{
 
   constructor(private router: Router,
      private recetteService: RecetteService,
-     private userService: UserService,
-     private snackBar: MatSnackBar,
-     private dialog: MatDialog) { }
+     private toastr : ToastrService) { }
 
 
   ngOnInit() {
@@ -65,9 +63,16 @@ export class RecetteListComponent implements OnInit{
     this.recetteService.getRecettes().subscribe(
       (response: Recette[]) => {
         this.recettes = response;
+        for (let recette of response) {
+          if (!recette.picture) {
+            recette.picture = this.imagePath+ "recettes/recette_auto.png";
+          }
+        }
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     )
   };

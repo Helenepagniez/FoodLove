@@ -2,8 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogSavedComponent } from '../dialog-sauvegarde/dialog.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Etape } from '../core/interfaces/etape';
@@ -11,6 +10,8 @@ import { Ingredient } from '../core/interfaces/ingredient';
 import { Recette } from '../core/interfaces/recette';
 import { IngredientService } from '../core/services/ingredient.service';
 import { RecetteService } from '../core/services/recette.service';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 export interface Unite {
   value: string;
@@ -28,7 +29,7 @@ export interface Filtre {
   styleUrls: ['./single-recette.component.css']
 })
 export class SingleRecetteComponent implements OnInit {
-  
+  imagePath: string = environment.imagePath;
   isModifying: boolean = false;
   updateform!: FormGroup;
   updateMenu!: FormGroup;
@@ -68,9 +69,10 @@ export class SingleRecetteComponent implements OnInit {
   constructor( private recetteService: RecetteService,
               private ingredientService: IngredientService,
               private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
               private dialog: MatDialog,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private toastr: ToastrService,
+              private router : Router) { }
 
   ngOnInit() {
     this.updateform= this.fb.group({
@@ -96,24 +98,38 @@ export class SingleRecetteComponent implements OnInit {
       (response: Recette) => {
         this.recette= response;
         this.etapes= response.etapes;
-        this.recette.picture = response.picture;
+        if (!response.picture) {
+          this.recette.picture = this.imagePath + "recettes/recette_auto.png";
+        }
+        else {
+          this.recette.picture = response.picture;
+        }
         this.recette.filtres = response.filtres;
         this.recette.portions = response.portions;
         this.recette.composants = response.composants;
-        console.log(this.recette.composants);
         for (let composant of response.composants) {
-          this.ingredientService.getOneIngredient(composant.ingredientId).subscribe(
+          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe(
             (response: Ingredient) => {
+              if (!response.picture) {
+                response.picture = this.imagePath+ "ingrédients/ingredient_auto.png";
+              }
+              else {
+                response.picture = this.imagePath+ "ingrédients/" + response.categorie +"/" + response.picture;
+              }
               composant.ingredient = response;
             },
             (error: HttpErrorResponse) => {
-              alert(error.message);
+              this.toastr.error(error.message, "Erreur serveur", {
+                positionClass: "toast-bottom-center" 
+              });
             }
           )
         }
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     )
   };
@@ -188,11 +204,15 @@ export class SingleRecetteComponent implements OnInit {
     }
     this.recetteService.updateRecette(this.recette._id, this.recette).subscribe(
       (response: Recette) => {
-        this.snackBar.open("Recette modifiée", "Fermer", {duration: 2000});
         this.isModifying = false;
+        this.toastr.success("Recette modifiée", "Modification réussie", {
+          positionClass: "toast-bottom-center" 
+        });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };
@@ -205,10 +225,17 @@ export class SingleRecetteComponent implements OnInit {
       if (result === true) {
         this.recetteService.deleteRecette(recetteId).subscribe(
           (response: void) => {
-            location.href="/liste";
+            this.router.navigate(["/liste"])
+              .then(() => {
+                this.toastr.success("Recette supprimée", "Suppression réussie", {
+                  positionClass: "toast-bottom-center" 
+                });
+        });
           },
           (error: HttpErrorResponse) => {
-            alert(error.message);
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
+            });
           }
         );
       }

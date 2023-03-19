@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Recette } from '../core/interfaces/recette';
 import { RecetteService } from '../core/services/recette.service';
 
@@ -20,8 +21,9 @@ export class RecetteFormComponent implements OnInit {
   filtres = new FormControl('');
 
   constructor(private fb: FormBuilder,
-    private recetteService: RecetteService,
-    private snackBar: MatSnackBar) { }
+              private toastr : ToastrService,
+              private recetteService: RecetteService,
+              private router : Router) { }
 
   ngOnInit() {
     this.recetteForm = this.fb.group({
@@ -52,22 +54,29 @@ export class RecetteFormComponent implements OnInit {
       
       this.recetteService.addRecette(newRecette).subscribe(
         (response: Recette) => {
-          this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
-            location.href="/liste";
+          this.router.navigate(["/liste"])
+            .then(() => {
+              this.toastr.success("Recette enregistrée", "Ajout réussie", {
+                positionClass: "toast-bottom-center" 
+              });
         });
         },
         (error: HttpErrorResponse) => {
           if(error.status !== 400){
-            alert(error.message);
-          }
-          else if(error.status === 400){
-            this.snackBar.open("Recette enregistrée", "Fermer", {duration: 2000}).afterDismissed().subscribe(() => {
-              location.href="/liste";
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
             });
           }
+          else if(error.status === 400){
+            this.router.navigate(["/liste"])
+            .then(() => {
+              this.toastr.success("Recette enregistrée", "Ajout réussie", {
+                positionClass: "toast-bottom-center" 
+              });
+            }
+          )}
         }
       )
-      
     };
   
     onFileAdded(event: Event) {

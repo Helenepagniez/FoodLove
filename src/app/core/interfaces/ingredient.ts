@@ -1,6 +1,7 @@
 export interface Ingredient {
     _id: any;
-    nomIngredient:string;
+    nomIngredient: string;
     categorie: string;
-    picture:string;
+    picture: string | null;
+    posterId: string | null;
 }

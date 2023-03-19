@@ -6,8 +6,7 @@
     <form class="formulaire-utilisateur" [formGroup]="userForm">
         <div class="form-group">
             <div class="photo">
-                <img *ngIf="!loggedInUser?.picture" type="file" id="image" src="../../assets/random-user.png" alt="photo de profil">
-                <img *ngIf="loggedInUser?.picture" type="file" id="image" [src]="loggedInUser?.picture" alt="photo de profil">
+                <img type="file" id="image" [src]="loggedInUser?.picture" alt="photo de profil">
                 <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)" formControlName="picture">
                 <button mat-raised-button color="primary" (click)="imageInput.click()">Modifie ton image</button>
                 <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">

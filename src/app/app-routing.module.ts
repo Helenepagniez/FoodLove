@@ -10,6 +10,7 @@ import { RecetteListComponent } from './recette-list/recette-list.component';
 import { EtapesComponent } from './single-recette/etapes/etapes.component';
 import { ComposantsComponent } from './single-recette/composants/composants.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
+import { PersonnaliserComponent } from './single-recette/composants/personnaliser/personnaliser.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'liste', component: RecetteListComponent },
   { path: 'recette/:id', component: SingleRecetteComponent},
   { path: 'recette/:id/ingredients', component: ComposantsComponent},
+  { path: 'personnalisation-ingredient', component: PersonnaliserComponent},
   { path: 'recette/:id/etapes', component: EtapesComponent},
   { path: 'profil', component: ProfilComponent },
   { path: 'new-recette', component: RecetteFormComponent },

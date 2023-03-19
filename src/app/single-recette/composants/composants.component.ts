@@ -10,6 +10,8 @@ import { Recette } from 'src/app/core/interfaces/recette';
 import { RecetteService } from 'src/app/core/services/recette.service';
 import { IngredientService } from 'src/app/core/services/ingredient.service';
 import { Ingredient } from 'src/app/core/interfaces/ingredient';
+import { ComposantService } from 'src/app/core/services/composant.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Unite {
   value: string;
@@ -27,12 +29,12 @@ export interface Categorie {
   styleUrls: ['./composants.component.css']
 })
 export class ComposantsComponent implements OnInit {
-
   ingredients: Ingredient[]= [];
   composant!: Composant | null;
   composants: Composant[] = [];
   updateform!: FormGroup;
   recette!: Recette;
+  nomIngredient!: string;
 
   unites: Unite[] = [
     {value: 'carré', viewValue: 'Carré'},
@@ -67,7 +69,9 @@ export class ComposantsComponent implements OnInit {
               private dialog: MatDialog,
               private fb: FormBuilder, 
               private router: Router,
-              private ingredientService: IngredientService) {}
+              private ingredientService: IngredientService,
+              private composantService: ComposantService,
+              private toastr: ToastrService) {}
 
   ngOnInit(){
     this.updateform= this.fb.group({
@@ -87,6 +91,7 @@ export class ComposantsComponent implements OnInit {
 
   modify(composant: Composant) {
     this.composant=composant;
+    document.getElementById("cancel")?.scrollIntoView({behavior:"smooth"});
     this.getIngredients();
     setTimeout(() => {
       this.ingredients = this.ingredients.filter((ingredient) => ingredient.categorie === composant.ingredient?.categorie);
@@ -95,7 +100,6 @@ export class ComposantsComponent implements OnInit {
 
   unmodify() {
     this.composant = null;
-    this.getIngredients();
   }
 
   onCategorieChange(event: any) {
@@ -103,8 +107,22 @@ export class ComposantsComponent implements OnInit {
     this.modify(this.composant!);
   }
 
+  onIngredientChange(event: any) {
+    if (event === 'Choix') {
+      this.updateform.setErrors({ 'invalid': true });
+    }
+    else {
+      this.updateform.setErrors(null);
+      this.nomIngredient = event;
+    }
+  }
+
   onClickRecette(id: string) {
     this.router.navigate(['recette/', id]);
+  }
+
+  onClickIngredientPersonnalise(id: string) {
+    this.router.navigate(['personnalisation-ingredient/']);
   }
 
   getOneRecette(recetteId: string) {
@@ -113,37 +131,103 @@ export class ComposantsComponent implements OnInit {
         this.recette= response;
         this.composants=response.composants;
         for (let composant of this.composants) {
-          composant.ingredient = {_id:null, nomIngredient: "", categorie:"", picture: ""};
-          this.ingredientService.getOneIngredient(composant.ingredientId).subscribe(
+          composant.ingredient = {_id:null, nomIngredient: "", categorie:"", picture: "", posterId: null};
+          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe(
             (response: Ingredient) => {
               composant.ingredient = response;
             },
             (error: HttpErrorResponse) => {
-              alert(error.message);
+              this.toastr.error(error.message, "Erreur serveur", {
+                positionClass: "toast-bottom-center" 
+              });
             }
           );
         }
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     )
   };
 
   //modifier les composants
-  updateComposant(composant: Composant) {
-    composant.quantiteValue = composant.quantiteValue/this.recette.portions!;
-    this.recetteService.updateComposant(composant, this.recette._id).subscribe(
-      (response: Composant) => {
-        this.snackBar.open("Composant modifié", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
-          location.reload();
-      });
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  };
+  updateComposant(formElements: any) {
+    formElements.quantiteValue = formElements.quantiteValue/this.recette.portions!;
+    let updatedComposant: Composant;
+    if (this.composant!.ingredient!.categorie === 'personnaliser') {
+      let newIngredient: Ingredient = {
+        _id: null,
+        nomIngredient: formElements.nomIngredient,
+        picture: null,
+        categorie: this.composant!.ingredient!.categorie,
+        posterId: null
+      };
+      this.ingredientService.addIngredient(newIngredient).subscribe(
+        (response: Ingredient) => {
+          updatedComposant = {
+            _id: formElements._id,
+            ingredientId: response._id,
+            quantiteValue: formElements.quantiteValue,
+            unite: formElements.unite,
+            ingredient: null
+          };
+          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe(
+            (response: Composant) => {
+              this.unmodify();
+              this.toastr.success("Composant modifié", "Modification Composant réussi", {
+                positionClass: "toast-bottom-center" 
+              });
+              this.getOneRecette(this.recette._id);
+              },
+              (error: HttpErrorResponse) => {
+                this.toastr.error(error.message, "Erreur serveur", {
+                  positionClass: "toast-bottom-center" 
+                });
+              }
+            );
+        },
+        (error: HttpErrorResponse) => {
+          this.toastr.error(error.message, "Erreur serveur", {
+            positionClass: "toast-bottom-center" 
+          });
+        }
+      );
+    }
+    else {
+      this.ingredientService.getOneIngredientByName(this.nomIngredient).subscribe(
+        (response: Ingredient) => {
+          updatedComposant = {
+            _id: formElements._id,
+            ingredientId: response._id,
+            quantiteValue: formElements.quantiteValue,
+            unite: formElements.unite,
+            ingredient: null
+          };
+          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe(
+            (response: Composant) => {
+              this.unmodify();
+              this.toastr.success("Composant modifié", "Modification Composant réussi", {
+                positionClass: "toast-bottom-center" 
+              });
+              this.getOneRecette(this.recette._id);
+              },
+              (error: HttpErrorResponse) => {
+                this.toastr.error(error.message, "Erreur serveur", {
+                  positionClass: "toast-bottom-center" 
+                });
+              }
+            );
+        },
+        (error: HttpErrorResponse) => {
+          this.toastr.error(error.message, "Erreur serveur", {
+            positionClass: "toast-bottom-center" 
+          });
+        }
+      );
+    }
+  }
 
   //créer un composant
   addComposant() {
@@ -154,13 +238,17 @@ export class ComposantsComponent implements OnInit {
       "quantiteValue":0,
       "unite":"produit"
     };
-    this.recetteService.addComposant(nouveauComposant, this.recette._id).subscribe(
+    this.composantService.addComposant(nouveauComposant, this.recette._id).subscribe(
       (response: Composant) => {
-        this.snackBar.open("Composant ajouté", "Fermer", {duration: 2000});
+        this.toastr.success("Composant ajouté", "Ajout Composant réussi", {
+          positionClass: "toast-bottom-center" 
+        });
         this.getOneRecette(this.recette._id);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     );
   };
@@ -171,14 +259,17 @@ export class ComposantsComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.recetteService.deleteComposant(composant, recetteId).subscribe(
+        this.composantService.deleteComposant(composant, recetteId).subscribe(
           (response: Composant) => {
-            this.snackBar.open("Composant supprimé", "Fermer", {duration: 1000}).afterDismissed().subscribe(() => {
-              location.reload();
+            this.toastr.success("Composant supprimé", "Suppression Composant réussi", {
+              positionClass: "toast-bottom-center" 
             });
+            this.getOneRecette(this.recette._id);
           },
           (error: HttpErrorResponse) => {
-            alert(error.message);
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
+            });
           }
         );
       }
@@ -191,7 +282,9 @@ export class ComposantsComponent implements OnInit {
         this.ingredients = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error(error.message, "Erreur serveur", {
+          positionClass: "toast-bottom-center" 
+        });
       }
     )
   }
