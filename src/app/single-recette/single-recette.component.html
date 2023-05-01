@@ -6,12 +6,12 @@
 <div class="general">
     <form (ngSubmit)="updateRecette(updateImage.value)" [formGroup]="updateImage" class="photo">
         <div *ngIf="recette?.picture" class="image">
-            <img type="jpg" id="image" [src]="recette.picture" alt="image">
+            <img class="rond" type="jpg" id="image" [src]="recette.picture" alt="image">
         </div>
         <div class="picture" *ngIf="isModifying">
             <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
             <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
-            <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+            <img class="rond" [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
         </div>
         <button type="submit" class="modif" *ngIf="isModifying">Enregistrer l'image</button>
     </form>
