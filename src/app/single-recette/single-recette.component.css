@@ -207,9 +207,11 @@ input[type="file"]{
 }
 
 .picture{
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .picture a{
@@ -345,6 +347,11 @@ span{
     text-align: center;
 }
 
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
+    cursor: pointer;
+}
+
 /*************************MEDIA QUERIES****************************/
 @media screen and (max-width: 450px){
     .details .menu{
@@ -371,7 +378,3 @@ span{
     }
 }
 
-/*******************BOUTONS**********************/
-::ng-deep .p-button{
-    cursor: pointer;
-}

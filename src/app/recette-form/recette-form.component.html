@@ -7,7 +7,7 @@
 <form [formGroup]="recetteForm">
     <div class="form-group">
       <label for="menu">Nom de la recette</label> <br />
-      <input type="text" class="form-control" id="menu" formControlName="menu">
+      <input pInputText type="text" class="p-inputtext-sm" id="menu" formControlName="menu">
     </div>
     <div class="form-group">
         <mat-form-field>
@@ -19,16 +19,16 @@
     </div>
     <div class="form-group">
         <label for="etoile">Difficulté de la recette</label> (Si 1 = facile et 5 = très difficile) <br /><br />
-        <input type="number" class="form-control" id="etoile" min="1" max="5" formControlName="etoile">
+        <input type="number" id="etoile" min="1" max="5" formControlName="etoile">
       </div>
     <div class="form-group">
         <label for="temps">Temps de préparation</label>
-        <input type="text" class="form-control" id="temps" formControlName="temps">
+        <input type="text" id="temps" formControlName="temps">
     </div>
     <div class="form-group">
         <div class="portions-container">
             <label for="portions">Portions</label> <br /><br />
-            <input type="number" id="quantity" name="quantity" min="1" max="10" formControlName="portions">
+            <input pInputText type="number" class="p-inputtext-sm" name="quantity" min="1" max="10" formControlName="portions">
         </div>
     </div>
     <div class="picture">

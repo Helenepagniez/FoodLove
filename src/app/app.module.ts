@@ -28,6 +28,8 @@ import { ButtonModule } from 'primeng-lts/button';
 import { SignupComponent } from './auth/connect/signup/signup.component';
 import { ConnectComponent } from './auth/connect/connect.component';
 import { DialogSavedComponent } from './dialog-sauvegarde/dialog.component';
+import { InputTextModule } from 'primeng-lts/inputtext';
+import { FileUploadModule } from 'primeng-lts/fileupload';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { DialogSavedComponent } from './dialog-sauvegarde/dialog.component';
     MatExpansionModule,
     MatCardModule,
     ToastrModule.forRoot(),
-    ButtonModule
+    ButtonModule,
+    InputTextModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

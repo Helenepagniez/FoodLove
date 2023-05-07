@@ -89,6 +89,7 @@ h3{
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 /****************MODIFIER ETAPE****************/
@@ -103,11 +104,18 @@ h3{
     padding-bottom: 20px;
 }
 
+.modify-container label{
+    font-size: 20px;
+}
+
 .object-form{
     width: 100%;
-    margin: auto;
     padding: 0 10px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .object-form .error{
@@ -116,24 +124,17 @@ h3{
     font-weight: 600;
 }
 
-.object-form-text{
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    margin: 16px 0;
-    border: 0;
-    padding: 20px 40px;
-    border: 2px solid rgb(2, 216, 216);
-    outline: none;
-    border-radius: 10px;
-    transition: 0.5s;
-    text-align: center;
-    background-color: rgb(64, 185, 185);
-}
-
 input{
-    color: white;
-    font-size: 1em;
+    width: 100%;
+    max-width: 600px;
+    background-color: whitesmoke;
+    border-radius: 50px;
+    text-align: center;
+    margin-bottom: 5px;
+    border: 2px solid black;
+    margin: 10px 0;
+    font-size: 18px;
+    color: darkcyan;
 }
 
 ::placeholder{
@@ -156,8 +157,9 @@ input{
 }
 
 .button-container{
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
 }

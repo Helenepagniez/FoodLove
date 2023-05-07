@@ -10,16 +10,16 @@
             <div class="photo">
                 <img type="file" id="image" [src]="loggedInUser?.picture" alt="photo de profil">
                 <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)" formControlName="picture">
-                <button styleClass="p-button-info" mat-raised-button color="primary" (click)="imageInput.click()">Modifie ton image</button>
-                <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+                <p-button styleClass="p-button-info" label="Modifie ta photo de profil" #imageInput (click)="imageInput.click()"></p-button>
+                <img class="rond" [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
             </div>
             <input type="hidden" class="id" formControlName="_id" name="_id">
             <input type="hidden" class="role" formControlName="role" name="role">
-            <input type="text" id="prenom" formControlName="firstname" name="firstname" placeholder="{{loggedInUser?.firstname}}">
-            <input type="text" id="nom" formControlName="name" name="name" placeholder="{{loggedInUser?.name}}">
-            <input type="text" id="email" formControlName="email" name="email" placeholder="{{loggedInUser?.email}}">
+            <input type="text" pInputText class="p-inputtext-sm" id="prenom" formControlName="firstname" name="firstname" placeholder="{{loggedInUser?.firstname}}">
+            <input type="text" pInputText class="p-inputtext-sm" id="nom" formControlName="name" name="name" placeholder="{{loggedInUser?.name}}">
+            <input type="text" pInputText class="p-inputtext-sm" id="email" formControlName="email" name="email" placeholder="{{loggedInUser?.email}}">
         </div>
-        <div class="boutons" style="justify-content: space-around;">
+        <div class="boutons" style="justify-content: space-around;margin-bottom: 20px;">
             <div class="modifier">
                 <p-button styleClass="p-button-info" class="submit" title="modifier votre profil" (click)="submitUser()" label="MODIFIER"></p-button>
             </div>

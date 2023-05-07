@@ -12,11 +12,11 @@
         </div>
         <div class="picture" *ngIf="isModifying">
             <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
-            <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
+            <p-button styleClass="p-button-info" label="Ajout image" #imageInput (click)="imageInput.click()"></p-button>
             <img class="rond" [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
-        </div>
-        <div style="margin: 20px;">
-            <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer l'image"></p-button>
+            <div style="margin: 20px;">
+                <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer l'image"></p-button>
+            </div>
         </div>
     </form>
     <div class="details">
@@ -24,7 +24,7 @@
         <form (ngSubmit)="updateRecette(updateMenu.value)" [formGroup]="updateMenu">
             <div class="menu" *ngIf="recette?.menu">
                 <p *ngIf="!isModifying">{{recette.menu}}</p>
-                <input *ngIf="isModifying" type="text" class="menu" ngModel="{{recette.menu}}" formControlName="menu">
+                <input *ngIf="isModifying" pInputText type="text" class="p-inputtext-sm" ngModel="{{recette.menu}}" formControlName="menu">
             </div>
             <div style="margin-top: 10px;margin-bottom: 15px;">
                 <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer le nom"></p-button>
@@ -75,7 +75,7 @@
                                 <div class="quantity" *ngIf="recette?.portions">
                                     <br/><p class="black">Portions : </p>
                                     <p *ngIf="!isModifying && recette?.portions"> {{recette.portions}}</p>
-                                    <input *ngIf="isModifying" type="number" id="quantity" name="quantity" min="1" max="10" ngModel="{{recette.portions}}" formControlName="portions" (change)="onPortionsChange($event)">
+                                    <input *ngIf="isModifying" pInputText type="number" id="quantity" name="quantity" class="p-inputtext-sm" min="1" max="10" ngModel="{{recette.portions}}" formControlName="portions" (change)="onPortionsChange($event)">
                                     <p *ngIf="!recette?.portions && !isModifying"> Aucune portion désirée</p>
                                 </div>
                             </div>

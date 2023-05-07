@@ -31,7 +31,7 @@
             <option [value]="categorie.value" *ngFor="let categorie of categories" [disabled]="disableCategorie(categorie)">{{categorie.viewValue}}</option>
         </select>
         <label for="name">Choix du nom de l'ingrédient :</label>
-        <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{composant.ingredient?.nomIngredient}}" *ngIf="composant.ingredient!.categorie === 'personnaliser'">
+        <input class="object-form-text p-inputtext-sm" pInputText placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{composant.ingredient?.nomIngredient}}" *ngIf="composant.ingredient!.categorie === 'personnaliser'">
         <select class="user-form-text" formControlName="nomIngredient" ngModel="{{composant.ingredient!.nomIngredient}}" (ngModelChange)="onIngredientChange($event)" *ngIf="composant.ingredient!.categorie !== 'personnaliser'">
             <option value="Choix">Choisissez votre ingredient</option>
             <option [value]="ingredient.nomIngredient" *ngFor="let ingredient of ingredients">{{ingredient.nomIngredient}}</option>

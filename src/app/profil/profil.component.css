@@ -38,13 +38,14 @@
     align-items: center;
     padding-top: 5px;
     padding-bottom: 10px;
+    width: 100%;
 }
 
 .profil .photo img{
-    width: 205px;
-    height: auto;
     margin-bottom: 10px;
-    border-radius: 20%;
+    border-radius: 20px;
+    width: auto;
+    height: 180px;
 }
 
 .profil .photo input[type="file"]{
@@ -80,6 +81,10 @@
 .profil button:hover{
     box-shadow: darkcyan 4px 4px 10px;
     cursor: pointer;
+}
+
+.rond{
+    border-radius: 20px;
 }
 
 /*******************BOUTONS**********************/
