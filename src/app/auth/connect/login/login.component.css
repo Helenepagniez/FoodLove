@@ -1,0 +1,76 @@
+/*******************GENERAUX*********************/
+.entier{
+    border-radius: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/*******************GAUCHE**********************/
+.gauche {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    border-radius: 20px 0 0 20px;
+    border: 10px solid darkcyan;
+    padding: 20px;
+}
+
+.gauche img{
+    width: auto;
+    height: 280px;
+}
+
+/*******************DROITE**********************/
+.droite{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 400px;
+    border-radius: 0 20px 20px 0;
+    border: 10px solid darkcyan;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.contenu {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.droite h1{
+    color: rgb(3, 117, 117);
+}
+
+.droite form{
+    margin-top: 5px;
+    height: 150px;
+}
+
+.droite form .form-group{
+    margin-top: 18px;
+    text-align: end;
+}
+
+.droite form .form-group label{
+    margin-right: 10px;
+    width: 50px;
+}
+
+.droite form .form-group input{
+    color: rgb(3, 117, 117);
+    box-shadow: 2px 2px 2px darkcyan;
+    width: 170px;
+}
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

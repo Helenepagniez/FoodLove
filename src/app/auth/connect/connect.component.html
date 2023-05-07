@@ -1,0 +1,17 @@
+<div class="presentation">
+    <h1 *ngIf="vueLogin">Connectez-vous dès maintenant via le formulaire ci-dessous.</h1>
+    <h1 *ngIf="!vueLogin">Inscrivez-vous dès maintenant via le formulaire ci-dessous.</h1>
+</div>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" routerLink="/home" label="RETOUR"></p-button>
+</div>
+<app-login *ngIf="vueLogin"></app-login>
+<app-signup *ngIf="!vueLogin"></app-signup>
+<div class="change">
+    <span *ngIf="vueLogin">Pas encore inscrit ?</span>
+    <span *ngIf="!vueLogin">Déjà inscrit ?</span>
+    <div style="margin: 20px;">
+        <p-button *ngIf="!vueLogin" (click)="changeVue()" label="Se connecter"></p-button>
+        <p-button *ngIf="vueLogin" (click)="changeVue()" label="S'inscrire"></p-button>
+    </div>
+</div>

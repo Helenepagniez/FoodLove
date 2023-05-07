@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoggedInUserId } from './core/interfaces/loggedInUserId';
 import { User } from './core/interfaces/user';
+import { PrimeNGConfig } from 'primeng-lts/api';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,10 @@ export class AppComponent  implements OnInit{
   loggedInUserId!: LoggedInUserId | null;
   isConnected: boolean = false;
 
-  constructor() { }
+  constructor(private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(){
+    this.primengConfig.ripple = true;
     if (sessionStorage.getItem('loggedInUserId')===null) {
       this.loggedInUserId = null;
     }

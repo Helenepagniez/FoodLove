@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ProfilComponent } from './profil/profil.component';
@@ -11,10 +9,10 @@ import { EtapesComponent } from './single-recette/etapes/etapes.component';
 import { ComposantsComponent } from './single-recette/composants/composants.component';
 import { SingleRecetteComponent } from './single-recette/single-recette.component';
 import { PersonnaliserComponent } from './single-recette/composants/personnaliser/personnaliser.component';
+import { ConnectComponent } from './auth/connect/connect.component';
 
 const routes: Routes = [
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'connect', component: ConnectComponent },
   { path: 'logout', component: HeaderComponent },
   { path: 'home', component: HomeComponent },
   { path: 'liste', component: RecetteListComponent },

@@ -1,0 +1,23 @@
+<div class="entier">
+  <div class="gauche">
+    <img src="../../../assets/logo site.png" alt="logo">
+  </div>
+  <div class="droite">
+    <div class="contenu">
+      <h1>Connexion</h1>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <div style="margin-top: 30px;">
+          <p-button styleClass="p-button-success" [disabled]="loginForm.invalid" (click)="loginUser(loginForm.value)" label="Se connecter"></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

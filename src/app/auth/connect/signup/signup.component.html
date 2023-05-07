@@ -1,0 +1,31 @@
+<div class="entier">
+    <div class="gauche">
+        <div class="contenu">
+            <h1>Inscription</h1>
+            <form [formGroup]="signupForm">
+                <div class="form-group">
+                    <label for="texte">Nom</label>
+                    <input type="texte" class="form-control" id="name" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label for="texte">Prénom</label>
+                    <input type="texte" class="form-control" id="firstname" formControlName="firstname">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" formControlName="password">
+                </div>
+                <div style="margin-top: 30px;">
+                    <p-button styleClass="p-button-success" [disabled]="signupForm.invalid" (click)="addUser(signupForm.value)" label="S'inscrire"></p-button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="droite">
+        <img src="./../../../assets/logo site.png" alt="logo">
+    </div>
+</div>

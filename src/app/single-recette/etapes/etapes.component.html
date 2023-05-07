@@ -1,7 +1,9 @@
 <div class="header">
     <h1>Etapes de la recette</h1>
 </div>
-<a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" (click)="onClickRecette(recette._id)" label="RETOUR"></p-button>
+</div>
 <h3>Cliquez sur le nom d'une étape pour l'afficher ou la modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <div class="etapes">
     <div class="etape titre">
@@ -10,21 +12,21 @@
     </div>
     <div class="etape" *ngFor="let etape of etapes">
         <p class="scale"><a title="modify" (click)="modify(etape)">{{etape.nomEtape}}</a></p>
-        <button class="supprimer" (click)="deleteEtape(etape, recette._id)">supprimer</button>
+        <p-button styleClass="p-button-danger" (click)="deleteEtape(etape, recette._id)" label="SUPPRIMER"></p-button>
     </div>
 </div>
 <div class="ajout">
-    <button class="ajouter" (click)="addEtape()">Ajouter</button>
+    <p-button styleClass="p-button-info" (click)="addEtape()" label="AJOUTER"></p-button>
 </div>
 <div *ngIf="etape" class="modify-container">
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateEtape(updateform.value)">
         <input type="hidden" formControlName="_id" ngModel="{{etape._id}}">
         <input class="object-form-text" placeholder="Nom étape" formControlName="nomEtape" ngModel="{{etape.nomEtape}}">
         <span class="error" *ngIf="updateform.get('nomEtape')!.hasError('required') && updateform.get('nomEtape')!.touched">Le nom de l'étape est requise</span>
-        <div class="button-container">
-            <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <button class="validButton" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <a class="cancel" title="annuler" (click)="unmodify()" id="cancel">ANNULER</a>
+        <div class="button-container" style="justify-content: space-around;">
+            <p-button styleClass="p-button-info" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-info" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-warning" title="annuler" (click)="unmodify()" id="cancel" label="ANNULER"></p-button>
         </div>
     </form>
 </div>

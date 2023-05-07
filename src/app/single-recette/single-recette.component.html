@@ -2,7 +2,9 @@
 <div class="header">
     <h1>Recette en détails</h1>
 </div>
-<a (click)="onReturn()"><button class="retour">Retour</button></a>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" (click)="onReturn()" label="RETOUR"></p-button>
+</div>
 <div class="general">
     <form (ngSubmit)="updateRecette(updateImage.value)" [formGroup]="updateImage" class="photo">
         <div *ngIf="recette?.picture" class="image">
@@ -13,16 +15,20 @@
             <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
             <img class="rond" [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
         </div>
-        <button type="submit" class="modif" *ngIf="isModifying">Enregistrer l'image</button>
+        <div style="margin: 20px;">
+            <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer l'image"></p-button>
+        </div>
     </form>
     <div class="details">
-        <a (click)="onModify()"><button class="modif">Modifier la recette</button></a>
+        <p-button styleClass="p-button-info" (click)="onModify()" label="Modifier la recette"></p-button>
         <form (ngSubmit)="updateRecette(updateMenu.value)" [formGroup]="updateMenu">
             <div class="menu" *ngIf="recette?.menu">
                 <p *ngIf="!isModifying">{{recette.menu}}</p>
                 <input *ngIf="isModifying" type="text" class="menu" ngModel="{{recette.menu}}" formControlName="menu">
             </div>
-            <button type="submit" class="modif" *ngIf="isModifying">Enregistrer le nom</button>
+            <div style="margin-top: 10px;margin-bottom: 15px;">
+                <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer le nom"></p-button>
+            </div>
         </form>
         <mat-accordion>
             <mat-expansion-panel expanded>
@@ -75,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="modif" *ngIf="isModifying" title="Enregistrer toutes vos modifications">Enregistrer</button>
+                    <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" title="Enregistrer toutes vos modifications" label="Enregistrer"></p-button>
                 </form>
             </mat-expansion-panel>
             <mat-expansion-panel>
@@ -86,7 +92,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="composition">
-                    <a routerLink="ingredients" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Ingrédients</button></a>
+                    <p-button styleClass="p-button-info" routerLink="ingredients" *ngIf="isModifying" label="Modifier ou ajouter des Ingrédients"></p-button>
                     <div class="ingredients">
                         <div class="ingredient" *ngFor="let composant of recette?.composants">
                             <img [src]="composant.ingredient?.picture" alt="ingredient">
@@ -106,7 +112,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="composition">
-                    <a routerLink="etapes" *ngIf="isModifying"><button class="lien">Modifier ou ajouter des Etapes</button></a>
+                    <p-button styleClass="p-button-info" routerLink="etapes" *ngIf="isModifying" label="Modifier ou ajouter des Etapes"></p-button>
                     <div >
                         <ol>
                             <li class="etapes" *ngFor="let etape of etapes">
@@ -117,6 +123,8 @@
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
-        <button class="suppression" (click)="deleteRecette(recette._id)" >Supprimer la recette</button>
+        <div style="margin-top: 20px;margin-bottom: 20px;">
+            <p-button styleClass="p-button-danger" (click)="deleteRecette(recette._id)" label="Supprimer la recette"></p-button>
+        </div>
     </div>
 </div>

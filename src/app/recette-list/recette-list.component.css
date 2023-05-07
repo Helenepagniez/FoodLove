@@ -135,3 +135,7 @@ a {
         max-width: 135px;
     }
 }
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

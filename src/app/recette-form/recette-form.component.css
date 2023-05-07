@@ -10,13 +10,9 @@
 
 .retour{
     border-radius: 50px;
-    width: auto;
-    height: 30px;
     background-color: darkcyan;
     color: white;
     cursor: pointer;
-    margin-left: 20px;
-    margin-top: 30px;
 }
 
 .retour:hover{
@@ -27,23 +23,9 @@
 }
 
 /****************GENERAUX*******************/
-.modif{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: green;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    margin: 20px auto;
-}
 
 .modif:hover{
     cursor: pointer;
-    color: white;
-    background-color: green;
     border: none;
     transform: scale(1.2);
 }
@@ -71,24 +53,12 @@ form .form-group{
     align-items: center;
 }
 
-form .form-group input{
-    margin-top: 50px;
-    height: auto;
-    margin: auto;
-}
-
 form .form-group label{
     color: darkcyan;
     font-size: medium;
     margin-bottom: 10px;
     font-weight: 500;
     font-size: 20px;
-}
-
-input{
-    border: 3px solid darkcyan;
-    text-align: center;
-    cursor: pointer;
 }
 
 #temps{
@@ -120,3 +90,6 @@ input[type="file"]{
     border: 2px solid darkcyan;
 }
 
+::ng-deep .p-button {
+    cursor: pointer;
+}

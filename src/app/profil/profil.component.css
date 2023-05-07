@@ -97,3 +97,7 @@
     box-shadow: darkcyan 4px 4px 10px;
     cursor: pointer;
 }
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

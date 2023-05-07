@@ -357,3 +357,7 @@ label{
     }
 
 }
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

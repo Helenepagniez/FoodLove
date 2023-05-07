@@ -8,22 +8,8 @@
     color: white;
 }
 
-.retour{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: darkcyan;
-    color: white;
-    margin-left: 20px;
-    margin-top: 30px;
-    margin-bottom: 5px;
-}
-
-.retour:hover{
+::ng-deep .p-button {
     cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-    border: 2px solid darkcyan;
 }
 /******************GENERAUX*******************/
 
@@ -474,4 +460,8 @@ span{
         margin-right: 0;
     }
 
+}
+
+::ng-deep .p-button {
+    cursor: pointer;
 }

@@ -1,14 +1,16 @@
 <div class="header">
     <h1>Mon Profil</h1>
 </div>
-<a routerLink="/liste"><button class="retour">Retour</button></a>
+<div  style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" routerLink="/liste" label="RETOUR"></p-button>
+</div>
 <div class="profil">
     <form class="formulaire-utilisateur" [formGroup]="userForm">
         <div class="form-group">
             <div class="photo">
                 <img type="file" id="image" [src]="loggedInUser?.picture" alt="photo de profil">
                 <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)" formControlName="picture">
-                <button mat-raised-button color="primary" (click)="imageInput.click()">Modifie ton image</button>
+                <button styleClass="p-button-info" mat-raised-button color="primary" (click)="imageInput.click()">Modifie ton image</button>
                 <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
             </div>
             <input type="hidden" class="id" formControlName="_id" name="_id">
@@ -17,12 +19,12 @@
             <input type="text" id="nom" formControlName="name" name="name" placeholder="{{loggedInUser?.name}}">
             <input type="text" id="email" formControlName="email" name="email" placeholder="{{loggedInUser?.email}}">
         </div>
-        <div class="boutons">
+        <div class="boutons" style="justify-content: space-around;">
             <div class="modifier">
-                <button class="submit" title="modifier votre profil" (click)="submitUser()">Modifier</button>
+                <p-button styleClass="p-button-info" class="submit" title="modifier votre profil" (click)="submitUser()" label="MODIFIER"></p-button>
             </div>
             <div class="supprimer">
-                <button (click)="deleteUser(loggedInUser?._id!)" title="supprimer votre profil">Supprimer</button>
+                <p-button styleClass="p-button-danger" (click)="deleteUser(loggedInUser?._id!)" title="supprimer votre profil" label="SUPPRIMER"></p-button>
             </div>
         </div>
     </form>

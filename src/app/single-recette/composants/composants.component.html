@@ -1,9 +1,13 @@
 <div class="header">
     <h1>Ingrédients de la recette</h1>
 </div>
-<a (click)="onClickRecette(recette._id)"><button class="retour">Retour</button></a>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" (click)="onClickRecette(recette._id)" label="RETOUR"></p-button>
+</div>
 <h3>Cliquez sur le nom d'un ingrédient pour l'afficher ou le modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
-<a (click)="onClickIngredientPersonnalise(recette._id)"><button class="retour">Gérer mes ingrédients personnalisées</button></a>
+<div style="margin-bottom: 15px;">
+    <p-button styleClass="p-button-info" (click)="onClickIngredientPersonnalise(recette._id)" label="Gérer mes ingrédients personnalisées"></p-button>
+</div>
 <div class="ingredients">
     <div class="ingredient titre">
         <p class="scale">Nom / Modifier</p>
@@ -11,13 +15,13 @@
         <p>Supprimer</p>
     </div>
     <div class="ingredient"*ngFor="let composant of composants">
-        <p class="scale"><a title="modify" (click)="modify(composant)">{{composant.ingredient!.nomIngredient}}</a></p>
+        <p class="scale"><a title="modifier" (click)="modify(composant)">{{composant.ingredient!.nomIngredient}}</a></p>
         <p class="center">{{composant.quantiteValue * recette.portions!}} {{composant.unite}}</p>
-        <button class="supprimer" (click)="deleteComposant(composant, recette._id)">supprimer</button>
+        <p-button styleClass="p-button-danger" (click)="deleteComposant(composant, recette._id)" label="SUPPRIMER"></p-button>
     </div>
 </div>
 <div class="ajout">
-    <button class="ajouter" (click)="addComposant()">Ajouter</button>
+    <p-button styleClass="p-button-info" (click)="addComposant()" label="AJOUTER"></p-button>
 </div>
 <div *ngIf="composant" class="modify-container">
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateComposant(updateform.value)">
@@ -41,10 +45,10 @@
             <option [value]="unite.value" *ngFor="let unite of unites">{{unite.viewValue}}</option>
         </select>
         <span class="error" *ngIf="updateform.get('unite')!.hasError('required') && updateform.get('unite')!.touched">L'unité de l'ingrédient est requise</span>
-        <div class="button-container">
-            <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <button class="validButton" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <a class="cancel" title="annuler" (click)="unmodify()" id="cancel">ANNULER</a>
+        <div class="button-container" style="justify-content: space-around;">
+            <p-button styleClass="p-button-info" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-info" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-warning" title="annuler" (click)="unmodify()" id="cancel" label="ANNULER"></p-button>
         </div>
     </form>
 </div>

@@ -1,0 +1,33 @@
+/*******************AU DESSUS**********************/
+.presentation{
+    text-align: center;
+    color: white;
+    background-color: darkcyan;
+}
+
+.retour{
+    border-radius: 50px;
+    width: auto;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.change {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change span {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

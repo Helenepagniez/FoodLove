@@ -7,25 +7,10 @@
 
 /*******************LIEN NAV**********************/
 nav{
-    background-color: darkcyan;
-    margin: auto;
-    width: 70%;
-    margin-bottom: 50px;
-}
-
-nav .conteneur{
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    flex-wrap: wrap;
-}
-
-nav .conteneur a{
-    text-decoration: none;
-    text-align: center;
-    color: white;
-    padding: 10px;
-    font-size: large;
+    justify-content: center;
+    margin: 20px;
 }
 
 h1{
@@ -91,4 +76,8 @@ h3{
     .accroche img{
         height: 150px;
     }
+}
+
+::ng-deep .p-button {
+    cursor: pointer;
 }

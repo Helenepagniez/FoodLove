@@ -1,7 +1,9 @@
 <div class="header">
     <h1>Nouvelle recette</h1>
 </div>
-<a routerLink="/liste"><button class="retour">Retour</button></a>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" routerLink="/liste" label="RETOUR"></p-button>
+</div>
 <form [formGroup]="recetteForm">
     <div class="form-group">
       <label for="menu">Nom de la recette</label> <br />
@@ -34,5 +36,7 @@
         <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
         <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
     </div>
-    <button class="modif" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid">Enregistrer</button>
+    <div style="margin-top: 20px;margin-bottom: 15px;">
+        <p-button styleClass="p-button-success" class="modif" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid" label="Enregistrer"></p-button>
+    </div>
 </form>

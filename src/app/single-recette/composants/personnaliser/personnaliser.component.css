@@ -271,3 +271,7 @@ textarea.object-form-text {
     color: white;
     cursor: pointer;
 }
+
+::ng-deep .p-button {
+    cursor: pointer;
+}

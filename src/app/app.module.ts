@@ -3,8 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/connect/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,15 +24,21 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import { PersonnaliserComponent } from './single-recette/composants/personnaliser/personnaliser.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ButtonModule } from 'primeng-lts/button';
+import { SignupComponent } from './auth/connect/signup/signup.component';
+import { ConnectComponent } from './auth/connect/connect.component';
+import { DialogSavedComponent } from './dialog-sauvegarde/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
+    ConnectComponent,
     HomeComponent,
     RecetteListComponent,
     DialogComponent,
+    DialogSavedComponent,
     HeaderComponent,
     SingleRecetteComponent,
     ProfilComponent,
@@ -56,7 +61,8 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     MatExpansionModule,
     MatCardModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

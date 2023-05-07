@@ -1,7 +1,9 @@
 <div class="header">
     <h1>Ingrédients personnalisés</h1>
 </div>
-<a (click)="onClickList()"><button class="retour">Retour</button></a>
+<div style="margin: 20px 0 0 5px;">
+    <p-button styleClass="p-button-secondary" (click)="onClickList()" label="RETOUR"></p-button>
+</div>
 <h3>Cliquez sur le nom d'un ingrédient pour l'afficher ou le modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <div class="ingredients">
     <div class="ingredient titre">
@@ -9,12 +11,12 @@
         <p>Supprimer</p>
     </div>
     <div class="ingredient"*ngFor="let ingredient of ingredients">
-        <p class="scale"><a title="modify" (click)="modify(ingredient)">{{ingredient!.nomIngredient}}</a></p>
-        <button class="supprimer" (click)="deleteIngredient(ingredient._id)">supprimer</button>
+        <p class="scale"><a title="modifier" (click)="modify(ingredient)">{{ingredient!.nomIngredient}}</a></p>
+        <p-button styleClass="p-button-danger" (click)="deleteIngredient(ingredient._id)" label="SUPPRIMER"></p-button>
     </div>
 </div>
 <div class="ajout">
-    <button class="ajouter" (click)="addIngredient()">Ajouter</button>
+    <p-button styleClass="p-button-info" (click)="addIngredient()" label="AJOUTER"></p-button>
 </div>
 <div *ngIf="ingredient" class="modify-container">
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateIngredient(updateform.value)">
@@ -22,10 +24,10 @@
         <label for="name">Choix du nom de l'ingrédient :</label>
         <input class="object-form-text" placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}">
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
-        <div class="button-container">
-            <button class="invalidButton" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <button class="validButton" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit">MODIFIER</button>
-            <a class="cancel" title="annuler" (click)="unmodify()" id="cancel">ANNULER</a>
+        <div class="button-container" style="justify-content: space-around;">
+            <p-button styleClass="p-button-info" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-info" title="modifier" *ngIf="updateform.valid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>
+            <p-button styleClass="p-button-warning" title="annuler" (click)="unmodify()" id="cancel" label="ANNULER"></p-button>
         </div>
     </form>
 </div>
