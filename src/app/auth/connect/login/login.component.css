@@ -8,7 +8,7 @@
 }
 
 /*******************GAUCHE**********************/
-.gauche {
+.gauche{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +38,7 @@
     padding-bottom: 20px;
 }
 
-.contenu {
+.contenu{
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -71,6 +71,7 @@
     width: 170px;
 }
 
-::ng-deep .p-button {
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
     cursor: pointer;
 }

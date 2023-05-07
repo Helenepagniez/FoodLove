@@ -8,30 +8,8 @@
     color: white;
 }
 
-.retour{
-    border-radius: 50px;
-    background-color: darkcyan;
-    color: white;
-    cursor: pointer;
-}
-
-.retour:hover{
-    cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-    border: 2px solid darkcyan;
-}
-
 /****************GENERAUX*******************/
-
-.modif:hover{
-    cursor: pointer;
-    border: none;
-    transform: scale(1.2);
-}
-
 form{
-
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -90,6 +68,7 @@ input[type="file"]{
     border: 2px solid darkcyan;
 }
 
-::ng-deep .p-button {
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
     cursor: pointer;
 }

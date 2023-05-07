@@ -1,3 +1,4 @@
+/*******************HEADER**********************/
 .header{
     background-color: darkcyan;
     height: 63px;
@@ -7,21 +8,15 @@
     color: white;
 }
 
-a {
-    cursor: pointer;
-}
-
 /************BARRE DE RECHERCHE***************/
-.barre-de-recherche
-{
+.barre-de-recherche{
     display: flex;
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.barre-de-recherche .info .recherche
-{
+.barre-de-recherche .info .recherche{
     border-width: 4px;
     border-color: darkcyan;
     border-style: solid;
@@ -63,13 +58,13 @@ a {
     cursor: pointer;
 }
 
-.recette .composition .texte {
+.recette .composition .texte{
     width: 70%;
     margin-left: 5px;
     text-align: center;
 }
 
-.recette .composition .texte .etoiles {
+.recette .composition .texte .etoiles{
     display: flex;
     align-content: center;
     justify-content: center;
@@ -109,6 +104,7 @@ a {
     transform: scaleX(-1);
 }
 
+/*******************FILTRES**********************/
 .filtres{
     margin-bottom: 20px;
 }
@@ -130,12 +126,14 @@ a {
     margin-top: 23px;
 }
 
-@media screen and (max-width: 700px) {
+/*******************MEDIA QUERIES**********************/
+@media screen and (max-width: 700px){
     .recette .composition img{
         max-width: 135px;
     }
 }
 
-::ng-deep .p-button {
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
     cursor: pointer;
 }

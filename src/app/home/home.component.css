@@ -64,6 +64,12 @@ h3{
     margin-top: 20px;
 }
 
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
+    cursor: pointer;
+}
+
+/*******************MEDIA QUERIES**********************/
 @media screen and (max-width: 600px){
     h1{
         font-size: 23px;
@@ -78,6 +84,3 @@ h3{
     }
 }
 
-::ng-deep .p-button {
-    cursor: pointer;
-}

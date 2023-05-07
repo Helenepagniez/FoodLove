@@ -37,6 +37,6 @@
         <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
     </div>
     <div style="margin-top: 20px;margin-bottom: 15px;">
-        <p-button styleClass="p-button-success" class="modif" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid" label="Enregistrer"></p-button>
+        <p-button styleClass="p-button-success" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid" label="Enregistrer"></p-button>
     </div>
 </form>

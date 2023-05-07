@@ -8,11 +8,7 @@
     color: white;
 }
 
-::ng-deep .p-button {
-    cursor: pointer;
-}
 /******************GENERAUX*******************/
-
 .general{
     margin-top: 20px;
     display: flex;
@@ -48,7 +44,7 @@
     color: darkcyan;
 }
 
-.details form .container {
+.details form .container{
     display: flex;
     align-content: center;
     justify-content: center;
@@ -85,22 +81,6 @@ button:hover{
     border: 2px solid darkcyan;
 }
 
-.lien{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    margin-bottom: 10px;
-    color: darkcyan;
-    background-color: white;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.lien:hover{
-    color: white;
-    background-color: black;
-}
-
 input{
     width: 50px;
     color: darkcyan;
@@ -109,7 +89,6 @@ input{
     font-weight: 600;
     height: 20px;
 }
-
 
 /******************MENU*******************/
 .details .menu{
@@ -123,17 +102,6 @@ input{
 .details .menu input{
     width: 60%;
 }
-
-.details .categories{
-    font-size: 22px;
-    text-align: justify;
-    padding-top: 13px;
-    margin-top: 15px;
-    margin-left: 20%;
-    text-decoration: underline;
-    color: darkcyan;
-}
-
 
 /******************FILTRES*******************/
 .details .filtres{
@@ -230,7 +198,7 @@ input{
     transform: scaleX(-1);
 }
 
-.rond {
+.rond{
     border-radius: 20px;
 }
 
@@ -260,56 +228,6 @@ input[type="file"]{
 .picture a:hover{
     color: white;
     background-color: black;
-}
-
-
-/******************BOUTON Modifier*******************/
-.modif{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: green;
-    color: white;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-
-.modif:hover{
-    cursor: pointer;
-    color: white;
-    background-color: green;
-    border: none;
-    transform: scale(1.2);
-}
-
-/******************BOUTON SUPPRESSION*******************/
-.suppression{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: red;
-    color: white;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-}
-
-.suppression:hover{
-    cursor: pointer;
-    color: white;
-    background-color: red;
-    border: none;
-    transform: scale(1.2);
 }
 
 /**************************iNGREDIENTS ET ETAPES***************************/
@@ -378,9 +296,9 @@ span{
     color: black;
     margin-left: 10px;
 }
-/******************INGREDIENTS*******************/
 
-.ingredients {
+/******************INGREDIENTS*******************/
+.ingredients{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -414,7 +332,7 @@ span{
     object-fit: cover;
 }
 
-.ingredient p {
+.ingredient p{
     margin-left: 10px;
 }
 
@@ -428,40 +346,32 @@ span{
 }
 
 /*************************MEDIA QUERIES****************************/
-
-@media screen and (max-width: 450px) {
-
+@media screen and (max-width: 450px){
     .details .menu{
         font-size: 28px;
     }
-
 }
 
-@media screen and (max-width: 720px) {   
-
+@media screen and (max-width: 720px){
     .details .menu input{
         width: 100%;
     }
-
 }
 
-@media screen and (max-width: 1240px) {
-
-    .photo {
+@media screen and (max-width: 1240px){
+    .photo{
         width: 90%;
         max-width: 950px;
     }
-
 }
 
-@media screen and (max-width: 1480px) {
-
-    .details {
+@media screen and (max-width: 1480px){
+    .details{
         margin-right: 0;
     }
-
 }
 
-::ng-deep .p-button {
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
     cursor: pointer;
 }

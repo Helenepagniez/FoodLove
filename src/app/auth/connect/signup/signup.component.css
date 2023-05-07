@@ -8,7 +8,7 @@
 }
 
 /*******************GAUCHE**********************/
-.gauche {
+.gauche{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +21,7 @@
     padding-bottom: 20px;
 }
 
-.contenu {
+.contenu{
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -54,18 +54,8 @@
     width: 170px;
 }
 
-.gauche button{
-    margin-top: 20px;
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: darkcyan;
-    color: white;
-    cursor: pointer;
-}
-
 /*******************DROITE**********************/
-.droite {
+.droite{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,6 +71,7 @@
     height: 280px;
 }
 
-::ng-deep .p-button {
+/*******************BOUTONS**********************/
+::ng-deep .p-button{
     cursor: pointer;
 }

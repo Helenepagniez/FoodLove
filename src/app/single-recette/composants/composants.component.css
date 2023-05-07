@@ -14,25 +14,6 @@ h3{
     margin: 0 20px;
 }
 
-.retour{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: darkcyan;
-    color: white;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-
-}
-
-.retour:hover{
-    cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-    border: 2px solid darkcyan;
-}
-
 /****************iNGREDIENTS*******************/
 .ingredients{
     background-color: darkcyan;
@@ -72,19 +53,19 @@ h3{
 }
 
 
-.ingredient .center {
+.ingredient .center{
     width: 30%;
 }
 
-.ingredient .scale {
+.ingredient .scale{
     width: 30%;
 }
 
-.ingredient.titre .center {
+.ingredient.titre .center{
     width: 30%;
 }
 
-.ingredient.titre .scale {
+.ingredient.titre .scale{
     width: 30%;
 }
 
@@ -98,24 +79,8 @@ h3{
     color: white;
 }
 
-p {
+p{
     margin: 3px;
-}
-
-/****************SUPPRIMER INGREDIENT*******************/
-.ingredient .supprimer{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: white;
-    color: darkcyan;
-    border: 2px solid black;
-}
-
-.ingredient .supprimer:hover{
-    cursor: pointer;
-    color: white;
-    background-color: black;
 }
 
 /****************AJOUT INGREDIENT*******************/
@@ -129,42 +94,8 @@ p {
     margin-bottom: 25px;
 }
 
-.ajout .ajouter{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: darkcyan;
-    color: white;
-}
-
-.ajout .ajouter:hover{
-    cursor: pointer;
-    color: darkcyan;
-    background-color: white;
-}
-
 /****************MODIFIER INGREDIENT****************/
-
-.cancel {
-    text-decoration: none;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    padding: 15px 30px;
-    margin: 30px 0 0 10px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border-radius: 0.4em;
-    transition: 0.5s;
-}
-
-.cancel:hover {
-    background-color: red;
-    color: white;
-}
-
-.modify-container {
+.modify-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,20 +106,20 @@ p {
     padding-bottom: 200px;
 }
 
-.object-form {
+.object-form{
     width: 100%;
     margin: auto;
     padding: 0 10px;
     overflow: hidden;
 }
 
-.object-form .error {
+.object-form .error{
     color: red;
     font-size: 14px;
     font-weight: 600;
 }
 
-.object-form-text {
+.object-form-text{
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -203,92 +134,52 @@ p {
     background-color: rgb(64, 185, 185);
 }
 
-input {
+input{
     color: white;
     font-size: 1em;
 }
 
-::placeholder {
+::placeholder{
     color: white;
     font-size: 1em;
 }
 
-.object-form-text:focus.ng-valid {
+.object-form-text:focus.ng-valid{
     box-shadow: 0 0 10px 4px darkcyan;
     background-color: white;
     color: darkcyan;
     border: 2px solid darkcyan;
 }
 
-.object-form-text:focus.ng-invalid {
+.object-form-text:focus.ng-invalid{
     box-shadow: 0 0 10px 4px #ff0000;
     border: 2px solid #ff0000;
     background-color: white;
     color: red;
 }
 
-textarea.object-form-text {
-    resize: none;
-    height: 100px;
-}
-
-.button-container {
+.button-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.object-form .button-container .validButton {
-    text-decoration: none;
-    background: aliceblue;
-    color: var(--secondary);
-    padding: 15px 30px;
-    border: 2px solid darkcyan;
-    margin-top: 30px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border-radius: 0.4em;
-    transition: 0.5s;
-}
-
-.object-form .button-container .invalidButton {
-    text-decoration: none;
-    background: aliceblue;
-    color: var(--secondary);
-    padding: 15px 30px;
-    border: 2px solid #ff0000;
-    margin-top: 30px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    border-radius: 0.4em;
-    transition: 0.5s;
-}
-
-.object-form .button-container .validButton:hover {
-    background-color: darkcyan;
-    color: white;
-    cursor: pointer;
-}
-
 /****************CATEGORIES****************/
-
-.user-form {
+.user-form{
     width: 80%;
     margin: auto;
     padding: 0 10px;
     overflow: hidden;
 }
 
-.user-form span {
+.user-form span{
     color: black;
     font-size: 14px;
     font-weight: 600;
 }
 
-.user-form-text {
+.user-form-text{
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -303,23 +194,23 @@ textarea.object-form-text {
     background-color: rgb(64, 185, 185);
 }
 
-input {
+input{
     color: white;
     font-size: 1em;
 }
 
-select {
+select{
     color: white;
     font-size: 1em;
     appearance: none;
     cursor: pointer;
 }
 
-select option {
+select option{
     color: black;
 }
 
-.user-form-text:focus.ng-valid {
+.user-form-text:focus.ng-valid{
     box-shadow: 0 0 10px 4px darkcyan;
     background-color: white;
     color: darkcyan;
@@ -333,31 +224,29 @@ label{
 }
 
 /*************************MEDIA QUERIES****************************/
-
-@media screen and (max-width: 450px) {
-
+@media screen and (max-width: 450px){
     .ingredient{
         flex-direction: column;
     }
 
-    .ingredient .center {
+    .ingredient .center{
         width: 90%;
     }
     
-    .ingredient .scale {
+    .ingredient .scale{
         width: 90%;
     }
 
-    .ingredient.titre .center {
+    .ingredient.titre .center{
         width: 90%;
     }
     
-    .ingredient.titre .scale {
+    .ingredient.titre .scale{
         width: 90%;
     }
-
 }
 
+/*******************BOUTONS**********************/
 ::ng-deep .p-button {
     cursor: pointer;
 }
