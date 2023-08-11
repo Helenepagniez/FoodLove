@@ -58,19 +58,19 @@ export class ProfilComponent implements OnInit {
 
    //récupère l'utilisateur connecté
    getLoggedInUser(userId: string) {
-    this.userService.getUser(userId).subscribe(
-      (response: User) => { 
+    this.userService.getUser(userId).subscribe({
+      next: (response: User) => { 
         if (!response.picture) {
           response.picture = this.imagePath + "random-user.png";
         }
         this.loggedInUser = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    ) 
+   }) 
   }
 
   submitUser() {
@@ -86,20 +86,22 @@ export class ProfilComponent implements OnInit {
 
   //Modifier l'utilisateur connecté
   updateUser(user : User) {    
-    this.userService.updateUser(user, user?._id).subscribe(
-      (response: User) => {
+    this.userService.updateUser(user, user?._id).subscribe({
+      next: (response: User) => {
         this.imagePreview=null;
         this.getLoggedInUser(response._id);
-        this.toastr.success("Vous avez modifié vos informations", "Profil modifié", {
-          positionClass: "toast-bottom-center" 
-        });
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Vous avez modifié vos informations", "Profil modifié", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+    });
   };
 
   //supprimer l'utilisateur connecté 
@@ -108,24 +110,24 @@ export class ProfilComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.userService.deleteUser(userId).subscribe(
-          (response: void) => {
-            this.router.navigate(["/home"])
-              .then(() => {
-                this.toastr.success("Votre compte a été supprimé", "Suppression réussie", {
-                  positionClass: "toast-bottom-center" 
-                });
-              });
+        this.userService.deleteUser(userId).subscribe({
+          next: (response: void) => {
             sessionStorage.removeItem('loggedInUserId');
             this.loggedInUser = null;
             this.loggedInUserId = null;
+            this.router.navigate(["/home"]);
           },
-          (error: HttpErrorResponse) => {
+          error: (error: HttpErrorResponse) => {
             this.toastr.error(error.message, "Erreur serveur", {
               positionClass: "toast-bottom-center" 
             });
+          },
+          complete: () => {
+            this.toastr.success("Votre compte a été supprimé", "Suppression réussie", {
+              positionClass: "toast-bottom-center" 
+            });
           }
-        );
+      });
       }
     });
   };

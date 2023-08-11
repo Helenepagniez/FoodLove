@@ -30,6 +30,7 @@ import { ConnectComponent } from './auth/connect/connect.component';
 import { DialogSavedComponent } from './dialog-sauvegarde/dialog.component';
 import { InputTextModule } from 'primeng-lts/inputtext';
 import { FileUploadModule } from 'primeng-lts/fileupload';
+import { PasswordModule } from 'primeng-lts/password';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { FileUploadModule } from 'primeng-lts/fileupload';
     ToastrModule.forRoot(),
     ButtonModule,
     InputTextModule,
-    FileUploadModule
+    FileUploadModule,
+    PasswordModule
   ],
   providers: [],
   bootstrap: [AppComponent]

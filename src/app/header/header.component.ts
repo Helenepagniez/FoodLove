@@ -33,24 +33,24 @@ export class HeaderComponent implements OnInit {
 
    //déconnecter l'utilisateur connecté
    logoutUser() {
-    this.userService.logoutUser(this.loggedInUser!).subscribe(
-      (response: User) => {
-        this.router.navigate(["/home"])
-        .then(() => {
-          this.toastr.success("Vous êtes déconnecté", "Déconnexion réussie", {
-            positionClass: "toast-bottom-center" 
-          });
-        });
+    this.userService.logoutUser(this.loggedInUser!).subscribe({
+      next: (response: User) => {
         sessionStorage.removeItem('loggedInUserId');
         this.loggedInUser = null;
         this.loggedInUserId = null;
+        this.router.navigate(["/home"])
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Vous êtes déconnecté", "Déconnexion réussie", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+   });
   };
 
 }

@@ -51,16 +51,16 @@ export class PersonnaliserComponent implements OnInit {
   }
 
   getIngredients(){
-    this.ingredientService.getIngredients().subscribe(
-      (response: Ingredient[]) => {
+    this.ingredientService.getIngredients().subscribe({
+      next: (response: Ingredient[]) => {
         this.ingredients = response.filter(ingredient => ingredient.posterId);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+    })
   }
 
    //créer un ingrédient
@@ -69,38 +69,38 @@ export class PersonnaliserComponent implements OnInit {
       nomIngredient: "nouvel ingrédient personnalisé",
       categorie: "personnalisée"
     };
-    this.ingredientService.addIngredient(nouvelIngredientPersonnaliser).subscribe(
-      (response: Ingredient) => {
+    this.ingredientService.addIngredient(nouvelIngredientPersonnaliser).subscribe({
+      next: (response: Ingredient) => {
         this.toastr.success("Ingrédient ajouté", "Ajout Ingrédient réussi", {
           positionClass: "toast-bottom-center" 
         });
         this.getIngredients();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    );
+     });
   };
 
   //modifier les ingrédients
   updateIngredient(ingredient: Ingredient) {
     ingredient.categorie="personnalisée";
-    this.ingredientService.updateIngredient(ingredient, this.ingredient!._id).subscribe(
-      (response: Ingredient) => {
+    this.ingredientService.updateIngredient(ingredient, this.ingredient!._id).subscribe({
+      next: (response: Ingredient) => {
         this.unmodify();
         this.toastr.success("Ingrédient modifié", "Modification Ingrédient réussi", {
           positionClass: "toast-bottom-center" 
         });
         this.getIngredients();
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    );
+    });
   };
 
   //supprimer les ingrédients
@@ -109,19 +109,19 @@ export class PersonnaliserComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.ingredientService.deleteIngredient(ingredientId).subscribe(
-          (response: any) => {
+        this.ingredientService.deleteIngredient(ingredientId).subscribe({
+          next: (response: any) => {
             this.toastr.success("Ingrédient supprimé", "Suppression Ingrédient réussi", {
               positionClass: "toast-bottom-center" 
             });
             this.getIngredients();
           },
-          (error: HttpErrorResponse) => {
+          error: (error: HttpErrorResponse) => {
             this.toastr.error(error.message, "Erreur serveur", {
               positionClass: "toast-bottom-center" 
             });
           }
-        );
+        });
       }
     });
   };

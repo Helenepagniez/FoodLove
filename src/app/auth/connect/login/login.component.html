@@ -7,12 +7,12 @@
       <h1>Connexion</h1>
       <form [formGroup]="loginForm">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" formControlName="email">
+          <span>Email</span>
+          <input pInputText type="email" id="email" formControlName="email">
         </div>
         <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input type="password" class="form-control" id="password" formControlName="password">
+          <span>Mot de passe</span>
+          <p-password [toggleMask]="true" formControlName="password" id="password"></p-password>
         </div>
         <div style="margin-top: 30px;">
           <p-button styleClass="p-button-success" [disabled]="loginForm.invalid" (click)="loginUser(loginForm.value)" label="Se connecter"></p-button>

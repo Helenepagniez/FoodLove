@@ -60,8 +60,15 @@ export class RecetteListComponent implements OnInit{
 
   //Afficher toutes les recettes
   getRecettes() {
-    this.recetteService.getRecettes().subscribe(
-      (response: Recette[]) => {
+    this.recetteService.getRecettes().subscribe({
+      next: (response: Recette[]) => {
+        if (response && response.length === 0) {
+          this.router.navigate(['/new-recette']).then(() => {
+            this.toastr.info("Ajouter une recette avant de pouvoir les consulter", "Pas de recette", {
+              positionClass: "toast-bottom-center" 
+            });
+          });
+        }
         this.recettes = response;
         for (let recette of response) {
           if (!recette.picture) {
@@ -69,12 +76,12 @@ export class RecetteListComponent implements OnInit{
           }
         }
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+    })
   };
 
   //Barre de recherche des recettes

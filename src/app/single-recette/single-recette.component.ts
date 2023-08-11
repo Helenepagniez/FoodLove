@@ -94,8 +94,8 @@ export class SingleRecetteComponent implements OnInit {
   }
 
   getOneRecette(recetteId: string) {
-    this.recetteService.getOneRecette(recetteId).subscribe(
-      (response: Recette) => {
+    this.recetteService.getOneRecette(recetteId).subscribe({
+      next: (response: Recette) => {
         this.recette= response;
         this.etapes= response.etapes;
         if (!response.picture) {
@@ -108,8 +108,8 @@ export class SingleRecetteComponent implements OnInit {
         this.recette.portions = response.portions;
         this.recette.composants = response.composants;
         for (let composant of response.composants) {
-          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe(
-            (response: Ingredient) => {
+          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe({
+            next: (response: Ingredient) => {
               if (!response.picture) {
                 response.picture = this.imagePath+ "ingrédients/ingredient_auto.png";
               }
@@ -118,20 +118,20 @@ export class SingleRecetteComponent implements OnInit {
               }
               composant.ingredient = response;
             },
-            (error: HttpErrorResponse) => {
+            error: (error: HttpErrorResponse) => {
               this.toastr.error(error.message, "Erreur serveur", {
                 positionClass: "toast-bottom-center" 
               });
             }
-          )
+          })
         }
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+    })
   };
 
   onModify() {
@@ -202,19 +202,21 @@ export class SingleRecetteComponent implements OnInit {
     if (nouvelleRecette.etoile) {
       this.recette.etoile = nouvelleRecette.etoile;
     }
-    this.recetteService.updateRecette(this.recette._id, this.recette).subscribe(
-      (response: Recette) => {
+    this.recetteService.updateRecette(this.recette._id, this.recette).subscribe({
+      next: (response: Recette) => {
         this.isModifying = false;
-        this.toastr.success("Recette modifiée", "Modification réussie", {
-          positionClass: "toast-bottom-center" 
-        });
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Recette modifiée", "Modification réussie", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+    });
   };
 
   //supprimer les recettes
@@ -223,21 +225,21 @@ export class SingleRecetteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
-        this.recetteService.deleteRecette(recetteId).subscribe(
-          (response: void) => {
+        this.recetteService.deleteRecette(recetteId).subscribe({
+          next: (response: void) => {
             this.router.navigate(["/liste"])
-              .then(() => {
-                this.toastr.success("Recette supprimée", "Suppression réussie", {
-                  positionClass: "toast-bottom-center" 
-                });
-        });
           },
-          (error: HttpErrorResponse) => {
+          error: (error: HttpErrorResponse) => {
             this.toastr.error(error.message, "Erreur serveur", {
               positionClass: "toast-bottom-center" 
             });
+          },
+          complete: () => {
+            this.toastr.success("Recette supprimée", "Suppression réussie", {
+              positionClass: "toast-bottom-center" 
+            });
           }
-        );
+        });
       }
     });
   }

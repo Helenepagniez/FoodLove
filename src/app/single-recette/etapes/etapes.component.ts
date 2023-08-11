@@ -53,36 +53,38 @@ export class EtapesComponent implements OnInit {
   }
 
   getOneRecette(recetteId: string) {
-    this.recetteService.getOneRecette(recetteId).subscribe(
-      (response: Recette) => {
+    this.recetteService.getOneRecette(recetteId).subscribe({
+      next: (response: Recette) => {
         this.recette= response;
         this.etapes=response.etapes;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+    })
   };
 
   
   //modifier les étapes
   updateEtape(etape: Etape) {
-    this.etapeService.updateEtape(etape, this.recette._id).subscribe(
-      (response: Etape) => {
+    this.etapeService.updateEtape(etape, this.recette._id).subscribe({
+      next: (response: Etape) => {
         this.unmodify();
         this.getOneRecette(this.recette._id);
-        this.toastr.success("Etape modifiée", "Modification étape", {
-          positionClass: "toast-bottom-center" 
-        });
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Etape modifiée", "Modification étape", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+    });
   };
 
   //créer une étape
@@ -90,19 +92,21 @@ export class EtapesComponent implements OnInit {
     let nouvelleEtape: any= {
       "nomEtape": "nouvelle étape"
     };
-    this.etapeService.addEtape(nouvelleEtape, this.recette._id).subscribe(
-      (response: Etape) => {
+    this.etapeService.addEtape(nouvelleEtape, this.recette._id).subscribe({
+      next: (response: Etape) => {
         this.getOneRecette(this.recette._id);
-        this.toastr.success("Etape ajoutée", "Ajout étape", {
-          positionClass: "toast-bottom-center" 
-        });
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Etape ajoutée", "Ajout étape", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+    });
   };
 
   //supprimer une étape
@@ -111,19 +115,21 @@ export class EtapesComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.etapeService.deleteEtape(etape, recetteId).subscribe(
-          (response: Etape) => {
+        this.etapeService.deleteEtape(etape, recetteId).subscribe({
+          next: (response: Etape) => {
             this.getOneRecette(this.recette._id);
+          },
+          error: (error: HttpErrorResponse) => {
+            this.toastr.error(error.message, "Erreur serveur", {
+              positionClass: "toast-bottom-center" 
+            });
+          },
+          complete : () => {
             this.toastr.success("Etape supprimée", "Suppression étape", {
               positionClass: "toast-bottom-center" 
             });
           },
-          (error: HttpErrorResponse) => {
-            this.toastr.error(error.message, "Erreur serveur", {
-              positionClass: "toast-bottom-center" 
-            });
-          }
-        );
+        });
       }
     });
   };

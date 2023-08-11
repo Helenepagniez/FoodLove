@@ -126,30 +126,30 @@ export class ComposantsComponent implements OnInit {
   }
 
   getOneRecette(recetteId: string) {
-      this.recetteService.getOneRecette(recetteId).subscribe(
-      (response: Recette) => {
+      this.recetteService.getOneRecette(recetteId).subscribe({
+      next: (response: Recette) => {
         this.recette= response;
         this.composants=response.composants;
         for (let composant of this.composants) {
           composant.ingredient = {_id:null, nomIngredient: "", categorie:"", picture: "", posterId: null};
-          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe(
-            (response: Ingredient) => {
+          this.ingredientService.getOneIngredientById(composant.ingredientId).subscribe({
+            next: (response: Ingredient) => {
               composant.ingredient = response;
             },
-            (error: HttpErrorResponse) => {
+            error: (error: HttpErrorResponse) => {
               this.toastr.error(error.message, "Erreur serveur", {
                 positionClass: "toast-bottom-center" 
               });
             }
-          );
+          });
         }
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+      })
   };
 
   //modifier les composants
@@ -164,8 +164,8 @@ export class ComposantsComponent implements OnInit {
         categorie: this.composant!.ingredient!.categorie,
         posterId: null
       };
-      this.ingredientService.addIngredient(newIngredient).subscribe(
-        (response: Ingredient) => {
+      this.ingredientService.addIngredient(newIngredient).subscribe({
+        next: (response: Ingredient) => {
           updatedComposant = {
             _id: formElements._id,
             ingredientId: response._id,
@@ -173,31 +173,33 @@ export class ComposantsComponent implements OnInit {
             unite: formElements.unite,
             ingredient: null
           };
-          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe(
-            (response: Composant) => {
+          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe({
+            next: (response: Composant) => {
               this.unmodify();
-              this.toastr.success("Composant modifié", "Modification Composant réussi", {
-                positionClass: "toast-bottom-center" 
-              });
               this.getOneRecette(this.recette._id);
               },
-              (error: HttpErrorResponse) => {
+            error: (error: HttpErrorResponse) => {
                 this.toastr.error(error.message, "Erreur serveur", {
                   positionClass: "toast-bottom-center" 
                 });
-              }
-            );
+            },
+            complete: () => {
+              this.toastr.success("Composant modifié", "Modification Composant réussi", {
+                positionClass: "toast-bottom-center" 
+              });
+            }
+          });
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.toastr.error(error.message, "Erreur serveur", {
             positionClass: "toast-bottom-center" 
           });
         }
-      );
+      });
     }
     else {
-      this.ingredientService.getOneIngredientByName(this.nomIngredient).subscribe(
-        (response: Ingredient) => {
+      this.ingredientService.getOneIngredientByName(this.nomIngredient).subscribe({
+        next: (response: Ingredient) => {
           updatedComposant = {
             _id: formElements._id,
             ingredientId: response._id,
@@ -205,27 +207,29 @@ export class ComposantsComponent implements OnInit {
             unite: formElements.unite,
             ingredient: null
           };
-          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe(
-            (response: Composant) => {
+          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe({
+            next: (response: Composant) => {
               this.unmodify();
-              this.toastr.success("Composant modifié", "Modification Composant réussi", {
-                positionClass: "toast-bottom-center" 
-              });
               this.getOneRecette(this.recette._id);
-              },
-              (error: HttpErrorResponse) => {
+            },
+            error: (error: HttpErrorResponse) => {
                 this.toastr.error(error.message, "Erreur serveur", {
                   positionClass: "toast-bottom-center" 
                 });
-              }
-            );
+            },
+            complete: () => {
+              this.toastr.success("Composant modifié", "Modification Composant réussi", {
+                positionClass: "toast-bottom-center" 
+              });
+            }
+          });
         },
-        (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {
           this.toastr.error(error.message, "Erreur serveur", {
             positionClass: "toast-bottom-center" 
           });
         }
-      );
+      });
     }
   }
 
@@ -238,19 +242,21 @@ export class ComposantsComponent implements OnInit {
       "quantiteValue":0,
       "unite":"produit"
     };
-    this.composantService.addComposant(nouveauComposant, this.recette._id).subscribe(
-      (response: Composant) => {
-        this.toastr.success("Composant ajouté", "Ajout Composant réussi", {
-          positionClass: "toast-bottom-center" 
-        });
+    this.composantService.addComposant(nouveauComposant, this.recette._id).subscribe({
+      next: (response: Composant) => {
         this.getOneRecette(this.recette._id);
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
+      },
+      complete: () => {
+        this.toastr.success("Composant ajouté", "Ajout Composant réussi", {
+          positionClass: "toast-bottom-center" 
+        });
       }
-    );
+    });
   };
 
   //supprimer un composant
@@ -259,34 +265,36 @@ export class ComposantsComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.composantService.deleteComposant(composant, recetteId).subscribe(
-          (response: Composant) => {
-            this.toastr.success("Composant supprimé", "Suppression Composant réussi", {
-              positionClass: "toast-bottom-center" 
-            });
+        this.composantService.deleteComposant(composant, recetteId).subscribe({
+          next: (response: Composant) => {
             this.getOneRecette(this.recette._id);
           },
-          (error: HttpErrorResponse) => {
+          error: (error: HttpErrorResponse) => {
             this.toastr.error(error.message, "Erreur serveur", {
               positionClass: "toast-bottom-center" 
             });
+          },
+          complete: () => {
+            this.toastr.success("Composant supprimé", "Suppression Composant réussi", {
+              positionClass: "toast-bottom-center" 
+            });
           }
-        );
+        });
       }
     });
   };
 
   getIngredients(){
-    this.ingredientService.getIngredients().subscribe(
-      (response: Ingredient[]) => {
+    this.ingredientService.getIngredients().subscribe({
+      next: (response: Ingredient[]) => {
         this.ingredients = response;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
           positionClass: "toast-bottom-center" 
         });
       }
-    )
+    })
   }
 
 }
