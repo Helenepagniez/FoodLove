@@ -12,21 +12,37 @@
 .barre-de-recherche{
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-wrap: wrap;
+    margin: 10px auto;
 }
 
-.barre-de-recherche .info .recherche{
-    border-width: 4px;
-    border-color: darkcyan;
-    border-style: solid;
-    padding: 3px;
+::ng-deep .p-inputtext {
+    background-color: darkcyan;
+    color: white;
+    border: 2px solid black;
     text-align: center;
-    border-radius: 50px;
-    margin-right: 8px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    transition: 0.5s;
+    width: 209px;
+    height: 49px;
+    margin: 5px auto;
 }
+
+::ng-deep .p-inputtext:focus {
+    background-color: white;
+    color: darkcyan;
+    border: none;
+}
+
+::placeholder {
+    color: white;
+}
+
+::ng-deep .p-inputtext:focus::placeholder {
+    color: darkcyan;
+}
+
 /************COLONNE***************/
 .colonne{
     flex-direction: column;
@@ -106,14 +122,16 @@
 
 /*******************FILTRES**********************/
 .filtres{
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .filtres mat-chip{
     display: flex;
     background-color: darkcyan;
     color: white;
-    margin-top: 23px;
     flex-wrap: wrap;
     align-content: center;
 }
@@ -123,7 +141,6 @@
     color: darkcyan;
     background-color: white;
     border: 2px solid darkcyan;
-    margin-top: 23px;
 }
 
 /*******************MEDIA QUERIES**********************/

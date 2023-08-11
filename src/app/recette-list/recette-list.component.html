@@ -3,7 +3,7 @@
 </div>
 <div class="barre-de-recherche">
     <div class="info">
-        <input class="recherche" type="search" (ngModelChange)="searchRecettes(key.value)" #key="ngModel" ngModel name="recherche" placeholder="Recherchez ici !">
+        <input pInputText class="recherche" type="search" (ngModelChange)="searchRecettes(key.value)" #key="ngModel" ngModel name="recherche" placeholder="Recherchez ici !">
     </div>
     <div class="filtres">
         <mat-chip-list selectable aria-label="Food selection">

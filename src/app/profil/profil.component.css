@@ -10,7 +10,7 @@
 
 /********************GENERAUX********************/
 .profil form .form-group{
-    margin: 10px auto;
+    margin: 20px auto;
     width: 100%;
     display: flex;
     align-items: center;
@@ -18,14 +18,30 @@
     flex-direction: column;
 }
 
-.profil form .form-group input{
-    width: 50%;
-    max-width: 400px;
-    background-color: whitesmoke;
-    border-radius: 50px;
+::ng-deep .p-inputtext {
+    background-color: darkcyan;
+    color: white;
+    border: 2px solid black;
     text-align: center;
-    margin-bottom: 5px;
-    border: 2px solid darkcyan;
+    border-radius: 10px;
+    transition: 0.5s;
+    width: 209px;
+    height: 49px;
+    margin: 5px auto;
+}
+
+::ng-deep .p-inputtext:focus {
+    background-color: white;
+    color: darkcyan;
+    border: none;
+}
+
+::placeholder {
+    color: white;
+}
+
+::ng-deep .p-inputtext:focus::placeholder {
+    color: darkcyan;
 }
 
 /********************iMAGE DE PROFIL********************/

@@ -31,6 +31,7 @@ import { DialogSavedComponent } from './dialog-sauvegarde/dialog.component';
 import { InputTextModule } from 'primeng-lts/inputtext';
 import { FileUploadModule } from 'primeng-lts/fileupload';
 import { PasswordModule } from 'primeng-lts/password';
+import { InputNumberModule } from 'primeng-lts/inputnumber';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { PasswordModule } from 'primeng-lts/password';
     ButtonModule,
     InputTextModule,
     FileUploadModule,
-    PasswordModule
+    PasswordModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,35 +1,34 @@
 <div class="header">
     <h1>Nouvelle recette</h1>
 </div>
-<div style="margin: 20px 0 0 5px;">
+<div style="margin: 20px 0 10px 5px;">
     <p-button styleClass="p-button-secondary" routerLink="/liste" label="RETOUR"></p-button>
 </div>
 <form [formGroup]="recetteForm">
     <div class="form-group">
-      <label for="menu">Nom de la recette</label> <br />
+      <span>Nom de la recette</span>
       <input pInputText type="text" class="p-inputtext-sm" id="menu" formControlName="menu">
     </div>
     <div class="form-group">
         <mat-form-field>
-            <label for="filtres">Filtres</label>
+            <span>Filtres</span>
             <mat-select formControlName="filtres" multiple>
               <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
     <div class="form-group">
-        <label for="etoile">Difficulté de la recette</label> (Si 1 = facile et 5 = très difficile) <br /><br />
-        <input type="number" id="etoile" min="1" max="5" formControlName="etoile">
+        <span>Difficulté de la recette</span>
+        <span class="indication">(Si 1 = facile et 5 = très difficile)</span>
+        <p-inputNumber inputId="integeronly" id="etoile" [min]="1" [max]="5" formControlName="etoile"></p-inputNumber>
       </div>
     <div class="form-group">
-        <label for="temps">Temps de préparation</label>
-        <input type="text" id="temps" formControlName="temps">
+        <span>Temps de préparation</span>
+        <p-inputNumber inputId="integeronly" id="temps" formControlName="temps"></p-inputNumber>
     </div>
     <div class="form-group">
-        <div class="portions-container">
-            <label for="portions">Portions</label> <br /><br />
-            <input pInputText type="number" class="p-inputtext-sm" name="quantity" min="1" max="10" formControlName="portions">
-        </div>
+        <span>Portions</span>
+        <p-inputNumber inputId="integeronly" id="portions" [min]="1" [max]="10" formControlName="portions"></p-inputNumber>
     </div>
     <div class="picture">
         <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)" formControlName="picture">

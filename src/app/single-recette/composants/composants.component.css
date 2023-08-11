@@ -39,7 +39,7 @@ h3{
     background-color: white;
     color: darkcyan;
     border-radius: 30px;
-    border: 3px solid black;
+    border: 2px solid black;
 }
 
 .ingredient p{
@@ -124,9 +124,8 @@ p{
     width: 100%;
     box-sizing: border-box;
     margin: 16px 0;
-    border: 0;
     padding: 20px 40px;
-    border: 2px solid rgb(2, 216, 216);
+    border: 2px solid black;
     outline: none;
     border-radius: 10px;
     transition: 0.5s;
@@ -142,20 +141,6 @@ input{
 ::placeholder{
     color: white;
     font-size: 1em;
-}
-
-.object-form-text:focus.ng-valid{
-    box-shadow: 0 0 10px 4px darkcyan;
-    background-color: white;
-    color: darkcyan;
-    border: 2px solid darkcyan;
-}
-
-.object-form-text:focus.ng-invalid{
-    box-shadow: 0 0 10px 4px #ff0000;
-    border: 2px solid #ff0000;
-    background-color: white;
-    color: red;
 }
 
 .button-container{
@@ -184,9 +169,8 @@ input{
     width: 100%;
     box-sizing: border-box;
     margin: 16px 0;
-    border: 0;
     padding: 20px 40px;
-    border: 2px solid rgb(2, 216, 216);
+    border: 2px solid black;
     outline: none;
     border-radius: 10px;
     transition: 0.5s;
@@ -208,13 +192,6 @@ select{
 
 select option{
     color: black;
-}
-
-.user-form-text:focus.ng-valid{
-    box-shadow: 0 0 10px 4px darkcyan;
-    background-color: white;
-    color: darkcyan;
-    border: 2px solid darkcyan;
 }
 
 label{
