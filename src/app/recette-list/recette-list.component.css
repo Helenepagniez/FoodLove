@@ -55,12 +55,13 @@
 
 /************RECETTES***************/
 .recette{
-    border: darkcyan 3px solid;
-    width: 60%;
+    background-color: darkcyan;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
     padding: 0;
     height: auto;
     margin: auto;
-    border-radius: 50px;
 }
 
 .recette .composition{
@@ -87,19 +88,26 @@
 }
 
 .recette .composition .texte .etoiles .etoile{
-    color: darkcyan;
+    color: white;
 }
 
 .recette .composition .texte p{
     color: black;
-    text-align: center;
-    height: 100%;
-    margin: auto;
     display: flex;
-    min-height: 50px;
     justify-content: center;
     align-items: center;
     font-weight: 600;
+    margin: 10px 0;
+}
+
+.recette .composition .texte span {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 10px 0;
 }
 
 .recette .composition .image{

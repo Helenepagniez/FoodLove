@@ -22,7 +22,7 @@
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateEtape(updateform.value)">
         <input type="hidden" formControlName="_id" ngModel="{{etape._id}}">
         <label htmlFor="name">Choix du nom de l'étape :</label>
-        <input class="p-inputtext" pInputText placeholder="Nom étape" formControlName="nomEtape" ngModel="{{etape.nomEtape}}">
+        <input pInputText placeholder="Nom étape" formControlName="nomEtape" ngModel="{{etape.nomEtape}}">
         <span class="error" *ngIf="updateform.get('nomEtape')!.hasError('required') && updateform.get('nomEtape')!.touched">Le nom de l'étape est requise</span>
         <div class="button-container" style="justify-content: space-around;">
             <p-button styleClass="p-button-info" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>

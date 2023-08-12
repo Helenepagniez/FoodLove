@@ -14,13 +14,11 @@ form{
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    align-content: center;
-    margin: auto;
-    border: darkcyan 3px solid;
-    border-radius: 50px;
-    max-width: 700px;
+    background-color: darkcyan;
     width: 100%;
-    cursor: pointer;
+    max-width: 600px;
+    border-radius: 20px;
+    margin: auto;
 }
 
 form .form-group{
@@ -28,14 +26,14 @@ form .form-group{
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 20px auto;
+    margin: 10px auto;
     flex-direction: column;
 }
 
 form .form-group span{
     font-size: 18px;
     font-weight: 500;
-    color: darkcyan;
+    color: white;
     margin: 5px 0;
 }
 
@@ -59,6 +57,24 @@ form .form-group .indication{
     background-color: white;
     color: darkcyan;
     border: none;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filtres {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+::ng-deep .p-knob-text {
+    fill: white;
 }
 
 /****************IMAGES*******************/

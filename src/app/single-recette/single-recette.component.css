@@ -18,13 +18,10 @@
 }
 
 .details{
-    min-height: 500px;
-    height: auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    width: 100%;
 }
 
 .etoiles{
@@ -41,6 +38,7 @@
 .details form .container{
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     width: 80%;
 }
 
@@ -95,10 +93,10 @@ button:hover{
 /******************MENU*******************/
 .details .menu{
     font-size: 42px;
-    padding-top: 5px;
-    text-align: center;
-    font-style: oblique;
-    height: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .entete {
@@ -109,6 +107,7 @@ button:hover{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    white-space: nowrap;
 }
 
 /******************IMAGE*******************/
@@ -172,10 +171,32 @@ input[type="file"]{
     background-color: black;
 }
 
+.flex {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 45px;
+}
+
+.filtres {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 150px;
+}
+
+p-knob {
+    margin: 0 50px;
+}
+
+::ng-deep .p-knob-text {
+    fill: white;
+}
+
 /**************************iNGREDIENTS ET ETAPES***************************/
 mat-accordion{
     width: 100%;
-    transition: 1s;
 }
 
 mat-accordion mat-expansion-panel{
@@ -187,7 +208,6 @@ mat-accordion mat-expansion-panel{
     justify-content: center;
     align-content: center;
     flex-direction: column;
-    height: auto;
     margin: auto;
     text-align: center;
 }
@@ -217,6 +237,7 @@ span{
     align-items: center;
     flex-direction: column;
     width: 100%;
+    min-width: 300px;
 }
 
 /******************ETAPES*******************/
@@ -298,6 +319,12 @@ span{
     cursor: pointer;
 }
 
+.boutons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*************************MEDIA QUERIES****************************/
 @media screen and (max-width: 450px){
     .details .menu{
@@ -309,12 +336,6 @@ span{
     .photo{
         width: 90%;
         max-width: 950px;
-    }
-}
-
-@media screen and (max-width: 1480px){
-    .details{
-        margin-right: 0;
     }
 }
 

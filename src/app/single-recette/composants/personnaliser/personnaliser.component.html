@@ -22,7 +22,7 @@
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateIngredient(updateform.value)">
         <input type="hidden" formControlName="_id" ngModel="{{ingredient._id}}">
         <label htmlFor="name">Choix du nom de l'ingrédient :</label>
-        <input class="p-inputtext" pInputText placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}">
+        <input pInputText placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}">
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
         <div class="button-container" style="justify-content: space-around;">
             <p-button styleClass="p-button-info" title="invalid form" *ngIf="updateform.invalid" [disabled]="updateform.invalid" type="submit" label="MODIFIER"></p-button>

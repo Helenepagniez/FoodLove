@@ -9,6 +9,25 @@
 }
 
 /********************GENERAUX********************/
+.profil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.profil .formulaire-utilisateur {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: darkcyan;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+}
+
 .profil form .form-group{
     margin: 20px auto;
     width: 100%;
@@ -74,33 +93,9 @@
 
 .profil .boutons{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: space-around;
-    max-width: 300px;
-}
-
-.profil button{
-    border-radius: 50px;
-    width: auto;
-    height: 30px;
-    background-color: darkcyan;
-    color: white;
-    cursor: pointer;
-    margin-left: 20px;
-    margin-top: 30px;
-}
-
-.profil button:hover{
-    box-shadow: darkcyan 4px 4px 10px;
-    cursor: pointer;
-}
-
-.rond{
-    border-radius: 20px;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 /*******************BOUTONS**********************/

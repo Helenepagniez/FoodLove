@@ -18,7 +18,7 @@ h3{
 .etapes{
     padding: 5px;
     background-color: darkcyan;
-    border-radius: 50px;
+    border-radius: 20px;
     width: 90%;
     margin: auto;
     margin: auto;
@@ -39,7 +39,7 @@ h3{
     padding: 5px;
     background-color: white;
     color: darkcyan;
-    border-radius: 30px;
+    border-radius: 20px;
     border: 2px solid black;
 }
 
@@ -124,22 +124,30 @@ h3{
     font-weight: 600;
 }
 
-input{
-    width: 100%;
-    max-width: 600px;
-    background-color: whitesmoke;
-    border-radius: 50px;
-    text-align: center;
-    margin-bottom: 5px;
+::ng-deep .p-inputtext {
+    background-color: darkcyan;
+    color: white;
     border: 2px solid black;
-    margin: 10px 0;
-    font-size: 18px;
-    color: darkcyan;
+    text-align: center;
+    border-radius: 10px;
+    transition: 0.5s;
+    width: 209px;
+    height: 49px;
+    margin: 5px auto;
 }
 
-::placeholder{
+::ng-deep .p-inputtext:focus {
+    background-color: white;
+    color: darkcyan;
+    border: none;
+}
+
+::placeholder {
     color: white;
-    font-size: 1em;
+}
+
+::ng-deep .p-inputtext:focus::placeholder {
+    color: darkcyan;
 }
 
 .button-container{

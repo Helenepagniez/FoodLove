@@ -20,13 +20,15 @@
         </div>
     </form>
     <div class="details">
-        <p-button styleClass="p-button-info" (click)="onModify()" label="Modifier la recette"></p-button>
+        <div>
+            <p-button styleClass="p-button-info" (click)="onModify()" label="Modifier la recette"></p-button>
+        </div>
         <form (ngSubmit)="updateRecette(updateMenu.value)" [formGroup]="updateMenu">
             <div class="menu" *ngIf="recette?.menu">
                 <p *ngIf="!isModifying">{{recette.menu}}</p>
                 <input *ngIf="isModifying" pInputText ngModel="{{recette.menu}}" formControlName="menu">
             </div>
-            <div style="margin-top: 10px;margin-bottom: 15px;">
+            <div class="boutons" style="margin-top: 10px;margin-bottom: 15px;">
                 <p-button styleClass="p-button-success" type="submit" *ngIf="isModifying" label="Enregistrer le nom"></p-button>
             </div>
         </form>
@@ -53,7 +55,7 @@
                         <div class="container" *ngIf="recette?.temps">
                             <span class="entete">Temps total :</span>
                             <span *ngIf="!isModifying">{{recette.temps}} min</span>
-                            <div *ngIf="isModifying"><p-inputNumber ngModel="{{recette.temps}}" formControlName="temps"></p-inputNumber> min</div>
+                            <p-knob *ngIf="isModifying" formControlName="temps" [min]="0" [max]="180" [step]="10" valueColor="#3b82f6" rangeColor="white" ngModel="{{recette.temps}}"></p-knob>
                         </div>
                     </div>
                     <div class="composition">
@@ -61,12 +63,12 @@
                             <span class="entete">Catégories :</span>
                             <span *ngIf="!isModifying">{{recette.filtres}}</span>
                             <div *ngIf="isModifying">
-                                <mat-form-field style="font-size:x-small">
-                                    <mat-label>Filtres</mat-label>
-                                    <mat-select multiple value="{{recette.filtres}}" formControlName="filtres">
-                                        <mat-option *ngFor="let filtre of filtres" [value]="filtre.viewValue">{{filtre.viewValue}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                <div class="flex">
+                                    <div *ngFor="let filtre of filtres" class="filtres">
+                                        <p-checkbox [value]="filtre.value" formControlName="filtres"></p-checkbox>
+                                        <span class="indication">{{ filtre.viewValue }}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

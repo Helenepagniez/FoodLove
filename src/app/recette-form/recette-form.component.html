@@ -10,12 +10,13 @@
       <input pInputText type="text" class="p-inputtext-sm" id="menu" formControlName="menu">
     </div>
     <div class="form-group">
-        <mat-form-field>
-            <span>Filtres</span>
-            <mat-select formControlName="filtres" multiple>
-              <mat-option *ngFor="let filtre of filtreList" [value]="filtre">{{filtre}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <span>Catégories</span>
+        <div class="flex">
+            <div *ngFor="let filtre of filtreList" class="filtres">
+                <p-checkbox [value]="filtre" formControlName="filtres"></p-checkbox>
+                <span class="indication">{{ filtre }}</span>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <span>Difficulté de la recette</span>
@@ -24,16 +25,16 @@
       </div>
     <div class="form-group">
         <span>Temps de préparation</span>
-        <p-inputNumber inputId="integeronly" id="temps" formControlName="temps"></p-inputNumber>
+        <p-knob formControlName="temps" [min]="0" [max]="180" [step]="10" valueColor="#3b82f6" rangeColor="white"></p-knob>
     </div>
     <div class="form-group">
         <span>Portions</span>
         <p-inputNumber inputId="integeronly" id="portions" [min]="1" [max]="10" formControlName="portions"></p-inputNumber>
     </div>
     <div class="picture">
-        <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)" formControlName="picture">
-        <a mat-raised-button color="primary" (click)="imageInput.click()">Ajout image</a>
-        <img [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
+        <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
+        <p-button styleClass="p-button-info" label="Ajout image" #imageInput (click)="imageInput.click()"></p-button>
+        <img class="rond" [src]="imagePreview" *ngIf="imagePreview" style="max-height: 100px;display:block;margin-top:10px">
     </div>
     <div style="margin-top: 20px;margin-bottom: 15px;">
         <p-button styleClass="p-button-success" (click)="addRecette(recetteForm.value)" [disabled]="recetteForm.invalid" label="Enregistrer"></p-button>

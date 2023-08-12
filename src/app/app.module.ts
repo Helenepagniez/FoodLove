@@ -32,6 +32,8 @@ import { InputTextModule } from 'primeng-lts/inputtext';
 import { FileUploadModule } from 'primeng-lts/fileupload';
 import { PasswordModule } from 'primeng-lts/password';
 import { InputNumberModule } from 'primeng-lts/inputnumber';
+import { CheckboxModule } from 'primeng-lts/checkbox';
+import { KnobModule } from 'primeng-lts/knob';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { InputNumberModule } from 'primeng-lts/inputnumber';
     InputTextModule,
     FileUploadModule,
     PasswordModule,
-    InputNumberModule
+    InputNumberModule,
+    CheckboxModule ,
+    KnobModule
   ],
   providers: [],
   bootstrap: [AppComponent]
