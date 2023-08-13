@@ -27,6 +27,8 @@ export class RecetteListComponent implements OnInit{
   loggedInUserId!: LoggedInUserId | null;
   user!: User;
   users: User[] = [];
+  selectedChip!: string;
+  filteredRecettes: Recette[] = [];
   
   filtres: Filtre[] = [
     {value: 'aperitif', viewValue: 'Apéritif'},
@@ -110,6 +112,20 @@ export class RecetteListComponent implements OnInit{
     }
     else {
       this.getRecettes();
+    }
+  }
+
+  activateCategory() {
+    if (!this.selectedChip) {
+      this.filteredRecettes = this.recettes;
+    }
+    else {
+      this.filteredRecettes = [];
+      for (const recette of this.recettes) {
+        if (recette?.filtres.includes(this.selectedChip)) {
+          this.filteredRecettes.push(recette);
+        }
+      }
     }
   }
 
