@@ -60,7 +60,7 @@ export class SingleRecetteComponent implements OnInit {
     {value: 'aperitif', viewValue: 'Apéritif'},
     {value: 'cocktails', viewValue: 'Cocktails'},
     {value: 'dessert', viewValue: 'Dessert'},
-    {value: 'entrée', viewValue: 'Entrée'},
+    {value: 'entree', viewValue: 'Entrée'},
     {value: 'familiale', viewValue: 'Familiale'},
     {value: 'rapide', viewValue: 'Rapide'},
     {value: 'repas', viewValue: 'Repas'}

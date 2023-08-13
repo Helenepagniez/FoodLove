@@ -34,11 +34,10 @@ export class RecetteListComponent implements OnInit{
     {value: 'aperitif', viewValue: 'Apéritif'},
     {value: 'cocktails', viewValue: 'Cocktails'},
     {value: 'dessert', viewValue: 'Dessert'},
-    {value: 'entrée', viewValue: 'Entrée'},
+    {value: 'entree', viewValue: 'Entrée'},
     {value: 'familiale', viewValue: 'Familiale'},
     {value: 'rapide', viewValue: 'Rapide'},
-    {value: 'repas', viewValue: 'Repas'},
-    {value: 'annuler', viewValue: 'Annuler'}
+    {value: 'repas', viewValue: 'Repas'}
   ];
 
   constructor(private router: Router,
@@ -77,6 +76,7 @@ export class RecetteListComponent implements OnInit{
             recette.picture = this.imagePath+ "recettes/recette_auto.png";
           }
         }
+        this.filteredRecettes = this.recettes;
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {
@@ -88,41 +88,56 @@ export class RecetteListComponent implements OnInit{
 
   //Barre de recherche des recettes
   searchRecettes(key: string){
-    const results: Recette[] = [];
-    for (const recette of this.recettes) {
-      if (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1) {
-        results.push(recette);
+    let withFilterCondition: boolean = false;
+    let noFilterCondition: boolean = false;
+    if (!this.selectedChip) {
+      this.filteredRecettes = [];
+      for (const recette of this.recettes) {
+        noFilterCondition = recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1;
+        if (noFilterCondition) {
+          this.filteredRecettes.push(recette);
+        }
+      }
+      if (this.filteredRecettes.length === 0 ||!key) {
+        this.filteredRecettes = this.recettes;
       }
     }
-    this.recettes = results;
-    if (results.length === 0 ||!key) {
-      this.getRecettes();
+    else {
+      this.filteredRecettes = [];    
+      let filtreSelected: string = ""; 
+      for (let filtre of this.filtres) {
+        if (filtre.viewValue === this.selectedChip) {
+          filtreSelected = filtre.value;
+        }
+      }       
+      for (const recette of this.recettes) {
+        console.log(filtreSelected, recette.filtres);
+        withFilterCondition = (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1
+                                            && recette.filtres.includes(filtreSelected));
+        if (withFilterCondition) {
+          this.filteredRecettes.push(recette);
+        }
+      }
+      if (this.filteredRecettes.length === 0 ||!key) {
+        this.activateFiltre();
+      }
     }
   };
 
-  activateFiltre(filtre: string) {
-    const results: Recette[] = [];
-    for (let recette of this.recettes) {
-      if(recette.filtres.includes(filtre)) {
-          results.push(recette);
-        }
-    }
-    if (results.length !== 0) {
-      this.recettes = results;
-    }
-    else {
-      this.getRecettes();
-    }
-  }
-
-  activateCategory() {
+  activateFiltre() {
     if (!this.selectedChip) {
       this.filteredRecettes = this.recettes;
     }
     else {
       this.filteredRecettes = [];
+      let filtreSelected: string = ""; 
+      for (let filtre of this.filtres) {
+        if (filtre.viewValue === this.selectedChip) {
+          filtreSelected = filtre.value;
+        }
+      }
       for (const recette of this.recettes) {
-        if (recette?.filtres.includes(this.selectedChip)) {
+        if (recette?.filtres.includes(filtreSelected)) {
           this.filteredRecettes.push(recette);
         }
       }

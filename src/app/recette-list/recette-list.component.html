@@ -7,11 +7,11 @@
     </div>
     <div class="filtres">
         <mat-chip-listbox [(ngModel)]="selectedChip">
-            <mat-chip-option *ngFor="let filtre of filtres" (click)="activateCategory()">{{filtre.viewValue}}</mat-chip-option>
+            <mat-chip-option *ngFor="let filtre of filtres" (click)="activateFiltre()">{{filtre.viewValue}}</mat-chip-option>
         </mat-chip-listbox>
     </div>
 </div>
-<div *ngFor="let recette of recettes" class="colonne">
+<div *ngFor="let recette of filteredRecettes" class="colonne">
     <div class="recette">
         <div class="composition" (click)="onClickRecette(recette._id)">
             <div class="texte">
