@@ -124,30 +124,28 @@ h3{
     font-weight: 600;
 }
 
-::ng-deep .p-inputtext {
-    background-color: darkcyan;
-    color: white;
+.object-form-text{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 16px 0;
+    padding: 20px 40px;
     border: 2px solid black;
-    text-align: center;
+    outline: none;
     border-radius: 10px;
     transition: 0.5s;
-    width: 209px;
-    height: 49px;
-    margin: 5px auto;
+    text-align: center;
+    background-color: rgb(64, 185, 185);
 }
 
-::ng-deep .p-inputtext:focus {
-    background-color: white;
-    color: darkcyan;
-    border: none;
-}
-
-::placeholder {
+input{
     color: white;
+    font-size: 1em;
 }
 
-::ng-deep .p-inputtext:focus::placeholder {
-    color: darkcyan;
+::placeholder{
+    color: white;
+    font-size: 1em;
 }
 
 .button-container{
