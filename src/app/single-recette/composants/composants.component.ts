@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { Composant } from 'src/app/core/interfaces/composant';
@@ -30,11 +29,11 @@ export interface Categorie {
 })
 export class ComposantsComponent implements OnInit {
   ingredients: Ingredient[]= [];
+  ingredientsASelectionner: Ingredient[]= [];
   composant!: Composant | null;
   composants: Composant[] = [];
   updateform!: FormGroup;
   recette!: Recette;
-  nomIngredient!: string;
 
   unites: Unite[] = [
     {value: 'carré', viewValue: 'Carré'},
@@ -58,14 +57,11 @@ export class ComposantsComponent implements OnInit {
     {value: 'legumes', viewValue: 'Légumes'},
     {value: 'produits-laitiers', viewValue: 'Produits Laitiers'},
     {value: 'proteines', viewValue: 'Protéines'},
-    {value: 'autres', viewValue: 'Autres'},
-    {value: 'personnaliser', viewValue: 'Personnaliser'},
-    {value: 'nouveau', viewValue: 'Nouveau'}
+    {value: 'autres', viewValue: 'Autres'}
   ];
 
   constructor(private recetteService: RecetteService,
               private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private fb: FormBuilder, 
               private router: Router,
@@ -85,17 +81,9 @@ export class ComposantsComponent implements OnInit {
     this.getIngredients();
   }
 
-  disableCategorie(categorie: Categorie): boolean {
-    return categorie.value === 'nouveau';
-  }
-
   modify(composant: Composant) {
     this.composant=composant;
     document.getElementById("cancel")?.scrollIntoView({behavior:"smooth"});
-    this.getIngredients();
-    setTimeout(() => {
-      this.ingredients = this.ingredients.filter((ingredient) => ingredient.categorie === composant.ingredient?.categorie);
-    }, 100);
   }
 
   unmodify() {
@@ -104,17 +92,7 @@ export class ComposantsComponent implements OnInit {
 
   onCategorieChange(event: any) {
     this.composant!.ingredient!.categorie = event;
-    this.modify(this.composant!);
-  }
-
-  onIngredientChange(event: any) {
-    if (event === 'Choix') {
-      this.updateform.setErrors({ 'invalid': true });
-    }
-    else {
-      this.updateform.setErrors(null);
-      this.nomIngredient = event;
-    }
+    this.ingredientsASelectionner = this.ingredients.filter((ingredient: Ingredient) => ingredient.categorie === event);
   }
 
   onClickRecette(id: string) {
@@ -122,7 +100,7 @@ export class ComposantsComponent implements OnInit {
   }
 
   onClickIngredientPersonnalise(id: string) {
-    this.router.navigate(['personnalisation-ingredient/']);
+    this.router.navigate([`recette/${id}/ingredients-perso`]);
   }
 
   getOneRecette(recetteId: string) {
@@ -156,49 +134,7 @@ export class ComposantsComponent implements OnInit {
   updateComposant(formElements: any) {
     formElements.quantiteValue = formElements.quantiteValue/this.recette.portions!;
     let updatedComposant: Composant;
-    if (this.composant!.ingredient!.categorie === 'personnaliser') {
-      let newIngredient: Ingredient = {
-        _id: null,
-        nomIngredient: formElements.nomIngredient,
-        picture: null,
-        categorie: this.composant!.ingredient!.categorie,
-        posterId: null
-      };
-      this.ingredientService.addIngredient(newIngredient).subscribe({
-        next: (response: Ingredient) => {
-          updatedComposant = {
-            _id: formElements._id,
-            ingredientId: response._id,
-            quantiteValue: formElements.quantiteValue,
-            unite: formElements.unite,
-            ingredient: null
-          };
-          this.composantService.updateComposant(updatedComposant, this.recette._id).subscribe({
-            next: (response: Composant) => {
-              this.unmodify();
-              this.getOneRecette(this.recette._id);
-              },
-            error: (error: HttpErrorResponse) => {
-                this.toastr.error(error.message, "Erreur serveur", {
-                  positionClass: "toast-bottom-center" 
-                });
-            },
-            complete: () => {
-              this.toastr.success("Composant modifié", "Modification Composant réussi", {
-                positionClass: "toast-bottom-center" 
-              });
-            }
-          });
-        },
-        error: (error: HttpErrorResponse) => {
-          this.toastr.error(error.message, "Erreur serveur", {
-            positionClass: "toast-bottom-center" 
-          });
-        }
-      });
-    }
-    else {
-      this.ingredientService.getOneIngredientByName(this.nomIngredient).subscribe({
+    this.ingredientService.getOneIngredientByName(formElements.nomIngredient).subscribe({
         next: (response: Ingredient) => {
           updatedComposant = {
             _id: formElements._id,
@@ -230,7 +166,6 @@ export class ComposantsComponent implements OnInit {
           });
         }
       });
-    }
   }
 
   //créer un composant
@@ -287,7 +222,7 @@ export class ComposantsComponent implements OnInit {
   getIngredients(){
     this.ingredientService.getIngredients().subscribe({
       next: (response: Ingredient[]) => {
-        this.ingredients = response;
+        this.ingredients = response.sort((a: Ingredient, b: Ingredient) => a.nomIngredient.localeCompare(b.nomIngredient));
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.message, "Erreur serveur", {

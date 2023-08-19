@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'liste', component: RecetteListComponent },
   { path: 'recette/:id', component: SingleRecetteComponent},
   { path: 'recette/:id/ingredients', component: ComposantsComponent},
-  { path: 'personnalisation-ingredient', component: PersonnaliserComponent},
+  { path: 'recette/:id/ingredients-perso', component: PersonnaliserComponent},
   { path: 'recette/:id/etapes', component: EtapesComponent},
   { path: 'profil', component: ProfilComponent },
   { path: 'new-recette', component: RecetteFormComponent },

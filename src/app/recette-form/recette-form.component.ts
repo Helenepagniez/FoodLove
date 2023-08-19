@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Recette } from '../core/interfaces/recette';
 import { RecetteService } from '../core/services/recette.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Filtre } from '../single-recette/single-recette.component';
 
 @Component({
   selector: 'app-recette-form',
@@ -17,7 +18,15 @@ export class RecetteFormComponent implements OnInit, OnDestroy {
   recetteForm!: FormGroup;
   imagePreview!: string;
   file!: File | null;
-  filtreList: string[] =  ['Familiale', 'Rapide', 'Entrée', 'Repas', 'Dessert'];
+  filtreList: Filtre[] = [
+    {value: 'entree', viewValue: 'Entrée'},
+    {value: 'plat', viewValue: 'Plat'},
+    {value: 'dessert', viewValue: 'Dessert'},
+    {value: 'boissons', viewValue: 'Boissons'},
+    {value: 'sauces', viewValue: 'Sauces'},
+    {value: 'familiale', viewValue: 'Familiale'},
+    {value: 'rapide', viewValue: 'Rapide'}
+  ];
   recette!: Recette;
   filtres = new FormControl('');
   ajoutRecetteSubscription!: Subscription;
@@ -33,7 +42,7 @@ export class RecetteFormComponent implements OnInit, OnDestroy {
       portions: [''],
       temps: [''],
       etoile: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(5)])],
-      filtres: ['', [Validators.required]],
+      filtres: [[]],
       picture: ['']
     })
   }
@@ -100,4 +109,9 @@ export class RecetteFormComponent implements OnInit, OnDestroy {
       };
       reader.readAsDataURL(file);
     } 
+
+    updateSelectedFilters(event: any) {
+      const selectedFilters = this.recetteForm.get('filtres') as FormControl;
+      selectedFilters.setValue(event.checked);
+    }
 }

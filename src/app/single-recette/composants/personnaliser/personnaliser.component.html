@@ -2,16 +2,18 @@
     <h1>Ingrédients personnalisés</h1>
 </div>
 <div style="margin: 20px 0 0 5px;">
-    <p-button styleClass="p-button-secondary" (click)="onClickList()" label="RETOUR"></p-button>
+    <p-button styleClass="p-button-secondary" (click)="onClickIngredient()" label="RETOUR"></p-button>
 </div>
 <h3>Cliquez sur le nom d'un ingrédient pour l'afficher ou le modifier. <br/> Cliquez sur les boutons pour en ajouter ou supprimer.</h3>
 <div class="ingredients">
     <div class="ingredient titre">
         <p class="scale">Nom / Modifier</p>
+        <p class="center">Catégorie</p>
         <p>Supprimer</p>
     </div>
     <div class="ingredient"*ngFor="let ingredient of ingredients">
         <p class="scale"><a title="modifier" (click)="modify(ingredient)">{{ingredient!.nomIngredient}}</a></p>
+        <p class="center">{{ingredient.categorie}}</p>
         <p-button styleClass="p-button-danger" (click)="deleteIngredient(ingredient._id)" label="SUPPRIMER"></p-button>
     </div>
 </div>
@@ -21,7 +23,11 @@
 <div *ngIf="ingredient" class="modify-container">
     <form class="object-form" [formGroup]="updateform" (ngSubmit)="updateIngredient(updateform.value)">
         <input type="hidden" formControlName="_id" ngModel="{{ingredient._id}}">
-        <label htmlFor="name">Choix du nom de l'ingrédient :</label>
+        <label>Choix de la catégorie de l'ingrédient :</label>
+        <select class="user-form-text" formControlName="categorie" ngModel="{{ingredient.categorie}}" (ngModelChange)="onCategorieChange($event)">
+            <option [value]="categorie.value" *ngFor="let categorie of categories">{{categorie.viewValue}}</option>
+        </select>
+        <label>Choix du nom de l'ingrédient :</label>
         <input placeholder="Nom ingrédient" formControlName="nomIngredient" ngModel="{{ingredient.nomIngredient}}" class="object-form-text">
         <span class="error" *ngIf="updateform.get('nomIngredient')!.hasError('required') && updateform.get('nomIngredient')!.touched">Le nom de l'ingrédient est requis</span>
         <div class="button-container" style="justify-content: space-around;">

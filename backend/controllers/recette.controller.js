@@ -27,8 +27,8 @@ module.exports.readRecette = (req, res) => {
   const role = decodedToken.role;
   
   RecetteModel.find((err, docs) => {
-    for (let recette of docs) {
-      if (decodedToken.id != recette.posterId && role != "ADMIN") docs = docs.filter((recette) => recette.posterId == decodedToken.id);
+    if (role != "ADMIN") {
+      docs = docs.filter((recette) => recette.posterId == decodedToken.id);
     }
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);

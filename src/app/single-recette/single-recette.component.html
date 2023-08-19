@@ -8,7 +8,7 @@
 <div class="general">
     <form (ngSubmit)="updateRecette(updateImage.value)" [formGroup]="updateImage" class="photo">
         <div *ngIf="recette?.picture" class="image">
-            <img class="rond" type="jpg" id="image" [src]="recette.picture" alt="image">
+            <img class="rond" type="jpg" id="image" [src]="recette.picture">
         </div>
         <div class="picture" *ngIf="isModifying">
             <input type="file" accept="image/*" #imageInput (change)="onFileAdded($event)">
@@ -65,7 +65,7 @@
                             <div *ngIf="isModifying">
                                 <div class="flex">
                                     <div *ngFor="let filtre of filtres" class="filtres">
-                                        <p-checkbox [value]="filtre.value" formControlName="filtres"></p-checkbox>
+                                        <p-checkbox [value]="filtre.value" [formControlName]="'filtres'" (onChange)="updateSelectedFilters($event)"></p-checkbox>
                                         <span class="indication">{{ filtre.viewValue }}</span>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                     <p-button styleClass="p-button-info" routerLink="ingredients" *ngIf="isModifying" label="Modifier ou ajouter des Ingrédients"></p-button>
                     <div class="ingredients">
                         <div class="ingredient" *ngFor="let composant of recette?.composants">
-                            <img [src]="composant.ingredient?.picture" alt="ingredient">
+                            <img [src]="composant.ingredient?.picture">
                             <div class="bloc">
                                 <span class="entete">{{composant.ingredient?.nomIngredient}}</span>
                                 <span class="entete">{{(composant.quantiteValue * recette.portions!).toFixed(1)}} {{composant.unite}}</span>

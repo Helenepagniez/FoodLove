@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogSavedComponent } from '../dialog-sauvegarde/dialog.component';
@@ -57,13 +57,13 @@ export class SingleRecetteComponent implements OnInit {
   ];
 
   filtres: Filtre[] = [
-    {value: 'aperitif', viewValue: 'Apéritif'},
-    {value: 'cocktails', viewValue: 'Cocktails'},
-    {value: 'dessert', viewValue: 'Dessert'},
     {value: 'entree', viewValue: 'Entrée'},
+    {value: 'plat', viewValue: 'Plat'},
+    {value: 'dessert', viewValue: 'Dessert'},
+    {value: 'boissons', viewValue: 'Boissons'},
+    {value: 'sauces', viewValue: 'Sauces'},
     {value: 'familiale', viewValue: 'Familiale'},
-    {value: 'rapide', viewValue: 'Rapide'},
-    {value: 'repas', viewValue: 'Repas'}
+    {value: 'rapide', viewValue: 'Rapide'}
   ];
 
   constructor( private recetteService: RecetteService,
@@ -260,6 +260,11 @@ export class SingleRecetteComponent implements OnInit {
 
   fakeArray(length: number): Array<any> {
     return new Array(length);
+  }
+
+  updateSelectedFilters(event: any) {
+    const selectedFilters = this.updateform.get('filtres') as FormControl;
+    selectedFilters.setValue(event.checked);
   }
 
 }

@@ -31,13 +31,13 @@ export class RecetteListComponent implements OnInit{
   filteredRecettes: Recette[] = [];
   
   filtres: Filtre[] = [
-    {value: 'aperitif', viewValue: 'Apéritif'},
-    {value: 'cocktails', viewValue: 'Cocktails'},
-    {value: 'dessert', viewValue: 'Dessert'},
     {value: 'entree', viewValue: 'Entrée'},
+    {value: 'plat', viewValue: 'Plat'},
+    {value: 'dessert', viewValue: 'Dessert'},
+    {value: 'boissons', viewValue: 'Boissons'},
+    {value: 'sauces', viewValue: 'Sauces'},
     {value: 'familiale', viewValue: 'Familiale'},
-    {value: 'rapide', viewValue: 'Rapide'},
-    {value: 'repas', viewValue: 'Repas'}
+    {value: 'rapide', viewValue: 'Rapide'}
   ];
 
   constructor(private router: Router,
@@ -111,7 +111,6 @@ export class RecetteListComponent implements OnInit{
         }
       }       
       for (const recette of this.recettes) {
-        console.log(filtreSelected, recette.filtres);
         withFilterCondition = (recette.menu?.toLowerCase().indexOf(key.toLowerCase())!== -1
                                             && recette.filtres.includes(filtreSelected));
         if (withFilterCondition) {

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ingredient } from 'src/app/core/interfaces/ingredient';
 import { Recette } from 'src/app/core/interfaces/recette';
 import { IngredientService } from 'src/app/core/services/ingredient.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Categorie } from '../composants.component';
 
 @Component({
   selector: 'app-personnaliser',
@@ -16,29 +16,39 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./personnaliser.component.css']
 })
 export class PersonnaliserComponent implements OnInit {
-
   ingredients: Ingredient[]= [];
   ingredient!: Ingredient | null;
   recette!: Recette;
   updateform!: FormGroup;
 
+  categories: Categorie[] = [
+    {value: 'assaisonnements', viewValue: 'Assaisonnements'},
+    {value: 'feculents', viewValue: 'Féculents'},
+    {value: 'fruits', viewValue: 'Fruits'},
+    {value: 'legumes', viewValue: 'Légumes'},
+    {value: 'produits-laitiers', viewValue: 'Produits Laitiers'},
+    {value: 'proteines', viewValue: 'Protéines'},
+    {value: 'autres', viewValue: 'Autres'}
+  ];
+
   constructor(private router: Router,
-              private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private fb: FormBuilder,
               private toastr: ToastrService,
-              private ingredientService: IngredientService) { }
+              private ingredientService: IngredientService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.updateform= this.fb.group({
       _id: [''],
+      categorie: ['', [Validators.required]],
       nomIngredient: ['', [Validators.required]]
     });
     this.getIngredients();
   }
 
-  onClickList() {
-    this.router.navigate(['/liste']);
+  onClickIngredient() {
+    this.router.navigate([`recette/${this.route.snapshot.params['id']}/ingredients`]);
   }
 
   modify(ingredient: Ingredient) {
@@ -48,6 +58,10 @@ export class PersonnaliserComponent implements OnInit {
 
   unmodify() {
     this.ingredient = null;
+  }
+
+  onCategorieChange(event: any) {
+    this.ingredient!.categorie = event;
   }
 
   getIngredients(){
@@ -67,7 +81,7 @@ export class PersonnaliserComponent implements OnInit {
    addIngredient() {
     let nouvelIngredientPersonnaliser: any= {
       nomIngredient: "nouvel ingrédient personnalisé",
-      categorie: "personnalisée"
+      categorie: "autres"
     };
     this.ingredientService.addIngredient(nouvelIngredientPersonnaliser).subscribe({
       next: (response: Ingredient) => {
@@ -86,7 +100,6 @@ export class PersonnaliserComponent implements OnInit {
 
   //modifier les ingrédients
   updateIngredient(ingredient: Ingredient) {
-    ingredient.categorie="personnalisée";
     this.ingredientService.updateIngredient(ingredient, this.ingredient!._id).subscribe({
       next: (response: Ingredient) => {
         this.unmodify();

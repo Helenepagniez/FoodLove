@@ -13,8 +13,8 @@
         <span>Catégories</span>
         <div class="flex">
             <div *ngFor="let filtre of filtreList" class="filtres">
-                <p-checkbox [value]="filtre" formControlName="filtres"></p-checkbox>
-                <span class="indication">{{ filtre }}</span>
+                <p-checkbox [value]="filtre.value" [formControlName]="'filtres'" (onChange)="updateSelectedFilters($event)"></p-checkbox>
+                <span class="indication">{{ filtre.viewValue }}</span>
             </div>
         </div>
     </div>

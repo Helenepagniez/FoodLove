@@ -49,30 +49,29 @@ h3{
     transition: 0.5s;
 }
 
+.ingredient .center{
+    width: 30%;
+}
+
 .ingredient .scale{
-    margin: 0;
-    padding: 5px;
-    font-size: 18px;
-    text-align: center;
-    transition: 0.5s;
-    width: 60%;
+    width: 30%;
+}
+
+.ingredient.titre .center{
+    width: 30%;
 }
 
 .ingredient.titre .scale{
-    margin: 0;
-    padding: 5px;
-    font-size: 18px;
-    text-align: center;
-    width: 60%;
-}
-
-.ingredient p a{
-    cursor: pointer;
+    width: 30%;
 }
 
 .ingredient .scale:hover{
     transform: scale(1.2);
     color: #ff0000;
+}
+
+.ingredient p a{
+    cursor: pointer;
 }
 
 .ingredient.titre{
@@ -147,12 +146,66 @@ input{
     font-size: 1em;
 }
 
+.user-form-text{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 16px 0;
+    padding: 20px 40px;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
+    background-color: rgb(64, 185, 185);
+}
+
+select{
+    color: white;
+    font-size: 1em;
+    appearance: none;
+    cursor: pointer;
+}
+
+select option{
+    color: black;
+}
+
+label{
+    font-style: oblique;
+    font-size: medium;
+    font-weight: 600;
+}
+
 .button-container{
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+}
+
+/*************************MEDIA QUERIES****************************/
+@media screen and (max-width: 450px){
+    .ingredient{
+        flex-direction: column;
+    }
+
+    .ingredient .center{
+        width: 90%;
+    }
+    
+    .ingredient .scale{
+        width: 90%;
+    }
+
+    .ingredient.titre .center{
+        width: 90%;
+    }
+    
+    .ingredient.titre .scale{
+        width: 90%;
+    }
 }
 
 /*******************BOUTONS**********************/

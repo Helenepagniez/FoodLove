@@ -38,9 +38,9 @@ module.exports.readIngredient = (req, res) => {
     const role = decodedToken.role;
     
     ingredientModel.find((err, docs) => {
-      for (let ingredient of docs) {
-        if ((docs.posterId != null && decodedToken.id != ingredient.posterId && role != "ADMIN")) docs = docs.filter((ingredient) => ingredient.posterId == decodedToken.id || ingredient.posterId == null);
-      }
+      if (role != "ADMIN") {
+        docs = docs.filter((ingredient) => !ingredient.posterId || ingredient.posterId === decodedToken.id);
+      } 
       if (!err) res.send(docs);
       else console.log("Error to get data : " + err);
     }).sort({ createdAt: -1 });
