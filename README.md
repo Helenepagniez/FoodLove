@@ -81,7 +81,6 @@ Ci-dessous, la liste des requêtes concernant les utilisateurs. <br />
 ● Suppression d'un utilisateur <br />
 ● Modification d'un utilisateur <br />
 ● Voir les infos d'un utilisateur <br />
-● Voir tous les utilisateurs <br />
 
 ### Inscription d'un utilisateur
     POST  : api/user/register
@@ -95,8 +94,6 @@ Ci-dessous, la liste des requêtes concernant les utilisateurs. <br />
     PUT  : api/user/{id de l'utilisateur voulu}
 ### Voir les infos d'un utilisateur
     GET  : api/user/{id de l'utilisateur voulu}
-### Voir tous les utilisateurs
-    GET  : api/user
     
 ## Requêtes concernant les recettes
 Ci-dessous, la liste des requêtes concernant les recettes de cuisine. <br />
@@ -149,7 +146,7 @@ Ci-dessous, la liste des requêtes concernant les recettes de cuisine. <br />
 ## Page de connexion
 Une page de connexion permettant à l’utilisateur de se connecter, ou bien
 de créer un compte s’il n’en possède pas.Ici la connexion doit se faire à partir 
-de quatres éléments : le nom et prénom de l'utilsateur ainsi que son adresse mail
+de quatres éléments : le nom et prénom de l'utilisateur ainsi que son adresse mail
 et un mot de passe. Rien de plus à prévoir pour le moment.
 
 ## Détails de la fonctionnalité de connexion
@@ -158,9 +155,9 @@ et un mot de passe. Rien de plus à prévoir pour le moment.
 ● Les données de connexion sont sécurisées. <br />
 
 ## Page d’accueil
-La page d’accueil liste les recettes créés par l'utilisateur.
-Les recettes sont listés de façon antéchronologique (du plus
-récent au plus ancien).
+● La page d’accueil liste les recettes créés par l'utilisateur.
+● Les recettes sont listés de façon antéchronologique (du plus récent au plus ancien).
+● L'utilisateur peut rechercher une recette précise à l'aide de la barre de recherche ou des filtres proposés.
 
 ## Création d’une recette
 ● Un utilisateur peut créer une recette. <br />
@@ -184,6 +181,4 @@ récent au plus ancien).
 ● Un utilisateur peut aussi ajouter, modifier et supprimer ses ingrédients ou étapes. <br />
 
 ## Rôle administrateur
-Dans le but de pouvoir faire de la modération si nécessaire, il faudra créer
-un utilisateur “administrateur” ; celui-ci aura les droits de modification /
-suppression sur toutes les recettes de l'application.
+Dans le but de pouvoir faire de la modération si nécessaire, il faudra créer un utilisateur“administrateur” ; celui-ci aura les droits de modification / suppression sur toutes les recettes de l'application.
