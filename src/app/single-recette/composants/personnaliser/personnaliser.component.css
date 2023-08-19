@@ -57,6 +57,10 @@ h3{
     width: 30%;
 }
 
+.majuscule{
+    text-transform: capitalize;
+}
+
 .ingredient.titre .center{
     width: 30%;
 }

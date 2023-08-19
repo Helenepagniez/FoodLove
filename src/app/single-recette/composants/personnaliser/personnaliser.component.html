@@ -12,7 +12,7 @@
         <p>Supprimer</p>
     </div>
     <div class="ingredient"*ngFor="let ingredient of ingredients">
-        <p class="scale"><a title="modifier" (click)="modify(ingredient)">{{ingredient!.nomIngredient}}</a></p>
+        <p class="scale majuscule"><a title="modifier" (click)="modify(ingredient)">{{ingredient!.nomIngredient}}</a></p>
         <p class="center">{{ingredient.categorie}}</p>
         <p-button styleClass="p-button-danger" (click)="deleteIngredient(ingredient._id)" label="SUPPRIMER"></p-button>
     </div>

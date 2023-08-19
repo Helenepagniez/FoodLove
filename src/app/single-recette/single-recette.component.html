@@ -96,7 +96,7 @@
                         <div class="ingredient" *ngFor="let composant of recette?.composants">
                             <img [src]="composant.ingredient?.picture">
                             <div class="bloc">
-                                <span class="entete">{{composant.ingredient?.nomIngredient}}</span>
+                                <span class="entete majuscule">{{composant.ingredient?.nomIngredient}}</span>
                                 <span class="entete">{{(composant.quantiteValue * recette.portions!).toFixed(1)}} {{composant.unite}}</span>
                             </div>
                         </div>

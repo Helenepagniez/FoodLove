@@ -61,6 +61,10 @@ h3{
     width: 30%;
 }
 
+.ingredient .scale a{
+    text-transform: capitalize;
+}
+
 .ingredient.titre .center{
     width: 30%;
 }

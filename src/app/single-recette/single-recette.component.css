@@ -314,6 +314,10 @@ span{
     text-align: center;
 }
 
+.majuscule{
+    text-transform: capitalize;
+}
+
 /*******************BOUTONS**********************/
 ::ng-deep .p-button{
     cursor: pointer;
