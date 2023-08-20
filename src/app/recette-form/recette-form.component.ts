@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Recette } from '../core/interfaces/recette';
 import { RecetteService } from '../core/services/recette.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { Filtre } from '../single-recette/single-recette.component';
+import { filtres } from '../shared/data/filtres';
+import { CategorieFiltreUnite } from '../core/interfaces/categorieFiltreUnite';
 
 @Component({
   selector: 'app-recette-form',
@@ -14,19 +15,10 @@ import { Filtre } from '../single-recette/single-recette.component';
   styleUrls: ['./recette-form.component.css']
 })
 export class RecetteFormComponent implements OnInit, OnDestroy {
-
   recetteForm!: FormGroup;
   imagePreview!: string;
   file!: File | null;
-  filtreList: Filtre[] = [
-    {value: 'entree', viewValue: 'Entrée'},
-    {value: 'plat', viewValue: 'Plat'},
-    {value: 'dessert', viewValue: 'Dessert'},
-    {value: 'boissons', viewValue: 'Boissons'},
-    {value: 'sauces', viewValue: 'Sauces'},
-    {value: 'familiale', viewValue: 'Familiale'},
-    {value: 'rapide', viewValue: 'Rapide'}
-  ];
+  filtreList: CategorieFiltreUnite[] = filtres;
   recette!: Recette;
   filtres = new FormControl('');
   ajoutRecetteSubscription!: Subscription;

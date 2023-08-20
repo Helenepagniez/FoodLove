@@ -8,7 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Categorie } from '../composants.component';
+import { categories } from 'src/app/shared/data/categories';
+import { CategorieFiltreUnite } from 'src/app/core/interfaces/categorieFiltreUnite';
 
 @Component({
   selector: 'app-personnaliser',
@@ -20,16 +21,7 @@ export class PersonnaliserComponent implements OnInit {
   ingredient!: Ingredient | null;
   recette!: Recette;
   updateform!: FormGroup;
-
-  categories: Categorie[] = [
-    {value: 'assaisonnements', viewValue: 'Assaisonnements'},
-    {value: 'feculents', viewValue: 'Féculents'},
-    {value: 'fruits', viewValue: 'Fruits'},
-    {value: 'legumes', viewValue: 'Légumes'},
-    {value: 'produits-laitiers', viewValue: 'Produits Laitiers'},
-    {value: 'proteines', viewValue: 'Protéines'},
-    {value: 'autres', viewValue: 'Autres'}
-  ];
+  categories: CategorieFiltreUnite[] = categories;
 
   constructor(private router: Router,
               private dialog: MatDialog,

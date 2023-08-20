@@ -16,7 +16,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./etapes.component.css']
 })
 export class EtapesComponent implements OnInit {
-  
   etape!: Etape | null;
   etapes!: Etape[];
   updateform!: FormGroup;

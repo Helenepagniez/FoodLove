@@ -11,16 +11,9 @@ import { IngredientService } from 'src/app/core/services/ingredient.service';
 import { Ingredient } from 'src/app/core/interfaces/ingredient';
 import { ComposantService } from 'src/app/core/services/composant.service';
 import { ToastrService } from 'ngx-toastr';
-
-export interface Unite {
-  value: string;
-  viewValue: string;
-}
-
-export interface Categorie {
-  value: string;
-  viewValue: string;
-}
+import { unites } from 'src/app/shared/data/unites';
+import { categories } from 'src/app/shared/data/categories';
+import { CategorieFiltreUnite } from 'src/app/core/interfaces/categorieFiltreUnite';
 
 @Component({
   selector: 'app-composants',
@@ -34,31 +27,8 @@ export class ComposantsComponent implements OnInit {
   composants: Composant[] = [];
   updateform!: FormGroup;
   recette!: Recette;
-
-  unites: Unite[] = [
-    {value: 'carré', viewValue: 'Carré'},
-    {value: 'centilitre', viewValue: 'Centilitre'},
-    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
-    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
-    {value: 'décilitre', viewValue: 'Décilitre'},
-    {value: 'gramme', viewValue: 'Gramme'},
-    {value: 'kilogramme', viewValue: 'Kilogramme'},
-    {value: 'litre', viewValue: 'Litre'},
-    {value: 'paquet', viewValue: 'Paquet'},
-    {value: 'produit', viewValue: 'Produit'},
-    {value: 'tranche', viewValue: 'Tranche'},
-    {value: 'verre', viewValue: 'Verre'}
-  ];
-
-  categories: Categorie[] = [
-    {value: 'assaisonnements', viewValue: 'Assaisonnements'},
-    {value: 'feculents', viewValue: 'Féculents'},
-    {value: 'fruits', viewValue: 'Fruits'},
-    {value: 'legumes', viewValue: 'Légumes'},
-    {value: 'produits-laitiers', viewValue: 'Produits Laitiers'},
-    {value: 'proteines', viewValue: 'Protéines'},
-    {value: 'autres', viewValue: 'Autres'}
-  ];
+  unites: CategorieFiltreUnite[] = unites;
+  categories: CategorieFiltreUnite[] = categories;
 
   constructor(private recetteService: RecetteService,
               private route: ActivatedRoute,

@@ -7,12 +7,8 @@ import { LoggedInUserId } from '../core/interfaces/loggedInUserId';
 import { Recette } from '../core/interfaces/recette';
 import { User } from '../core/interfaces/user';
 import { RecetteService } from '../core/services/recette.service';
-
-
-export interface Filtre {
-  value: string;
-  viewValue: string;
-}
+import { filtres } from '../shared/data/filtres';
+import { CategorieFiltreUnite } from '../core/interfaces/categorieFiltreUnite';
 
 @Component({
   selector: 'app-recette-list',
@@ -29,16 +25,7 @@ export class RecetteListComponent implements OnInit{
   users: User[] = [];
   selectedChip!: string;
   filteredRecettes: Recette[] = [];
-  
-  filtres: Filtre[] = [
-    {value: 'entree', viewValue: 'Entrée'},
-    {value: 'plat', viewValue: 'Plat'},
-    {value: 'dessert', viewValue: 'Dessert'},
-    {value: 'boissons', viewValue: 'Boissons'},
-    {value: 'sauces', viewValue: 'Sauces'},
-    {value: 'familiale', viewValue: 'Familiale'},
-    {value: 'rapide', viewValue: 'Rapide'}
-  ];
+  filtres: CategorieFiltreUnite[] = filtres;
 
   constructor(private router: Router,
      private recetteService: RecetteService,

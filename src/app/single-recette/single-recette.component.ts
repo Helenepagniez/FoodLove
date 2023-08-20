@@ -12,16 +12,9 @@ import { IngredientService } from '../core/services/ingredient.service';
 import { RecetteService } from '../core/services/recette.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-
-export interface Unite {
-  value: string;
-  viewValue: string;
-}
-
-export interface Filtre {
-  value: string;
-  viewValue: string;
-}
+import { unites } from '../shared/data/unites';
+import { filtres } from '../shared/data/filtres';
+import { CategorieFiltreUnite } from '../core/interfaces/categorieFiltreUnite';
 
 @Component({
   selector: 'app-single-recette',
@@ -40,31 +33,8 @@ export class SingleRecetteComponent implements OnInit {
   file!: File | null;
   ingredients!: Ingredient[];
   etapes!: Etape[];
-
-  unites: Unite[] = [
-    {value: 'carré', viewValue: 'Carré'},
-    {value: 'centilitre', viewValue: 'Centilitre'},
-    {value: 'cuillère-cafe', viewValue: 'Cuillère à café'},
-    {value: 'cuillère-soupe', viewValue: 'Cuillère à soupe'},
-    {value: 'décilitre', viewValue: 'Décilitre'},
-    {value: 'gramme', viewValue: 'Gramme'},
-    {value: 'kilogramme', viewValue: 'Kilogramme'},
-    {value: 'litre', viewValue: 'Litre'},
-    {value: 'paquet', viewValue: 'Paquet'},
-    {value: 'produit', viewValue: 'Produit'},
-    {value: 'tranche', viewValue: 'Tranche'},
-    {value: 'verre', viewValue: 'Verre'}
-  ];
-
-  filtres: Filtre[] = [
-    {value: 'entree', viewValue: 'Entrée'},
-    {value: 'plat', viewValue: 'Plat'},
-    {value: 'dessert', viewValue: 'Dessert'},
-    {value: 'boissons', viewValue: 'Boissons'},
-    {value: 'sauces', viewValue: 'Sauces'},
-    {value: 'familiale', viewValue: 'Familiale'},
-    {value: 'rapide', viewValue: 'Rapide'}
-  ];
+  unites: CategorieFiltreUnite[] = unites;
+  filtres: CategorieFiltreUnite[] = filtres;
 
   constructor( private recetteService: RecetteService,
               private ingredientService: IngredientService,
