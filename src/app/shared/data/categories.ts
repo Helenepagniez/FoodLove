@@ -2,6 +2,7 @@ import { CategorieFiltreUnite } from "src/app/core/interfaces/categorieFiltreUni
 
 export const categories: CategorieFiltreUnite[] = [
     {value: 'assaisonnements', viewValue: 'Assaisonnements'},
+    {value: 'boissons', viewValue: 'Boissons'},
     {value: 'feculents', viewValue: 'Féculents'},
     {value: 'fruits', viewValue: 'Fruits'},
     {value: 'legumes', viewValue: 'Légumes'},
